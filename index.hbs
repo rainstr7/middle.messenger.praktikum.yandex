@@ -5,29 +5,35 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="/src/styles/reset.css" />
-    <link rel="stylesheet" href="/src/styles/main.css" />
-    <link rel="stylesheet" href="/src/styles/fonts.css" />
+    <link rel="stylesheet" href="/src/styles/reset.css"/>
+    <link rel="stylesheet" href="/src/styles/main.scss"/>
+    <link rel="stylesheet" href="/src/styles/fonts.css"/>
+    <link rel="stylesheet" href="/src/styles/inputs.scss"/>
     <title>Messenger</title>
 </head>
 <body>
-<!--<a href="/src/pages/auth.hbs">link</a>-->
-    <div class="container">
-        <form class="auth_form">
-            <h2>
-                Вход
-            </h2>
-            <div class="inputs_group">
-                <label for="login"></label>
-                <label for="password"></label>
-                <input type="text" placeholder="Логин" name="login" id="login"/>
-                <input type="password" placeholder="Пароль" name="password" id="password"/>
-            </div>
-            <div class="button_group">
-                <button type="submit" class="button_active" name="login">Авторизоваться</button>
-                <a class="button_passive" href="/src/pages/create_new_accaunt.hbs">Нет аккаунта?</a>
-            </div>
-        </form>
-    </div>
+
+<ul class="container direction_column">
+    <li class="response_status_description m-b-20">Hello user_name!</li>
+
+    <li>
+        <a href="/src/pages/auth.hbs">Auth Page</a>
+    </li>
+    <li>
+        <a href="/src/pages/create_new_account.hbs">Registration Page</a>
+    </li>
+    <li>
+        <a href="/src/pages/chat.hbs">Chat Page</a>
+    </li>
+    <li>
+        <a href="/src/pages/profile.hbs">Profile Page</a>
+    </li>
+    <li>
+        <a href="/src/pages/404.hbs">404 Page</a>
+    </li>
+    <li>
+        <a href="/src/pages/500.hbs">500 Page</a>
+    </li>
+</ul>
 </body>
 </html>

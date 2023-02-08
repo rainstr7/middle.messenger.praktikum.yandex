@@ -5,9 +5,38 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <link rel="stylesheet" href="/src/styles/reset.css"/>
+    <link rel="stylesheet" href="/src/styles/main.scss"/>
+    <link rel="stylesheet" href="/src/styles/fonts.css"/>
+    <link rel="stylesheet" href="/src/styles/inputs.scss"/>
+    <title>Messenger</title>
 </head>
 <body>
-    Auth
+<div class="container">
+    <form class="auth_form">
+        <h2 class="title">
+            Вход
+        </h2>
+        <div class="inputs_group_auth">
+            <div class="group middle_margin">
+                <input type="text" required name="login" id="login">
+                <span class="bar"></span>
+                <label for="login">Логин</label>
+                <p style="visibility: initial" class="error_input">Не верный логин</p>
+            </div>
+
+            <div class="group">
+                <input type="password" required name="password" id="password">
+                <span class="bar"></span>
+                <label for="password">Пароль</label>
+                <p class="error_input">Не верный пароль</p>
+            </div>
+        </div>
+        <div class="button_group">
+            <button type="submit" class="button_active" name="login">Авторизоваться</button>
+            <a class="button_passive" href="/src/pages/create_new_account.hbs">Нет аккаунта?</a>
+        </div>
+    </form>
+</div>
 </body>
 </html>
