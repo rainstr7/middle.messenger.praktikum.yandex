@@ -1,11 +1,10 @@
 {
   "name": "middle.messenger.praktikum.yandex",
   "version": "1.0.0",
-  "description": "### Откройте pull request в ветку main из ветки, где вы разрабатывали проект, и добавьте ссылку на этот pr в README.md в ветке main.  ### ВАЖНО: pull request должен называться “Sprint i” (i — номер спринта).",
+  "description": "messenger",
   "scripts": {
     "start": "parcel ./index.hbs --no-cache -p 3000",
-    "build": "parsel build ./index.hbs --no-cache",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "parsel build ./index.hbs --no-cache"
   },
   "repository": {
     "type": "git",
@@ -18,12 +17,12 @@
   },
   "homepage": "https://github.com/rainstr7/middle.messenger.praktikum.yandex#readme",
   "dependencies": {
-    "handlebars": "^4.7.7"
+    "handlebars": "4.7.7"
   },
   "devDependencies": {
-    "@anikin/parcel-transformer-handlebars": "^1.0.9",
-    "@anikin/parcel-transformer-handlebars-precompile": "^1.0.1",
-    "@parcel/transformer-sass": "^2.8.3",
-    "parcel": "^2.8.3"
+    "@anikin/parcel-transformer-handlebars": "1.0.9",
+    "@anikin/parcel-transformer-handlebars-precompile": "1.0.1",
+    "@parcel/transformer-sass": "2.8.3",
+    "parcel": "2.8.3"
   }
 }

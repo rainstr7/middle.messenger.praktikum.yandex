@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="{{data.lang}}">
+{{> head}}
+<body>
+<main class="container-center">
+    <form class="form_container">
+        {{>ui/title classNames="title-large m-b-40" label="Регистрация"}}
+        <div class="">
+            {{>ui/input classNames="custom_input_group m-b-20" type="text" id="email" placeholder="Почта" error=""}}
+            {{>ui/input classNames="custom_input_group m-b-20" type="text" id="login" placeholder="Логин" error=""}}
+            {{>ui/input classNames="custom_input_group m-b-20" type="text" id="first_name" placeholder="Имя" error=""}}
+            {{>ui/input classNames="custom_input_group m-b-20" type="text" id="second_name" placeholder="Фамилия" error=""}}
+            {{>ui/input classNames="custom_input_group m-b-20" type="tel" id="phone" placeholder="Телефон" error=""}}
+            {{>ui/input classNames="custom_input_group m-b-20" type="tel" id="password" placeholder="Пароль" error=""}}
+            {{>ui/input classNames="custom_input_group m-b-20" type="tel" id="password_repeat" placeholder="Пароль (еще раз)" error=""}}
+        </div>
+        <div class="container-center direction_column m-t-40">
+            {{>ui/button classNames="button_active m-b-20" type="submit" label="Зарегистрироваться"}}
+            {{>ui/linkButton classNames="button_passive" href="./auth.hbs" label="Войти"}}
+        </div>
+    </form>
+</main>
+</body>
+</html>

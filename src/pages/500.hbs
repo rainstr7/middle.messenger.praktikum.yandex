@@ -1,22 +1,12 @@
 <!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="/src/styles/reset.css"/>
-    <link rel="stylesheet" href="/src/styles/main.scss"/>
-    <link rel="stylesheet" href="/src/styles/fonts.css"/>
-    <link rel="stylesheet" href="/src/styles/inputs.scss"/>
-    <title>Messenger</title>
-</head>
+<html lang="{{data.lang}}">
+{{> head}}
 <body>
-<div class="container direction_column">
-    <h1 class="response_status_header m-b-20">500</h1>
-    <h3 class="response_status_description m-b-70">Мы уже фиксим</h3>
+<div class="container-center direction_column">
+    <h1 class="response_status_header m-b-20">{{data.error_page.500_error.status}}</h1>
+    <h3 class="response_status_description m-b-70">{{data.error_page.500_error.description}}</h3>
 
-    <a class="button_passive" href="/src/pages/chat.hbs">Назад к чатам</a>
+    {{>ui/linkButton classNames="button_passive" href="./chat.hbs" label="Назад к чатам"}}
 </div>
 </body>
 </html>

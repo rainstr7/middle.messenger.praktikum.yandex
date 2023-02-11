@@ -1,42 +1,19 @@
 <!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="/src/styles/reset.css"/>
-    <link rel="stylesheet" href="/src/styles/main.scss"/>
-    <link rel="stylesheet" href="/src/styles/fonts.css"/>
-    <link rel="stylesheet" href="/src/styles/inputs.scss"/>
-    <title>Messenger</title>
-</head>
+<html lang="{{data.lang}}">
+{{>head}}
 <body>
-<div class="container">
-    <form class="auth_form">
-        <h2 class="title">
-            Вход
-        </h2>
-        <div class="inputs_group_auth">
-            <div class="group middle_margin">
-                <input type="text" required name="login" id="login">
-                <span class="bar"></span>
-                <label for="login">Логин</label>
-                <p style="visibility: initial" class="error_input">Не верный логин</p>
-            </div>
-
-            <div class="group">
-                <input type="password" required name="password" id="password">
-                <span class="bar"></span>
-                <label for="password">Пароль</label>
-                <p class="error_input">Не верный пароль</p>
-            </div>
+<main class="container-center">
+    <form class="form_container">
+        {{>ui/title classNames="title-large m-b-40" label="Вход"}}
+        <div class="m-b-90">
+            {{>ui/input classNames="custom_input_group m-b-20" type="text" id="login" placeholder="Логин" error=""}}
+            {{>ui/input classNames="custom_input_group" type="password" id="password" placeholder="Пароль" error=""}}
         </div>
-        <div class="button_group">
-            <button type="submit" class="button_active" name="login">Авторизоваться</button>
-            <a class="button_passive" href="/src/pages/create_new_account.hbs">Нет аккаунта?</a>
+        <div class="container-center direction_column m-t-40">
+            {{>ui/button classNames="button_active m-b-20" type="submit" label="Авторизоваться"}}
+            {{>ui/linkButton classNames="button_passive" href="./registration.hbs" label="Нет аккаунта?"}}
         </div>
     </form>
-</div>
+</main>
 </body>
 </html>
