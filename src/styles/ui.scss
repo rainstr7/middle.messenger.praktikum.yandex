@@ -1,0 +1,107 @@
+@import "default_variables";
+
+.button_passive {
+  font-size: $font-size-1;
+  color: $primary;
+  background-color: $default-background;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+}
+
+.button_active {
+  background: $primary;
+  border-radius: 0.4rem;
+  padding: 0.6rem 4.4rem;
+  color: $default-background;
+  font-size: $font-size-2;
+  cursor: pointer;
+}
+
+.custom_input_group {
+  position: relative;
+  width: 14rem;
+
+  input {
+    font-size: 0.65rem;
+    padding: 0.5rem;
+    display: block;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid $default-link-color;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  label {
+    color: $default-link-color;
+    font-size: 0.65rem;
+    line-height: 1;
+    position: absolute;
+    pointer-events: none;
+    left: 0.5rem;
+    top: 0.65rem;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+  }
+
+  input {
+    &:focus ~ label,
+    &:valid ~ label {
+      top: -0.45rem;
+      font-size: 0.45rem;
+      color: $default-link-color;
+    }
+  }
+
+  .bar {
+    position: relative;
+    display: block;
+
+    &:before,
+    &:after {
+      content: '';
+      height: 2px;
+      width: 0;
+      bottom: 0;
+      position: absolute;
+      background: $primary;
+      transition: 0.2s ease all;
+      -moz-transition: 0.2s ease all;
+      -webkit-transition: 0.2s ease all;
+    }
+
+    &:before {
+      left: 50%;
+    }
+
+    &:after {
+      right: 50%;
+    }
+  }
+
+  input:focus ~ .bar:before,
+  input:focus ~ .bar:after {
+    width: 50%;
+  }
+
+  .error_input {
+    visibility: hidden;
+    margin: 0.25rem 0;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 0.4rem;
+    line-height: 0.4rem;
+    color: $error;
+  }
+}
+
+.go_back_bar {
+  display: flex;
+  align-items: center;
+  padding: 0 0.9rem;
+  background: $dark-background;
+}

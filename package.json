@@ -1,0 +1,30 @@
+{
+  "name": "middle.messenger.praktikum.yandex",
+  "version": "1.0.0",
+  "description": "messenger",
+  "scripts": {
+    "dev": "parcel ./index.hbs --no-cache -p 3000 --open",
+    "build": "npx parcel build ./index.hbs --no-cache",
+    "start": "npm run build && node ./server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rainstr7/middle.messenger.praktikum.yandex.git"
+  },
+  "author": "ihahn",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rainstr7/middle.messenger.praktikum.yandex/issues"
+  },
+  "homepage": "https://github.com/rainstr7/middle.messenger.praktikum.yandex#readme",
+  "dependencies": {
+    "handlebars": "4.7.7"
+  },
+  "devDependencies": {
+    "@anikin/parcel-transformer-handlebars": "^1.0.2",
+    "@parcel/transformer-css": "2.8.3",
+    "@parcel/transformer-sass": "2.8.3",
+    "express": "4.18.2",
+    "parcel": "2.8.3"
+  }
+}

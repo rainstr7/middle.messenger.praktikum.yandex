@@ -1,0 +1,16 @@
+{
+  "email": "Почта",
+  "lang": "en",
+  "error_page": {
+    "500_error": {
+      "status": "500",
+      "description": "Мы уже фиксим",
+      "go_back": "Назад к чатам"
+    },
+    "404_error": {
+      "status": "404",
+      "description": "Не туда попали"
+    }
+  },
+  "profile": "Профиль"
+}

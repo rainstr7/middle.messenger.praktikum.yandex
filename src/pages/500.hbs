@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="{{data.lang}}">
+{{> head}}
+<body>
+<div class="container-center direction_column">
+    <h1 class="response_status_header m-b-20">{{data.error_page.500_error.status}}</h1>
+    <h3 class="response_status_description m-b-70">{{data.error_page.500_error.description}}</h3>
+
+    {{>ui/linkButton classNames="button_passive" href="./chat.hbs" label="Назад к чатам"}}
+</div>
+</body>
+</html>
