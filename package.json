@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "description": "messenger",
   "scripts": {
-    "dev": "parcel ./index.hbs --no-cache -p 3000 --open",
+    "dev": "parcel ./src/index.html --no-cache -p 3000 --open",
     "build": "npx parcel build ./index.hbs --no-cache",
-    "start": "npm run build && node ./server.js"
+    "start": "npm run build && node ./server.js",
+    "eslint": "node_modules/.bin/eslint . --fix",
+    "stylelint": "npx stylelint '**/*.scss'"
   },
   "repository": {
     "type": "git",
@@ -21,10 +23,17 @@
     "handlebars": "4.7.7"
   },
   "devDependencies": {
-    "@anikin/parcel-transformer-handlebars": "^1.0.2",
+    "@anikin/parcel-transformer-handlebars-precompile": "^1.0.1",
+    "@parcel/resolver-glob": "^2.8.3",
     "@parcel/transformer-css": "2.8.3",
     "@parcel/transformer-sass": "2.8.3",
+    "eslint": "^8.34.0",
+    "eslint-config-airbnb": "^19.0.4",
     "express": "4.18.2",
-    "parcel": "2.8.3"
+    "parcel": "2.8.3",
+    "stylelint": "^15.1.0",
+    "stylelint-config-standard-scss": "^7.0.1",
+    "stylelint-scss": "^4.4.0",
+    "typescript": "^4.9.5"
   }
 }
