@@ -1,22 +1,18 @@
 import Block from "../../utils/Block";
-import template from './button.hbs';
+import template from './navlink.hbs';
 
-interface ButtonProps {
+interface NavLinkProps {
     label: string;
     onClick: () => void;
-    classes: string;
-    events: { //вынести в отдельный тип
-        click: () => void;
-    };
 }
 
-class Button extends Block {
-    constructor(props: ButtonProps) {
+class NavLink extends Block {
+    constructor(props: NavLinkProps) {
         super({
             ...props,
             events: {
                 click: props.onClick
-            }
+            },
         });
     }
 
@@ -25,4 +21,4 @@ class Button extends Block {
     }
 }
 
-export default Button;
+export default NavLink;

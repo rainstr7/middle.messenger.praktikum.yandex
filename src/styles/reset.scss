@@ -1,4 +1,4 @@
-@import "default_variables";
+@import "default_variables.scss";
 
 *,
 *::before,
@@ -21,9 +21,10 @@ dd {
 }
 
 a,
-a.text:active,
+a.text,
 a.text:hover,
-a.text {
+a.text:active,
+{
   text-decoration: none;
   color: $default-link-color;
 }
@@ -54,9 +55,9 @@ html:focus-within {
 
 /* Set core body defaults */
 body {
-    min-height: 100vh;
-    text-rendering: optimizeSpeed;
-    line-height: 1.5;
+  min-height: 100vh;
+  text-rendering: optimizespeed;
+  line-height: 1.5;
 }
 
 /* A elements that don't have a class get default styles */
@@ -83,15 +84,16 @@ select {
 
 /* Remove all animations and transitions for people that prefer not to see them */
 @media (prefers-reduced-motion: reduce) {
-    html:focus-within {
-        scroll-behavior: auto;
-    }
-    *,
-    *::before,
-    *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
-    }
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

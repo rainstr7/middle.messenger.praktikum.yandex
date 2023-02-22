@@ -1,7 +1,7 @@
 import Block from "../../utils/Block";
-import template from './input.hbs';
+import template from "./message.hbs";
 
-class Input extends Block {
+class Message extends Block {
 
     protected render(): DocumentFragment {
         return this.compile(template, {
@@ -10,4 +10,4 @@ class Input extends Block {
     }
 }
 
-export default Input;
+export default Message;

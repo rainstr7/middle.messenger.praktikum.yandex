@@ -1,15 +1,19 @@
-@import "default_variables";
+@import '_default_variables.scss';
 
-.button_passive {
+.button-passive {
   font-size: $font-size-1;
   color: $primary;
   background-color: $default-background;
   cursor: pointer;
   padding: 0;
   margin: 0;
+
+  &.button-link {
+    color: $default-link-color;
+  }
 }
 
-.button_active {
+.button-active {
   background: $primary;
   border-radius: 0.4rem;
   padding: 0.6rem 4.4rem;
@@ -18,9 +22,20 @@
   cursor: pointer;
 }
 
-.custom_input_group {
+.custom-input-group {
   position: relative;
   width: 14rem;
+
+  label {
+    color: $default-link-color;
+    font-size: 0.65rem;
+    line-height: 1;
+    position: absolute;
+    pointer-events: none;
+    left: 0.5rem;
+    top: 0.65rem;
+    transition: 0.2s ease all;
+  }
 
   input {
     font-size: 0.65rem;
@@ -33,22 +48,7 @@
     &:focus {
       outline: none;
     }
-  }
 
-  label {
-    color: $default-link-color;
-    font-size: 0.65rem;
-    line-height: 1;
-    position: absolute;
-    pointer-events: none;
-    left: 0.5rem;
-    top: 0.65rem;
-    transition: 0.2s ease all;
-    -moz-transition: 0.2s ease all;
-    -webkit-transition: 0.2s ease all;
-  }
-
-  input {
     &:focus ~ label,
     &:valid ~ label {
       top: -0.45rem;
@@ -61,8 +61,8 @@
     position: relative;
     display: block;
 
-    &:before,
-    &:after {
+    &::before,
+    &::after {
       content: '';
       height: 2px;
       width: 0;
@@ -70,25 +70,23 @@
       position: absolute;
       background: $primary;
       transition: 0.2s ease all;
-      -moz-transition: 0.2s ease all;
-      -webkit-transition: 0.2s ease all;
     }
 
-    &:before {
+    &::before {
       left: 50%;
     }
 
-    &:after {
+    &::after {
       right: 50%;
     }
   }
 
-  input:focus ~ .bar:before,
-  input:focus ~ .bar:after {
+  input:focus ~ .bar::before,
+  input:focus ~ .bar::after {
     width: 50%;
   }
 
-  .error_input {
+  .error-input {
     visibility: hidden;
     margin: 0.25rem 0;
     font-style: normal;
@@ -97,9 +95,17 @@
     line-height: 0.4rem;
     color: $error;
   }
+
+  .visibility-on {
+    visibility: visible;
+  }
+
+  .visibility-off {
+    visibility: hidden;
+  }
 }
 
-.go_back_bar {
+.go-back-bar {
   display: flex;
   align-items: center;
   padding: 0 0.9rem;

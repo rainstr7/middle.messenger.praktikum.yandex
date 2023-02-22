@@ -3,10 +3,11 @@
     "stylelint-scss"
   ],
   "extends": "stylelint-config-standard",
+  "customSyntax": "postcss-scss",
   "rules": {
     "at-rule-no-unknown": null,
     "scss/at-rule-no-unknown": true,
-    "color-hex-case": "upper"
+    "import-notation": "string"
   },
   "ignoreFiles": [
     "dist/*"

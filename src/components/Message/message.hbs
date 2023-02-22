@@ -1,0 +1,28 @@
+<div class="{{classNames}}">
+    {{#if isOwnMessage}}
+        {{message_text}}
+        <div class="my-time-of-message">
+            <div class="success">
+                <svg width="11" height="5" viewBox="0 0 11 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <line y1="-0.5" x2="3.765" y2="-0.5"
+                          transform="matrix(0.705933 0.708278 -0.705933 0.708278 0.700195 2.33313)"
+                          stroke="currentColor"/>
+                    <line y1="-0.5" x2="5.6475" y2="-0.5"
+                          transform="matrix(0.705933 -0.708278 0.705933 0.708278 3.35828 5.00006)"
+                          stroke="currentColor"/>
+                    <line y1="-0.5" x2="5.6475" y2="-0.5"
+                          transform="matrix(0.705933 -0.708278 0.705933 0.708278 6.01587 5.00006)"
+                          stroke="currentColor"/>
+                </svg>
+            </div>
+            <span class="my_time">{{time}}</span>
+        </div>
+    {{else}}
+
+        {{message_text}}
+        <div class="time-of-message">
+            {{time}}
+        </div>
+    {{/if}}
+</div>
+

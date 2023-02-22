@@ -1,0 +1,26 @@
+<main class="container-center">
+    {{#Form classNames='form-container'}}
+        {{#Title class='title-large m-b-40'}}
+            Регистрация
+        {{/Title}}
+        <div>
+            {{{InputGroup classNames='m-b-20' type='text' id='email' placeholder='Почта' error=error}}}
+            {{{InputGroup classNames='m-b-20' type='text' id='login' placeholder='Логин' error=error}}}
+            {{{InputGroup classNames='m-b-20' type='text' id='first_name' placeholder='Имя' error=error}}}
+            {{{InputGroup classNames='m-b-20' type='text' id='second_name' placeholder='Фамилия' error=error}}}
+            {{{InputGroup classNames='m-b-20' type='tel' id='phone' placeholder='Телефон' error=error}}}
+            {{{InputGroup classNames='m-b-20' type='password' id='password' placeholder='Пароль' error=error}}}
+            {{{InputGroup classNames='m-b-20' type='password' id='password_repeat' placeholder='Пароль (еще раз)'
+                          error=error}}}
+        </div>
+        <div class="container-center direction-column m-t-40">
+            {{#Button classNames='button-active m-b-20' type='submit' onClick=onHandleRegistrationClick}}
+                Зарегистрироваться
+            {{/Button}}
+            {{#Button classNames='button-passive' type='button' onClick=onHandleGoToAuthClick}}
+                Войти
+            {{/Button}}
+        </div>
+    {{/Form}}
+</main>
+

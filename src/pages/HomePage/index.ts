@@ -1,40 +1,45 @@
 import Block from "../../utils/Block";
 import template from "./home.hbs";
-
-interface HomePageProps {
-    title: string;
-}
+import renderDom from "../../utils/renderDom";
 
 class HomePage extends Block {
-    constructor(props: HomePageProps) {
-        super(props);
+    goToAuthPage() {
+        renderDom('auth');
     }
 
-    init() {
-        // this.children.button = new Button({
-        //     label: 'Click me',
-        //     classes: 'test classes',
-        //     events: {
-        //         click: () => {
-        //             const value = (this.children.input as Input).value;
-        //             console.log('TEST');
-        //             console.log(value);
-        //         },
-        //     },
-        // });
-        // this.children.inputs = [new Input(), new Input(), new Input(), new Input()];
+    goToRegistrationPage() {
+        renderDom('registration');
     }
 
-    handleClick() {
-        console.log('Clicked');
-        // const data = this.children.inputs.map(child => child.value);
-        // const result = ProfileController.validate(data)
-        // this.setProps({error: result});
+    goTo500ErrorPage() {
+        renderDom('error500');
+    }
+
+    goTo404ErrorPage() {
+        renderDom('error404');
+    }
+
+    goToChatPage() {
+        renderDom('chat');
+    }
+
+    goToProfilePage() {
+        renderDom('profile');
     }
 
     protected render(): DocumentFragment {
-        return this.compile(template, {...this.props, handleClick: this.handleClick.bind(this)});
+        return this.compile(
+            template,
+            {
+                ...this.props,
+                goToAuthPage: this.goToAuthPage.bind(this),
+                goToRegistrationPage: this.goToRegistrationPage.bind(this),
+                goTo404ErrorPage: this.goTo404ErrorPage.bind(this),
+                goTo500ErrorPage: this.goTo500ErrorPage.bind(this),
+                goToChatPage: this.goToChatPage.bind(this),
+                goToProfilePage: this.goToProfilePage.bind(this)
+            });
     }
-};
+}
 
 export default HomePage;

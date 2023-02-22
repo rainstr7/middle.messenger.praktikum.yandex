@@ -1,13 +1,26 @@
-<main>
-    <h1>HomePage</h1>
-    <!--    {{{button}}}-->
-    <!--    {{{input}}}-->
-        <!--    {{#each inputs}}-->
-    <!--        {{{this}}}<br />-->
-        <!--    {{/each}}-->
-    {{#Button type="sumbit" onClick=handleClick}}
-        Click me!
-    {{/Button}}
-    {{{Input type="password"}}}
-</main>
+<nav class="container-center">
+    <ul>
+        {{#NavLink classNames="response-status-description m-b-20" onClick=handleClick}}
+            Hello user-name!
+        {{/NavLink}}
+        {{#NavLink classNames="m-b-10" onClick=goToAuthPage}}
+            Auth Page
+        {{/NavLink}}
+        {{#NavLink classNames="m-b-10" onClick=goToRegistrationPage}}
+            Registration Page
+        {{/NavLink}}
+        {{#NavLink classNames="m-b-10" onClick=goToChatPage}}
+            Chat Page
+        {{/NavLink}}
+        {{#NavLink classNames="m-b-10" onClick=goToProfilePage}}
+            Profile Page
+        {{/NavLink}}
+        {{#NavLink classNames="m-b-10" onClick=goTo404ErrorPage}}
+            404 Page
+        {{/NavLink}}
+        {{#NavLink classNames="m-b-10" onClick=goTo500ErrorPage}}
+            500 Page
+        {{/NavLink}}
+    </ul>
+</nav>
 
