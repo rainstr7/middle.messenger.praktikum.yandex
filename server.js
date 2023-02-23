@@ -7,5 +7,5 @@ const PORT = 3000;
 app.use(express.static(path.join(__dirname, 'dist')));
 
 app.listen(PORT, () => {
-    console.log(`App has been started on port ${PORT}!`);
+  console.log(`App has been started on port ${PORT}!`);
 });

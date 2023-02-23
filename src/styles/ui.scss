@@ -87,21 +87,12 @@
   }
 
   .error-input {
-    visibility: hidden;
     margin: 0.25rem 0;
     font-style: normal;
     font-weight: 400;
     font-size: 0.4rem;
     line-height: 0.4rem;
     color: $error;
-  }
-
-  .visibility-on {
-    visibility: visible;
-  }
-
-  .visibility-off {
-    visibility: hidden;
   }
 }
 

@@ -2,7 +2,9 @@ import Handlebars from 'handlebars/dist/handlebars.runtime';
 import Block from "./Block";
 
 function registerComponent(name: string, Component: typeof Block) {
-    Handlebars.registerHelper(name, function ({data, hash, fn}) {
+    Handlebars.registerHelper(name, function (props: any) {
+        const {data, hash, fn} = props;
+        // console.log(props)
         const {root} = data;
         if (!root.children) {
             root.children = {};

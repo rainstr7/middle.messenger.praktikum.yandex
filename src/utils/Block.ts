@@ -12,7 +12,7 @@ class Block {
 
     public id = nanoid(6);
     protected props: any;
-    public children: Record<string, Block>;
+    public children: Record<string, Block | Block[]>;
     private eventBus: () => EventBus;
     private _element: HTMLElement | null = null;
     private _meta: { props: any; };
@@ -127,9 +127,7 @@ class Block {
         if (this._element) {
             this._element.replaceWith(newElement);
         }
-
         this._element = newElement;
-
         this._addEvents();
     }
 

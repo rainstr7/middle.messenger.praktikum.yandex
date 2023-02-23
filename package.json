@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/rainstr7/middle.messenger.praktikum.yandex#readme",
   "dependencies": {
+    "express": "4.18.2",
     "handlebars": "4.7.7"
   },
   "devDependencies": {
@@ -29,7 +30,6 @@
     "@parcel/transformer-sass": "2.8.3",
     "eslint": "8.34.0",
     "eslint-config-airbnb": "19.0.4",
-    "express": "4.18.2",
     "parcel": "2.8.3",
     "stylelint": "15.1.0",
     "stylelint-config-standard-scss": "7.0.1",

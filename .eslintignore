@@ -1,3 +1,4 @@
-/distnode_modules/.bin/eslint .
+/dist
+node_modules/.bin/eslint .
 **/*.min.js
 /node_modules

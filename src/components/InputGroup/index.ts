@@ -12,11 +12,6 @@ class InputGroup extends Block {
         });
     }
 
-    get value() {
-        console.log(this)
-        return (this.element as HTMLInputElement).value;
-    }
-
     protected render(): DocumentFragment {
         return this.compile(template, {
             ...this.props,
