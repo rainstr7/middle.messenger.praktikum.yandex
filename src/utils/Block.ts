@@ -13,6 +13,7 @@ class Block {
     public id = nanoid(6);
     protected props: any;
     public children: Record<string, Block | Block[]>;
+    public refs: { [key: string]: Block } = {};
     private eventBus: () => EventBus;
     private _element: HTMLElement | null = null;
     private _meta: { props: any; };
@@ -121,6 +122,7 @@ class Block {
 
     private _render() {
         this.children = {};
+        this.refs = {};
         const fragment = this.render();
         const newElement = fragment.firstElementChild as HTMLElement;
         // this._removeEvents()
@@ -132,7 +134,7 @@ class Block {
     }
 
     protected compile(template: (context: any) => string, context: any) {
-        const contextAndStubs = {...context, children: this.children};
+        const contextAndStubs = {...context, children: this.children, refs: this.refs};
 
         // Object.entries(this.children).forEach(([name, component]) => {
         //     if (Array.isArray(component)) {

@@ -1,7 +1,6 @@
 import renderDom from "./utils/renderDom";
 import registerComponent from "./utils/registerComponent";
 
-// @ts-ignore
 import components from './components/**/*.ts';
 
 console.log('components', components)

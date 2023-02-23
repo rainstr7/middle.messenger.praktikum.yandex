@@ -4,14 +4,20 @@
             Регистрация
         {{/Title}}
         <div>
-            {{{InputGroup classNames='m-b-20' type='text' id='email' placeholder='Почта' error=error}}}
-            {{{InputGroup classNames='m-b-20' type='text' id='login' placeholder='Логин' error=error}}}
-            {{{InputGroup classNames='m-b-20' type='text' id='first_name' placeholder='Имя' error=error}}}
-            {{{InputGroup classNames='m-b-20' type='text' id='second_name' placeholder='Фамилия' error=error}}}
-            {{{InputGroup classNames='m-b-20' type='tel' id='phone' placeholder='Телефон' error=error}}}
-            {{{InputGroup classNames='m-b-20' type='password' id='password' placeholder='Пароль' error=error}}}
+            {{{InputGroup classNames='m-b-20' type='text' id='email' placeholder='Почта' error=errors.email
+                          onBlur=onHandleBlur}}}
+            {{{InputGroup classNames='m-b-20' type='text' id='login' placeholder='Логин' error=errors.login
+                          onBlur=onHandleBlur}}}
+            {{{InputGroup classNames='m-b-20' type='text' id='first_name' placeholder='Имя' error=errors.firstName
+                          onBlur=onHandleBlur}}}
+            {{{InputGroup classNames='m-b-20' type='text' id='second_name' placeholder='Фамилия' error=errors.secondName
+                          onBlur=onHandleBlur}}}
+            {{{InputGroup classNames='m-b-20' type='tel' id='phone' placeholder='Телефон' error=errors.phone
+                          onBlur=onHandleBlur}}}
+            {{{InputGroup classNames='m-b-20' type='password' id='password' placeholder='Пароль' error=errors.password
+                          onBlur=onHandleBlur}}}
             {{{InputGroup classNames='m-b-20' type='password' id='password_repeat' placeholder='Пароль (еще раз)'
-                          error=error}}}
+                          error=errors.passwordRepeat onBlur=onHandleBlur}}}
         </div>
         <div class="container-center direction-column m-t-40">
             {{#Button classNames='button-active m-b-20' type='submit' onClick=onHandleRegistrationClick}}

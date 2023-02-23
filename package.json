@@ -4,7 +4,7 @@
   "description": "messenger",
   "scripts": {
     "dev": "parcel ./src/index.html --no-cache -p 3000 --open",
-    "build": "npx parcel build ./index.hbs --no-cache",
+    "build": "npx parcel build ./src/index.html --no-cache",
     "start": "npm run build && node ./server.js",
     "eslint": "node_modules/.bin/eslint . --fix",
     "stylelint": "npx stylelint '**/*.scss'"

@@ -1,10 +1,10 @@
-interface ProfileControllerInterface {
+interface AuthControllerInterface {
     validate: (data: string) => string | null;
 }
 
-class AuthController implements ProfileControllerInterface {
+class AuthController implements AuthControllerInterface {
     validate(data: string | null) {
-        return !data ? 'Поле не может быть пустым' : null;
+        return Boolean(data) ? null : 'Поле не может быть пустым';
     }
 }
 

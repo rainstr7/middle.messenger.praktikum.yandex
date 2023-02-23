@@ -1,16 +1,26 @@
+import { HelperOptions } from 'handlebars';
 import Handlebars from 'handlebars/dist/handlebars.runtime';
 import Block from "./Block";
 
 function registerComponent(name: string, Component: typeof Block) {
-    Handlebars.registerHelper(name, function (props: any) {
+    Handlebars.registerHelper(name, function (props: HelperOptions) {
         const {data, hash, fn} = props;
-        // console.log(props)
         const {root} = data;
         if (!root.children) {
             root.children = {};
         }
+        if (!root.refs) {
+            root.refs = {};
+        }
+        const { children, refs } = data.root;
         const component = new Component(hash);
-        root.children[component.id] = component;
+
+
+        children[component.id] = component;
+        if (hash.ref) {
+            refs[hash.ref] = component;
+        }
+
         if (fn) {
             return `<div data-id="${component.id}">${fn(this)}</div>`;
         } else {

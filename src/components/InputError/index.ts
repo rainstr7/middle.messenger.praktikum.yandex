@@ -5,7 +5,6 @@ class InputError extends Block {
 
 
     protected render(): DocumentFragment {
-        console.log('getContent', this);
         return this.compile(template, this.props);
     }
 }
