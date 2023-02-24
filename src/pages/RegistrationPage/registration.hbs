@@ -1,0 +1,32 @@
+<main class="container-center">
+    {{#Form classNames='form-container'}}
+        {{#Title class='title-large m-b-40'}}
+            Регистрация
+        {{/Title}}
+        <div>
+            {{{InputGroup classNames='m-b-20' type='text' id='email' placeholder='Почта'
+                          onBlur=onHandleBlur onFocus=onHandleFocus ref='InputGroupEmailRef' }}}
+            {{{InputGroup classNames='m-b-20' type='text' id='login' placeholder='Логин'
+                          onBlur=onHandleBlur onFocus=onHandleFocus ref='InputGroupLoginRef'}}}
+            {{{InputGroup classNames='m-b-20' type='text' id='first_name' placeholder='Имя'
+                          onBlur=onHandleBlur onFocus=onHandleFocus ref='InputGroupFirstNameRef'}}}
+            {{{InputGroup classNames='m-b-20' type='text' id='second_name' placeholder='Фамилия'
+                          onBlur=onHandleBlur onFocus=onHandleFocus ref='InputGroupSecondNameRef'}}}
+            {{{InputGroup classNames='m-b-20' type='tel' id='phone' placeholder='Телефон'
+                          onBlur=onHandleBlur onFocus=onHandleFocus ref='InputGroupPhoneRef'}}}
+            {{{InputGroup classNames='m-b-20' type='password' id='password' placeholder='Пароль'
+                          onBlur=onHandleBlur onFocus=onHandleFocus ref='InputGroupPasswordRef'}}}
+            {{{InputGroup classNames='m-b-20' type='password' id='password_repeat' placeholder='Пароль (еще раз)'
+                          onBlur=onHandleBlur onFocus=onHandleFocus ref='InputGroupPasswordRepeatRef'}}}
+        </div>
+        <div class="container-center direction-column m-t-40">
+            {{#Button classNames='button-active m-b-20' type='submit' onClick=onHandleRegistrationClick}}
+                Зарегистрироваться
+            {{/Button}}
+            {{#Button classNames='button-passive' type='button' onClick=onHandleGoToAuthClick}}
+                Войти
+            {{/Button}}
+        </div>
+    {{/Form}}
+</main>
+
