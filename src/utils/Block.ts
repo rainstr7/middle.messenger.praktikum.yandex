@@ -16,12 +16,6 @@ class Block<P extends Record<string, any> = any> {
     private eventBus: () => EventBus;
     private _element: HTMLElement | null = null;
 
-    /** JSDoc
-     * @param {string} tagName
-     * @param {Object} props
-     *
-     * @returns {void}
-     */
     constructor(propsWithChildren: P) {
         const eventBus = new EventBus();
         const {props, children} = this._getChildrenAndProps(propsWithChildren || {});
@@ -81,7 +75,6 @@ class Block<P extends Record<string, any> = any> {
 
     public dispatchComponentDidMount() {
         this.eventBus().emit(Block.EVENTS.FLOW_CDM);
-
         Object.values(this.children).forEach(child => child.dispatchComponentDidMount());
     }
 
