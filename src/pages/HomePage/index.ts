@@ -3,6 +3,7 @@ import template from "./home.hbs";
 import renderDom from "../../utils/renderDom";
 
 class HomePage extends Block {
+
     goToAuthPage() {
         renderDom('auth');
     }
@@ -27,6 +28,10 @@ class HomePage extends Block {
         renderDom('profile');
     }
 
+    goToChangeProfileDataPage() {
+        renderDom('changeProfileData');
+    }
+
     protected render(): DocumentFragment {
         return this.compile(
             template,
@@ -37,7 +42,8 @@ class HomePage extends Block {
                 goTo404ErrorPage: this.goTo404ErrorPage.bind(this),
                 goTo500ErrorPage: this.goTo500ErrorPage.bind(this),
                 goToChatPage: this.goToChatPage.bind(this),
-                goToProfilePage: this.goToProfilePage.bind(this)
+                goToProfilePage: this.goToProfilePage.bind(this),
+                goToChangeProfileDataPage: this.goToChangeProfileDataPage.bind(this),
             });
     }
 }

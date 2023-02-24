@@ -3,16 +3,14 @@ import template from "./profile.hbs";
 import renderDom from "../../utils/renderDom";
 
 class ProfilePage extends Block {
+
     handleChangePasswordClick(event: PointerEvent) {
         event.preventDefault();
-        console.log('handleChangePasswordClick');
-        console.log(event);
+
     }
 
     handleChangeProfileDataClick(event: PointerEvent) {
         event.preventDefault();
-        console.log('handleChangePasswordClick');
-        console.log(event);
     }
 
     handleGoAwayClick() {

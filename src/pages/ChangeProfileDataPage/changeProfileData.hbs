@@ -1,7 +1,7 @@
 <main class="container-center">
     {{#Form classNames='form-container'}}
         {{#Title class='title-large m-b-40'}}
-            Регистрация
+            Изменить данные
         {{/Title}}
         <div>
             {{{InputGroup classNames='m-b-20' type='text' id='email' placeholder='Почта'
@@ -14,17 +14,13 @@
                           onBlur=onHandleBlur onFocus=onHandleFocus ref='InputGroupSecondNameRef'}}}
             {{{InputGroup classNames='m-b-20' type='tel' id='phone' placeholder='Телефон'
                           onBlur=onHandleBlur onFocus=onHandleFocus ref='InputGroupPhoneRef'}}}
-            {{{InputGroup classNames='m-b-20' type='password' id='password' placeholder='Пароль'
-                          onBlur=onHandleBlur onFocus=onHandleFocus ref='InputGroupPasswordRef'}}}
-            {{{InputGroup classNames='m-b-20' type='password' id='password_repeat' placeholder='Пароль (еще раз)'
-                          onBlur=onHandleBlur onFocus=onHandleFocus ref='InputGroupPasswordRepeatRef'}}}
         </div>
         <div class="container-center direction-column m-t-40">
-            {{#Button classNames='button-active m-b-20' type='submit' onClick=onHandleRegistrationClick}}
-                Зарегистрироваться
+            {{#Button classNames='button-active m-b-20' type='submit' onClick=onHandleChangeProfileDataClick}}
+                Сохранить
             {{/Button}}
-            {{#Button classNames='button-passive' type='button' onClick=onHandleGoToAuthClick}}
-                Войти
+            {{#Button classNames='button-passive' type='button' onClick=onHandleGoToProfileClick}}
+                Отмена
             {{/Button}}
         </div>
     {{/Form}}

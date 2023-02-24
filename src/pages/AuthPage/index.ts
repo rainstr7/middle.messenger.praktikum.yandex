@@ -1,68 +1,54 @@
 import Block from "../../utils/Block";
 import template from "./auth.hbs";
 import renderDom from "../../utils/renderDom";
-import AuthController from "../../controllers/AuthController";
+import AuthController, {authErrors} from "../../controllers/AuthController";
+import toCapitalize from "../../utils/toCapitalize";
 
 class AuthPage extends Block {
-    constructor(props: any) {
-        super({
-            ...props,
-        })
-    }
 
-    private static getLoginValue(): HTMLInputElement {
-        return <HTMLInputElement>document.getElementById('login');
-    }
+    protected controller = new AuthController;
 
-    private static getPasswordValue(): HTMLInputElement {
-        return <HTMLInputElement>document.getElementById('password');
-
-    }
-
-    handleAuthClick(event: PointerEvent) {
-        event.preventDefault();
-        const targetLogin = AuthPage.getLoginValue();
-        const targetPassword = AuthPage.getPasswordValue();
-        const login = this.getValidateStatus(targetLogin.value, targetLogin.id);
-        const password = this.getValidateStatus(targetPassword.value, targetPassword.id);
-        if (login && password) {
-            this.setProps({
-                errors: {
-                    [targetLogin.id]: '',
-                    [targetPassword.id]: '',
-                }
-            });
-            console.log('start Auth process');
+    protected changeStatusError(error: string | null, id: keyof typeof authErrors) {
+        const errorComponent = this.refs[`InputGroup${toCapitalize(id)}Ref`].refs.inputErrorRef
+        if (errorComponent) {
+            errorComponent.setProps({error});
         }
     }
 
-    handleGoToRegistrationClick() {
+    protected getValidateStatus(data: string, id: keyof typeof authErrors) {
+        const textError = this.controller.validate(data, id);
+        this.changeStatusError(textError, id);
+        return !textError;
+    }
+
+    protected handleAuthClick(event: PointerEvent) {
+        event.preventDefault();
+
+        const allFields = Object.keys(this.refs)
+            .map((keyOfRef) => this.refs[keyOfRef].refs.inputRef.getContent() as HTMLInputElement)
+
+        const isValid = allFields.map((inputDomComponent) => this.getValidateStatus(
+            inputDomComponent.value, inputDomComponent.id as keyof typeof authErrors))
+            .every((status => Boolean(status)));
+
+        if (isValid) {
+            const body = allFields.reduce((acc, {value, id}) => ({...acc, [id]: value}), {});
+            console.log(body);
+        }
+    }
+
+    protected handleGoToRegistrationClick() {
         renderDom('registration');
     }
 
-
-    handleFocus() {
-    }
-
-    getValidateStatus(data: string, id: string) {
-        const controller = new AuthController;
-        const textError = controller.validate(data);
-        if (textError) {
-            this.setProps({
-                input: data,
-                errors: {
-                    ...this.props.errors,
-                    [id]: textError,
-                }
-            });
-            return false;
-        }
-        return true;
-    }
-
-    handleBlur(event: InputEvent) {
+    protected handleBlur(event: InputEvent) {
         const target = event.target as HTMLTextAreaElement;
-        this.getValidateStatus(target.value, target.id);
+        this.getValidateStatus(target.value, target.id as keyof typeof authErrors);
+    }
+
+    protected handleFocus(event: InputEvent) {
+        const target = event.target as HTMLTextAreaElement;
+        this.getValidateStatus(target.value, target.id as keyof typeof authErrors);
     }
 
     protected render(): DocumentFragment {

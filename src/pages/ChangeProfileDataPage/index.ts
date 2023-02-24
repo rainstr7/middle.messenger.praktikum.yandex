@@ -1,15 +1,15 @@
 import Block from "../../utils/Block";
-import template from "./registration.hbs";
+import template from "./changeProfileData.hbs";
 import renderDom from "../../utils/renderDom";
 import RegistrationController, {registrationErrors} from "../../controllers/RegistrationController";
 import toCapitalize from "../../utils/toCapitalize";
 import toCamelCase from "../../utils/toCamelCase";
 
-class RegistrationPage extends Block {
+class ChangeProfileDataPage extends Block {
 
     controller = new RegistrationController;
 
-    protected handleRegistrationClick(event: PointerEvent) {
+    protected handleChangeProfileDataClick(event: PointerEvent) {
         event.preventDefault();
         const allFields = Object.keys(this.refs)
             .map((keyOfRef) => this.refs[keyOfRef].refs.inputRef.getContent() as HTMLInputElement);
@@ -38,8 +38,8 @@ class RegistrationPage extends Block {
     }
 
 
-    protected handleGoToAuthClick() {
-        renderDom('auth');
+    protected handleGoToProfileClick() {
+        renderDom('profile');
     }
 
     protected handleBlur(event: InputEvent) {
@@ -56,8 +56,8 @@ class RegistrationPage extends Block {
         return this.compile(
             template, {
                 ...this.props,
-                onHandleRegistrationClick: this.handleRegistrationClick.bind(this),
-                onHandleGoToAuthClick: this.handleGoToAuthClick.bind(this),
+                onHandleChangeProfileDataClick: this.handleChangeProfileDataClick.bind(this),
+                onHandleGoToProfileClick: this.handleGoToProfileClick.bind(this),
                 onHandleBlur: this.handleBlur.bind(this),
                 onHandleFocus: this.handleFocus.bind(this),
             }
@@ -65,4 +65,4 @@ class RegistrationPage extends Block {
     }
 }
 
-export default RegistrationPage;
+export default ChangeProfileDataPage;

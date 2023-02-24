@@ -3,9 +3,12 @@ import template from './inputError.hbs';
 
 class InputError extends Block {
 
-
     protected render(): DocumentFragment {
-        return this.compile(template, this.props);
+        return this.compile(template, {
+            ...this.props,
+            error: this.props.error
+
+        });
     }
 }
 
