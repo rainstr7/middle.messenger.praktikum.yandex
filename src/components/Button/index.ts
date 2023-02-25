@@ -2,15 +2,16 @@ import Block from "../../utils/Block";
 import template from './button.hbs';
 
 interface ButtonProps {
-    label: string;
-    onClick: () => void;
-    classes: string;
-    events: { //вынести в отдельный тип
-        click: () => void;
+    onClick: (event: MouseEvent) => void;
+    classNames: string;
+    events: {
+        click: (event: MouseEvent) => void;
     };
+    type?: "submit" | "button"
 }
 
 class Button extends Block {
+
     constructor(props: ButtonProps) {
         super({
             ...props,

@@ -2,11 +2,15 @@ import Block from "../../utils/Block";
 import template from './navlink.hbs';
 
 interface NavLinkProps {
-    label: string;
+    classNames?: string;
+    events: {
+        click: () => void;
+    }
     onClick: () => void;
 }
 
 class NavLink extends Block {
+
     constructor(props: NavLinkProps) {
         super({
             ...props,

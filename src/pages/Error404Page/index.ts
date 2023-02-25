@@ -4,6 +4,10 @@ import renderDom from "../../utils/renderDom";
 
 class Error400Page extends Block {
 
+    constructor(props: {}) {
+        super(props);
+    }
+
     handleGoToProfileClick() {
         renderDom('profile');
     }

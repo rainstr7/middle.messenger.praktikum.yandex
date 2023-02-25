@@ -4,6 +4,10 @@ import renderDom from "../../utils/renderDom";
 
 class Error500Page extends Block {
 
+    constructor(props: {}) {
+        super(props);
+    }
+
     handleGoToChatClick() {
         renderDom('chat');
     }

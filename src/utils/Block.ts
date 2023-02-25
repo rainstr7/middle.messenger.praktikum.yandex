@@ -1,5 +1,8 @@
 import EventBus from "./EventBus";
 import {nanoid} from 'nanoid';
+import {Nullable, Undefined, Values} from "./types";
+
+type Events = Values<typeof Block.EVENTS>;
 
 class Block<P extends Record<string, any> = any> {
     static EVENTS = {
@@ -7,27 +10,27 @@ class Block<P extends Record<string, any> = any> {
         FLOW_CDM: "flow:component-did-mount",
         FLOW_CDU: "flow:component-did-update",
         FLOW_RENDER: "flow:render"
-    }
+    } as const;
 
     public id = nanoid(6);
     protected props: P;
     public children: Record<string, Block | Block[]>;
     public refs: { [key: string]: Block } = {};
-    private eventBus: () => EventBus;
-    private _element: HTMLElement | null = null;
+    private eventBus: () => EventBus<Events>;
+    private _element: Nullable<HTMLElement> = null;
 
     constructor(propsWithChildren: P) {
-        const eventBus = new EventBus();
-        const {props, children} = this._getChildrenAndProps(propsWithChildren || {});
+        const eventBus = new EventBus<Events>();
+        const {props, children} = this._getChildrenAndProps(propsWithChildren || {} as P);
         this.children = children;
-        this.props = this._makePropsProxy(props);
+        this.props = this._makePropsProxy(props || {} as P);
         this.eventBus = () => eventBus;
         this._registerEvents(eventBus);
         eventBus.emit(Block.EVENTS.INIT);
     }
 
     _getChildrenAndProps(childrenAndProps: P): { props: P, children: Record<string, Block | Block[]> } {
-        const props: Record<string, any> = {};
+        const props: Record<string, unknown> = {};
         const children: Record<string, Block | Block[]> = {};
 
         Object.entries(childrenAndProps).forEach(([key, value]) => {
@@ -51,7 +54,7 @@ class Block<P extends Record<string, any> = any> {
         });
     }
 
-    _registerEvents(eventBus: EventBus) {
+    _registerEvents(eventBus: EventBus<Events>) {
         eventBus.on(Block.EVENTS.INIT, this._init.bind(this));
         eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
         eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
@@ -88,7 +91,7 @@ class Block<P extends Record<string, any> = any> {
         return true;
     }
 
-    setProps = (nextProps: any) => {
+    setProps = (nextProps: P) => {
         if (!nextProps) {
             return;
         }
@@ -101,6 +104,7 @@ class Block<P extends Record<string, any> = any> {
     }
 
     private _render() {
+        this._removeEvents();
         this.children = {};
         this.refs = {};
 
@@ -114,7 +118,7 @@ class Block<P extends Record<string, any> = any> {
         this._addEvents();
     }
 
-    protected compile(template: (context: any) => string, context: any) {
+    protected compile(template: (context: unknown) => string, context: Record<string, unknown>) {
         const contextAndStubs = {...context, children: this.children, refs: this.refs};
 
         const html = template(contextAndStubs);
@@ -151,34 +155,42 @@ class Block<P extends Record<string, any> = any> {
         return this.element;
     }
 
-    _makePropsProxy(props: any) {
-        // Ещё один способ передачи this, но он больше не применяется с приходом ES6+
-        const self = this;
-
-        return new Proxy(props, {
-            get(target, prop) {
+    _makePropsProxy(props: Undefined<P>) {
+        return new Proxy(props as unknown as object, {
+            get: (target: Record<string, unknown>, prop: string) => {
                 const value = target[prop];
                 return typeof value === "function" ? value.bind(target) : value;
             },
-            set(target, prop, value) {
+            set: (target: Record<string, unknown>, prop: string, value: unknown) => {
                 const oldTarget = {...target}
-
                 target[prop] = value;
 
                 // Запускаем обновление компоненты
                 // Плохой cloneDeep, в следующей итерации нужно заставлять добавлять cloneDeep им самим
-                self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldTarget, target);
+                this.eventBus().emit(Block.EVENTS.FLOW_CDU, oldTarget, target);
                 return true;
             },
             deleteProperty() {
                 throw new Error("Нет доступа");
             }
-        });
+        }) as unknown as P;
     }
 
     _createDocumentElement(tagName: string) {
-        // Можно сделать метод, который через фрагменты в цикле создаёт сразу несколько блоков
         return document.createElement(tagName);
+    }
+
+    _removeEvents() {
+        const events: Record<string, () => void> = (this.props).events;
+
+        if (!events || !this._element) {
+            return;
+        }
+
+
+        Object.entries(events).forEach(([event, listener]) => {
+            this._element!.removeEventListener(event, listener);
+        });
     }
 
     show() {

@@ -1,4 +1,6 @@
-export enum Method {
+import queryStringify from "./queryStringify";
+
+export enum METHODS {
     GET = 'GET',
     POST = 'POST',
     PUT = 'PUT',
@@ -6,63 +8,63 @@ export enum Method {
 }
 
 type Options = {
-    method: Method;
+    method: METHODS;
     data?: any;
-    timeout: number;
     headers?: any;
+    timeout?: number;
 };
 
-function queryStringify(data: any) {
-    if (!(data instanceof Object)) {
-        return null;
-
-    }
-    return Object.keys(data).reduce((queryString, key, index, keys) => (
-        `${queryString}${key}=${data[key]}${index < keys.length - 1 ? '&' : ''}`
-    ), '?');
-}
+type HTTPMethod = (url: string, options?: Options) => Promise<unknown>
 
 export default class HTTPTransport {
-    get = (url: string, options: Options) => {
-        return this.request(url, {...options, method: Method.GET}, options.timeout);
-    };
 
-    post = (url: string, options: Options) => {
-        return this.request(url, {...options, method: Method.POST}, options.timeout);
-    };
+    get: HTTPMethod = (url, options) => {
+        const parameters = queryStringify(options?.data);
+        return this.request(url + parameters, {...options, method: METHODS.GET});
+    }
+    put: HTTPMethod = (url, options) => (
+        this.request(url, {...options, method: METHODS.PUT})
+    )
+    post: HTTPMethod = (url, options) => (
+        this.request(url, {...options, method: METHODS.POST})
+    )
+    delete: HTTPMethod = (url, options) => (
+        this.request(url, {...options, method: METHODS.DELETE})
+    )
 
-    put = (url: string, options: Options) => {
-        return this.request(url, {...options, method: Method.PUT}, options.timeout);
-    };
-
-    delete = (url: string, options: Options) => {
-        return this.request(url, {...options, method: Method.DELETE}, options.timeout);
-    };
-    request = (url: string, options: Options, timeout = 5000) => {
-        const {method = Method.GET, data = null, headers = {}} = options;
+    private request(url: string, options: Options): Promise<Response> {
+        const {method = METHODS.GET, data = null, headers = {}, timeout = 5000} = options;
         return new Promise((resolve, reject) => {
-            if (!Object.keys(Method).includes(method)) {
+            if (!Object.keys(METHODS).includes(method)) {
                 reject('Wrong method');
                 return;
             }
             const xhr = new XMLHttpRequest();
-            const isGet = method === Method.GET;
-            const getURL = isGet && !!data ? `${url}${queryStringify(data)}` : url;
+            xhr.open(method, url);
+            xhr.timeout = timeout;
 
-            xhr.open(method, getURL);
+            Object.keys(headers).forEach((key) => {
+                xhr.setRequestHeader(key, headers[key]);
+            });
 
-            Object.keys(headers).forEach((key) => xhr.setRequestHeader(key, headers[key]));
             xhr.onload = () => {
-                resolve(xhr)
+                if (xhr.status < 400) {
+                    resolve(xhr.response);
+                } else {
+                    reject(xhr);
+                }
             };
 
             xhr.onabort = reject;
             xhr.onerror = reject;
-
-            xhr.timeout = timeout;
             xhr.ontimeout = reject;
+            xhr.responseType = "json";
 
-            xhr.send(isGet ? null : data);
+            if (method === METHODS.GET || !data) {
+                xhr.send();
+            } else {
+                xhr.send(data);
+            }
         })
     };
 }

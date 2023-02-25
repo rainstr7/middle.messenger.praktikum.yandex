@@ -4,6 +4,10 @@ import renderDom from "../../utils/renderDom";
 
 class HomePage extends Block {
 
+    constructor(props: {}) {
+        super(props);
+    }
+
     goToAuthPage() {
         renderDom('auth');
     }
