@@ -7,6 +7,10 @@ import toCamelCase from "../../utils/toCamelCase";
 
 class RegistrationPage extends Block {
 
+    constructor(props: {}) {
+        super(props);
+    }
+
     controller = new RegistrationController;
 
     protected handleRegistrationClick(event: PointerEvent) {

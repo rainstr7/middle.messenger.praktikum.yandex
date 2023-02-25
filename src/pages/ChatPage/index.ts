@@ -3,6 +3,11 @@ import template from "./chat.hbs";
 import renderDom from "../../utils/renderDom";
 
 class ChatPage extends Block {
+
+    constructor(props: {}) {
+        super(props);
+    }
+
     getChats() {
         return [
             {

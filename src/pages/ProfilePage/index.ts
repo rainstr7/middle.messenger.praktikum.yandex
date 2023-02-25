@@ -4,6 +4,10 @@ import renderDom from "../../utils/renderDom";
 
 class ProfilePage extends Block {
 
+    constructor(props: {}) {
+        super(props);
+    }
+
     handleChangePasswordClick(event: PointerEvent) {
         event.preventDefault();
 

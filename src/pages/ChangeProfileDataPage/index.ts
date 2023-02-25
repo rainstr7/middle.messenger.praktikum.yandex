@@ -7,6 +7,10 @@ import toCamelCase from "../../utils/toCamelCase";
 
 class ChangeProfileDataPage extends Block {
 
+    constructor(props: {}) {
+        super(props);
+    }
+
     controller = new RegistrationController;
 
     protected handleChangeProfileDataClick(event: PointerEvent) {

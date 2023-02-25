@@ -24,7 +24,7 @@ export const registrationErrors = {
 
 const validationMethods: RegistrationValidateInterface = {
     email: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
-    login: /^[a-zA-Z0-9-_]{3,20}$/,
+    login: /^[a-zA-Z](.[a-zA-Z0-9_-]*){2,19}$/,
     firstName: /^([А-Я][а-яё-]{1,23}|[A-Z][a-z-])$/,
     secondName: /^([А-Я][а-яё-]{1,23}|[A-Z][a-z-])$/,
     phone: /^[0-9+][0-9]{9,14}$/,

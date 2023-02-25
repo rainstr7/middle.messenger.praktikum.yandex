@@ -6,6 +6,10 @@ import toCapitalize from "../../utils/toCapitalize";
 
 class AuthPage extends Block {
 
+    constructor(props: {}) {
+        super(props);
+    }
+
     protected controller = new AuthController;
 
     protected changeStatusError(error: string | null, id: keyof typeof authErrors) {
