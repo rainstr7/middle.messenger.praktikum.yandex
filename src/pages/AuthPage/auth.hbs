@@ -1,0 +1,22 @@
+<main class="container-center">
+    {{#Form classNames='form-container'}}
+        {{#Title}}
+            Вход
+        {{/Title}}
+        <div class="m-b-90">
+            {{{InputGroup classNames='m-b-20' type='text' id='login' placeholder='Логин'
+                          onBlur=onHandleBlur onFocus=onHandleFocus ref='InputGroupLoginRef'}}}
+
+            {{{InputGroup classNames='' type='password' id='password' placeholder='Пароль'
+                          onBlur=onHandleBlur onFocus=onHandleFocus ref='InputGroupPasswordRef'}}}
+        </div>
+        <div class="container-center direction-column m-t-40">
+            {{#Button classNames='button-active m-b-20' type='submit' onClick=onHandleAuthClick}}
+                Авторизоваться
+            {{/Button}}
+            {{#Button classNames='button-passive' type='submit' onClick=onHandleGoToRegistrationClick}}
+                Нет аккаунта?
+            {{/Button}}
+        </div>
+    {{/Form}}
+</main>

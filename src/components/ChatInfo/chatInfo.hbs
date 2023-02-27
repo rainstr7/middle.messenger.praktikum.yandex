@@ -1,0 +1,24 @@
+<li class="{{classNames}} {{#if active}}active{{/if}}">
+    <div>
+        <div class="avatar-middle"></div>
+    </div>
+    <div class="user-container">
+                    <span class="user-name">
+                        {{name}}
+                    </span>
+        <span class="last-message">
+            {{text}}
+        </span>
+    </div>
+    <div class="information-message direction-column">
+                    <span class="time">
+                        {{time}}
+                    </span>
+        {{#if newMessage includeZero=false}}
+            <div class="widget">
+                {{newMessage}}
+            </div>
+        {{/if}}
+
+    </div>
+</li>
