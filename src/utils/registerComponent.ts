@@ -4,7 +4,6 @@ import Block from "./Block";
 
 export interface BlockConstructable<Props = any> {
     cName: string;
-
     new(props: Props): Block;
 }
 

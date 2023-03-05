@@ -1,4 +1,4 @@
-<li class="{{classNames}} {{#if active}}active{{/if}}">
+<li class="{{classNames}} {{#if active}}active{{/if}}" id="{{id}}">
     <div>
         <div class="avatar-middle"></div>
     </div>
@@ -14,11 +14,10 @@
                     <span class="time">
                         {{time}}
                     </span>
-        {{#if newMessage includeZero=false}}
+        {{#if unreadMessagesCount includeZero=false}}
             <div class="widget">
-                {{newMessage}}
+                {{unreadMessagesCount}}
             </div>
         {{/if}}
-
     </div>
 </li>

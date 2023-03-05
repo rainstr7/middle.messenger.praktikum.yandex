@@ -1,0 +1,8 @@
+<ul>
+    {{#each chats}}
+        {{{Chat classNames="message-container" name=name text=text time=time unreadMessagesCount=unreadMessagesCount
+                active=active id=id onClick=onClick}}}
+    {{else}}
+        <p class="empty">No open chats</p>
+    {{/each}}
+</ul>

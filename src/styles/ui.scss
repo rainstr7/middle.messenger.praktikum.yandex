@@ -101,4 +101,9 @@
   align-items: center;
   padding: 0 0.9rem;
   background: $dark-background;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $active;
+  }
 }

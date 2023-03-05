@@ -214,6 +214,14 @@ body {
     justify-content: space-between;
     padding: 1rem 0;
     border-top: $default-border;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $active;
+      margin-left: -1rem;
+      margin-right: -1rem;
+      padding: 1rem;
+    }
 
     &:last-child {
       border-bottom: $default-border;
@@ -221,6 +229,7 @@ body {
 
     &.active {
       background: $active;
+      cursor: default;
       margin-left: -1rem;
       margin-right: -1rem;
       padding: 1rem;
@@ -299,6 +308,7 @@ body {
 
     .message {
       display: flex;
+
       @include middle-text;
 
       line-height: 1.25;
@@ -323,6 +333,7 @@ body {
 
       @include middle-text;
 
+      line-height: 1.2;
       color: #1E1E1E;
       max-width: 50%;
       height: fit-content;
@@ -336,6 +347,7 @@ body {
         @include flex-center;
         @include small-text;
 
+        align-self: end;
         text-align: right;
         color: $primary;
 
@@ -422,6 +434,7 @@ body {
 
 .chat-menu {
   display: flex;
+
   @include flex-center;
 
   cursor: pointer;
@@ -439,8 +452,8 @@ body {
 .modal {
   position: absolute;
   //padding: 0.4rem;
-  background: #FFFFFF;
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.14);
+  background: #FFF;
+  box-shadow: 0 0 6px rgb(0 0 0 / 14%);
   border-radius: 12px;
 
   &.left-top {
@@ -462,19 +475,18 @@ body {
     right: 0;
     bottom: -4rem;
   }
+
+  &.top {
+    left: 0;
+    top: -6rem;
+  }
 }
 
 .modal-menu {
   display: flex;
+  color: #3369F3;
+
   @include flex-start;
-
-  li:first-child {
-    border-radius: 0.4rem 0.4rem 0 0;
-  }
-
-  li:last-child {
-    border-radius: 0 0 0.4rem 0.4rem;
-  }
 
   li {
     cursor: pointer;
@@ -485,12 +497,21 @@ body {
     transition: background-color .2s;
   }
 
+  li:first-child {
+    border-radius: 0.4rem 0.4rem 0 0;
+  }
+
+  li:last-child {
+    border-radius: 0 0 0.4rem 0.4rem;
+  }
+
   li:hover {
     background-color: $active;
   }
 
   li > div {
     @include middle-text;
+
     white-space: nowrap;
     padding-left: 0.3rem;
   }

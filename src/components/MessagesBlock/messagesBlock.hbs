@@ -1,0 +1,7 @@
+<section class="messages-container direction-column">
+    {{#each messages}}
+        {{{Message classNames=classNames message=message time=time isOwnMessage=isOwnMessage id=id}}}
+    {{else}}
+        <p class="empty">Empty chat</p>
+    {{/each}}
+</section>

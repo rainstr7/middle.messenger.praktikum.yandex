@@ -1,6 +1,12 @@
 import Block from "../../utils/Block";
+import {nanoid} from 'nanoid';
 import template from "./chat.hbs";
 import renderDom from "../../utils/renderDom";
+import normalizedTime from "../../utils/normalizedTime";
+import MessagesBlock from "../../components/MessagesBlock";
+import ChangeUserListModal from "../../components/ChangeUserListModal";
+import AddChatContentModal from "../../components/AddChatContentModal";
+import Input from "../../components/Input";
 
 class ChatPage extends Block {
 
@@ -8,67 +14,34 @@ class ChatPage extends Block {
         super(props);
     }
 
-    getChats() {
-        return [
-            {
-                name: 'Максим',
-                text: 'Друзья, у меня для вас особенный выпуск новостей!',
-                time: '10:49',
-                newMessage: 3,
-                active: false
-            },
-            {
-                name: 'Максим',
-                text: 'Друзья, у меня для вас особенный выпуск новостей!',
-                time: '10:53',
-                newMessage: 2,
-                active: false
-            },
-            {
-                name: 'Максим',
-                text: 'Друзья, у меня для вас особенный выпуск новостей!',
-                time: '11:11',
-                newMessage: 0,
-                active: true
-            }
-        ];
-    }
-
-    messagesOfCurrentChat(newMessage = {}) {
-        return [
-            {
-                classNames: 'message direction-column m-b-40',
-                message_text: `Привет! Смотри, тут всплыл интересный кусок лунной космической истории — НАСА в какой-то момент
-                попросила Хассельблад адаптировать модель SWC для полетов на Луну. Сейчас мы все знаем что астронавты
-                летали с моделью 500 EL — и к слову говоря, все тушки этих камер все еще находятся на поверхности Луны,
-                так как астронавты с собой забрали только кассеты с пленкой.
-                Хассельблад в итоге адаптировал SWC для космоса, но что-то пошло не так и на ракету они так никогда и не
-                попали. Всего их было произведено 25 штук, одну из них недавно продали на аукционе за 45000 евро.`,
-                time: '11:56',
-                isOwnMessage: false
-            },
-            {
-                classNames: 'my-message m-b-40',
-                message_text: `Круто!`,
-                time: '11:56',
-                isOwnMessage: true
-            },
-            {...newMessage},
-        ]
-    }
-
-    chatMenuModalContainerRef = this.refs.chatMenuModalContainerRef;
+    chatMenuModalContainerRef = this.refs.chatMenuModalContainerRef as ChangeUserListModal;
+    chatAddContentModalContainerRef = this.refs.chatAddContentModalContainerRef as AddChatContentModal;
+    newMessageInputRef = this.refs.newMessageInputRef as Input;
+    inputMessageElement = this.newMessageInputRef.getContent() as HTMLInputElement;
+    messagesContainerRef = this.refs.messagesContainerRef as MessagesBlock;
 
     handleGoToProfileClick() {
         renderDom('profile');
     }
 
     handleAddNewMessageClick() {
-        console.log('added new message');
+        if (this.inputMessageElement && this.inputMessageElement.value.trim()) {
+            const message = this.inputMessageElement.value;
+            const newMessage = {
+                id: nanoid(),
+                classNames: 'my-message m-b-40',
+                message,
+                time: normalizedTime(new Date(Date.now())),
+                isOwnMessage: true
+            };
+            (this.messagesContainerRef).addNewMessage(newMessage);
+            this.inputMessageElement.value = '';
+        }
+
     }
 
     handleChatMenuChoice(event: any) {
-        console.log(event.currentTarget.id, 'user');
+        console.log(event.currentTarget.id);
         const ref = this.refs.chatMenuModalContainerRef;
         ref.setProps({status: false});
         ref.refs.chatMenuModalRef.hide();
@@ -79,23 +52,40 @@ class ChatPage extends Block {
             this.chatMenuModalContainerRef.setProps({status: false});
             this.chatMenuModalContainerRef.refs.chatMenuModalRef.hide();
         }
+
+        if (this.chatAddContentModalContainerRef.getStatus()) {
+            this.chatAddContentModalContainerRef.setProps({status: false});
+            this.chatAddContentModalContainerRef.refs.chatContentModalRef.hide();
+        }
     }
 
-    handleOpenChatMenuClick(event: MouseEvent) {
+    handleOpenMenuClick(event: Event & { currentTarget: Element }) {
         event.stopPropagation();
-        this.chatMenuModalContainerRef.setProps({status: true});
-        this.chatMenuModalContainerRef.refs.chatMenuModalRef.show();
+        const {id} = event.currentTarget;
+        if (id) {
+            switch (id) {
+                case 'menu_user':
+                    this.chatMenuModalContainerRef.setProps({status: true});
+                    this.chatMenuModalContainerRef.refs.chatMenuModalRef.show();
+                    return;
+                case  'chat_content':
+                    this.chatAddContentModalContainerRef.setProps({status: true});
+                    this.chatAddContentModalContainerRef.refs.chatContentModalRef.show();
+                    return;
+                default:
+                    return;
+            }
+        }
+
     }
 
     protected render(): DocumentFragment {
         return this.compile(
             template, {
                 ...this.props,
-                chats: this.getChats.bind(this),
-                messagesOfCurrentChat: this.messagesOfCurrentChat.bind(this),
                 onHandleGoToProfileClick: this.handleGoToProfileClick.bind(this),
                 onHandleAddNewMessageClick: this.handleAddNewMessageClick.bind(this),
-                onHandleOpenChatMenuClick: this.handleOpenChatMenuClick.bind(this),
+                onHandleOpenMenuClick: this.handleOpenMenuClick.bind(this),
                 onHandleCloseChatMenuClick: this.handleCloseChatMenuClick.bind(this),
                 onHandleChatMenuChoice: this.handleChatMenuChoice.bind(this),
             }

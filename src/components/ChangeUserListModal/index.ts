@@ -1,14 +1,14 @@
 import Block from "../../utils/Block";
-import template from './buttonWithModal.hbs';
+import template from './changeUserListModal.hbs';
 
-interface ButtonWithModalProps {
-    onHandleOpenChatMenuClick: () => void;
+interface ChangeUserListModalProps {
+    onHandleOpenMenuClick: () => void;
     status: boolean;
 }
 
-class ButtonWithModal extends Block {
+class ChangeUserListModal extends Block {
 
-    constructor(props: ButtonWithModalProps) {
+    constructor(props: ChangeUserListModalProps) {
         super(props);
     }
 
@@ -18,9 +18,13 @@ class ButtonWithModal extends Block {
         this.refs.chatMenuModalRef.hide();
     }
 
+    getStatus(): boolean | undefined {
+        return this.props.status;
+    }
+
     protected render(): DocumentFragment {
         return this.compile(template, this.props);
     }
 }
 
-export default ButtonWithModal;
+export default ChangeUserListModal;

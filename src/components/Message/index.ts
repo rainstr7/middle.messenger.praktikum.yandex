@@ -1,10 +1,11 @@
 import Block from "../../utils/Block";
 import template from "./message.hbs";
 
-interface MessageProps {
+export interface MessageProps {
+    id: string;
     classNames: string;
     isOwnMessage: boolean;
-    message_text: string;
+    message: string;
     time: string;
 }
 

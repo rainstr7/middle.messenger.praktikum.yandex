@@ -200,10 +200,6 @@ class Block<P extends Record<string, any> = any> {
     hide() {
         this.getContent()!.style.display = "none";
     }
-
-    getStatus(): boolean | undefined {
-        return this.props.status;
-    }
 }
 
 export default Block;
