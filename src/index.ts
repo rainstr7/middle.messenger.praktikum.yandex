@@ -8,5 +8,5 @@ Object.entries(components).forEach(([name, {index}]) => {
 })
 
 window.addEventListener('DOMContentLoaded', () => {
-    renderDom('home');
+    renderDom('chat');
 });

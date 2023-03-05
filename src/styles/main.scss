@@ -290,23 +290,6 @@ body {
       font-weight: 600;
       font-size: $font-size-2;
     }
-
-    .chat-menu {
-      display: flex;
-
-      @include flex-center;
-
-      cursor: pointer;
-      width: 1.7rem;
-      height: 1.7rem;
-      border-radius: 50%;
-      transition: background-color .5s;
-      color: $primary;
-
-      &:hover {
-        background-color: $dark-background;
-      }
-    }
   }
 
   .messages-container {
@@ -316,7 +299,6 @@ body {
 
     .message {
       display: flex;
-
       @include middle-text;
 
       line-height: 1.25;
@@ -379,7 +361,6 @@ body {
       &::placeholder {
         text-align: start;
         margin-left: 0.25rem;
-        padding: 0.5rem;
       }
     }
   }
@@ -439,6 +420,79 @@ body {
   color: #1E1E1E;
 }
 
+.chat-menu {
+  display: flex;
+  @include flex-center;
 
+  cursor: pointer;
+  min-width: 1.7rem;
+  min-height: 1.7rem;
+  border-radius: 50%;
+  transition: background-color .5s;
+  color: $primary;
 
+  &:hover {
+    background-color: $dark-background;
+  }
+}
+
+.modal {
+  position: absolute;
+  //padding: 0.4rem;
+  background: #FFFFFF;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.14);
+  border-radius: 12px;
+
+  &.left-top {
+    left: -5rem;
+    top: -5rem;
+  }
+
+  &.left-bottom {
+    left: -5rem;
+    bottom: -5rem;
+  }
+
+  &.left {
+    left: -5rem;
+    bottom: 0;
+  }
+
+  &.bottom-left {
+    right: 0;
+    bottom: -4rem;
+  }
+}
+
+.modal-menu {
+  display: flex;
+  @include flex-start;
+
+  li:first-child {
+    border-radius: 0.4rem 0.4rem 0 0;
+  }
+
+  li:last-child {
+    border-radius: 0 0 0.4rem 0.4rem;
+  }
+
+  li {
+    cursor: pointer;
+    min-width: 100%;
+    align-items: center;
+    padding: 0.4rem;
+    display: flex;
+    transition: background-color .2s;
+  }
+
+  li:hover {
+    background-color: $active;
+  }
+
+  li > div {
+    @include middle-text;
+    white-space: nowrap;
+    padding-left: 0.3rem;
+  }
+}
 

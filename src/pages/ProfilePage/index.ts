@@ -13,8 +13,8 @@ class ProfilePage extends Block {
 
     }
 
-    handleChangeProfileDataClick(event: PointerEvent) {
-        event.preventDefault();
+    handleChangeProfileDataClick() {
+        renderDom('changeProfileData');
     }
 
     handleGoAwayClick() {

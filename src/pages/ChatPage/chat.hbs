@@ -1,4 +1,4 @@
-<main class="container">
+{{#Container onClick=onHandleCloseChatMenuClick ref="chatContainer" id='chat-container'}}
     <aside class="container direction-column chat-list-container">
         <div class="chat-list-header">
             {{#Button classNames="button-passive button-link" type="button" onClick=onHandleGoToProfileClick}}
@@ -27,13 +27,8 @@
             <span class="user-name">
                 Вадим
             </span>
-            {{#Button classNames="chat-menu" type="button"}}
-                <svg width="3" height="16" viewBox="0 0 3 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="1.5" cy="2" r="1.5" fill="currentColor"/>
-                    <circle cx="1.5" cy="8" r="1.5" fill="currentColor"/>
-                    <circle cx="1.5" cy="14" r="1.5" fill="currentColor"/>
-                </svg>
-            {{/Button}}
+            {{{ButtonWithModal ref="chatMenuModalContainerRef" onHandleOpenChatMenuClick=onHandleOpenChatMenuClick
+                               onHandleChatMenuChoice=onHandleChatMenuChoice id='menu_user'}}}
         </section>
         <section class="messages-container direction-column">
             {{#each messagesOfCurrentChat}}
@@ -69,7 +64,7 @@
                 </svg>
             {{/Button}}
             {{{Input type='text' placeHolder="Сообщение" id="message" autocomplete='off' required=false}}}
-            {{#Button type="button" onClick=onHandleAddNewMessageClick}}
+            {{#Button classNames='chat-menu' type="button" onClick=onHandleAddNewMessageClick}}
                 <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <circle cx="14" cy="14" r="14" fill="#3369F3"/>
                     <rect x="8" y="13.2" width="11" height="1.6" fill="white"/>
@@ -78,4 +73,4 @@
             {{/Button}}
         </div>
     </div>
-</main>
+{{/Container}}

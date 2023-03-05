@@ -4,7 +4,7 @@ import renderDom from "../../utils/renderDom";
 
 class ChatPage extends Block {
 
-    constructor(props: {}) {
+    constructor(props: any) {
         super(props);
     }
 
@@ -57,12 +57,34 @@ class ChatPage extends Block {
         ]
     }
 
+    chatMenuModalContainerRef = this.refs.chatMenuModalContainerRef;
+
     handleGoToProfileClick() {
         renderDom('profile');
     }
 
     handleAddNewMessageClick() {
         console.log('added new message');
+    }
+
+    handleChatMenuChoice(event: any) {
+        console.log(event.currentTarget.id, 'user');
+        const ref = this.refs.chatMenuModalContainerRef;
+        ref.setProps({status: false});
+        ref.refs.chatMenuModalRef.hide();
+    }
+
+    handleCloseChatMenuClick() {
+        if (this.chatMenuModalContainerRef.getStatus()) {
+            this.chatMenuModalContainerRef.setProps({status: false});
+            this.chatMenuModalContainerRef.refs.chatMenuModalRef.hide();
+        }
+    }
+
+    handleOpenChatMenuClick(event: MouseEvent) {
+        event.stopPropagation();
+        this.chatMenuModalContainerRef.setProps({status: true});
+        this.chatMenuModalContainerRef.refs.chatMenuModalRef.show();
     }
 
     protected render(): DocumentFragment {
@@ -72,7 +94,10 @@ class ChatPage extends Block {
                 chats: this.getChats.bind(this),
                 messagesOfCurrentChat: this.messagesOfCurrentChat.bind(this),
                 onHandleGoToProfileClick: this.handleGoToProfileClick.bind(this),
-                onHandleAddNewMessageClick: this.handleAddNewMessageClick.bind(this)
+                onHandleAddNewMessageClick: this.handleAddNewMessageClick.bind(this),
+                onHandleOpenChatMenuClick: this.handleOpenChatMenuClick.bind(this),
+                onHandleCloseChatMenuClick: this.handleCloseChatMenuClick.bind(this),
+                onHandleChatMenuChoice: this.handleChatMenuChoice.bind(this),
             }
         )
     }
