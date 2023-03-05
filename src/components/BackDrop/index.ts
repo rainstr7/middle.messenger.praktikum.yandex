@@ -1,23 +1,16 @@
+import template from './backDrop.hbs';
 import Block from "../../utils/Block";
-import template from './chat.hbs';
 
-export interface ChatProps {
-    id: string;
-    active: boolean;
-    classNames: string;
-    name: string;
-    newMessage: number;
-    text: string;
-    time: string;
+interface BackDropProps {
+    onClick: (event: MouseEvent) => void;
     events: {
         click: (event: MouseEvent) => void;
     };
-    onClick: (event: MouseEvent) => void;
 }
 
-class Chat extends Block {
+class BackDrop extends Block {
 
-    constructor(props: ChatProps) {
+    constructor(props: BackDropProps) {
         super({
             ...props,
             events: {
@@ -31,4 +24,4 @@ class Chat extends Block {
     }
 }
 
-export default Chat;
+export default BackDrop;

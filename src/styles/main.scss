@@ -429,7 +429,7 @@ body {
   @include extra-large-text;
 
   text-align: center;
-  color: #1E1E1E;
+  color: $default-font-color;
 }
 
 .chat-menu {
@@ -451,8 +451,7 @@ body {
 
 .modal {
   position: absolute;
-  //padding: 0.4rem;
-  background: #FFF;
+  background: $default-background;
   box-shadow: 0 0 6px rgb(0 0 0 / 14%);
   border-radius: 12px;
 
@@ -484,7 +483,7 @@ body {
 
 .modal-menu {
   display: flex;
-  color: #3369F3;
+  color: $primary;
 
   @include flex-start;
 
@@ -514,6 +513,22 @@ body {
 
     white-space: nowrap;
     padding-left: 0.3rem;
+  }
+}
+
+.back-drop-modal-container {
+  position: absolute;
+  display: flex;
+  @include flex-center;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+
+  .modal-container {
+    @include large-text;
+    padding: 2rem;
   }
 }
 

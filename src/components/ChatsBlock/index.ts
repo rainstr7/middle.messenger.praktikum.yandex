@@ -52,11 +52,9 @@ class ChatsBlock extends Block {
         this.setProps({
             ...this.props,
             chats: this.props.chats.map(({id, active, ...rest}: ChatProps) => {
-                console.log(id, currentID)
                 return ({...rest, id, active: currentID === id})
             })
         })
-        console.log(this.props.chats);
     }
 
     componentDidMount() {
