@@ -35,7 +35,6 @@ const validationMethods: RegistrationValidateInterface = {
 class RegistrationController implements ProfileControllerInterface {
 
     protected password: string | null = null;
-
     validate(data: string, id: keyof typeof registrationErrors) {
         if (id === 'password') {
             this.password = data;

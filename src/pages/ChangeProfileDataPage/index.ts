@@ -1,9 +1,10 @@
 import Block from "../../utils/Block";
 import template from "./changeProfileData.hbs";
-import renderDom from "../../utils/renderDom";
 import RegistrationController, {registrationErrors} from "../../controllers/RegistrationController";
 import toCapitalize from "../../utils/toCapitalize";
 import toCamelCase from "../../utils/toCamelCase";
+import Router from "../../utils/Router";
+import {ROUTES} from "../../utils/registerRouters";
 
 class ChangeProfileDataPage extends Block {
 
@@ -43,7 +44,7 @@ class ChangeProfileDataPage extends Block {
 
 
     protected handleGoToProfileClick() {
-        renderDom('profile');
+        Router.go(ROUTES.profile);
     }
 
     protected handleBlur(event: InputEvent) {

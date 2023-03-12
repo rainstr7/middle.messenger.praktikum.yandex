@@ -1,8 +1,10 @@
 import Block from "../../utils/Block";
 import template from "./profile.hbs";
-import renderDom from "../../utils/renderDom";
+import Router from "../../utils/Router";
+import {ROUTES} from "../../utils/registerRouters";
+import AuthController from "../../controllers/AuthController";
 
-class ProfilePage extends Block {
+class ProfilePageBase extends Block {
 
     constructor(props: {}) {
         super(props);
@@ -14,18 +16,18 @@ class ProfilePage extends Block {
     }
 
     handleChangeProfileDataClick() {
-        renderDom('changeProfileData');
+        Router.go(ROUTES.changeProfileData);
     }
 
-    handleGoAwayClick() {
-        renderDom('home');
+    async handleGoAwayClick() {
+        await AuthController.logout();
     }
 
     handleGoToChatsClick() {
-        renderDom('chat');
+        Router.go(ROUTES.chat);
     }
 
-    profileInfo() {
+    init() {
         return [
             {
                 label: 'Почта',
@@ -62,10 +64,14 @@ class ProfilePage extends Block {
                 handleChangeProfileDataClick: this.handleChangeProfileDataClick.bind(this),
                 handleGoToChatsClick: this.handleGoToChatsClick.bind(this),
                 handleGoAwayClick: this.handleGoAwayClick.bind(this),
-                profileInfo: this.profileInfo.bind(this)(),
+                profileInfo: this.init.bind(this)(),
             }
         )
     }
 }
 
-export default ProfilePage;
+// const withUser = withStore((state) => ({ ...state.user }))
+//
+// export const ProfilePage = withUser(ProfilePageBase);
+
+export default ProfilePageBase;

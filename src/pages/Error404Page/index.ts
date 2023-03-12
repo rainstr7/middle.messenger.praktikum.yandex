@@ -1,6 +1,8 @@
 import Block from "../../utils/Block";
 import template from "./error404page.hbs";
-import renderDom from "../../utils/renderDom";
+import Router from "../../utils/Router";
+import {ROUTES} from "../../utils/registerRouters";
+
 
 class Error400Page extends Block {
 
@@ -9,7 +11,7 @@ class Error400Page extends Block {
     }
 
     handleGoToProfileClick() {
-        renderDom('profile');
+        Router.go(ROUTES.profile);
     }
 
     protected render(): DocumentFragment {

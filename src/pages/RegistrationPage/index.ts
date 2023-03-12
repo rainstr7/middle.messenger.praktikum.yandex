@@ -1,9 +1,12 @@
 import Block from "../../utils/Block";
 import template from "./registration.hbs";
-import renderDom from "../../utils/renderDom";
 import RegistrationController, {registrationErrors} from "../../controllers/RegistrationController";
 import toCapitalize from "../../utils/toCapitalize";
 import toCamelCase from "../../utils/toCamelCase";
+import Router from "../../utils/Router";
+import {ROUTES} from "../../utils/registerRouters";
+import AuthController from "../../controllers/AuthController";
+import {SignupData} from "../../api/AuthAPI";
 
 class RegistrationPage extends Block {
 
@@ -13,7 +16,7 @@ class RegistrationPage extends Block {
 
     controller = new RegistrationController;
 
-    protected handleRegistrationClick(event: PointerEvent) {
+    protected async handleRegistrationClick(event: PointerEvent) {
         event.preventDefault();
         const allFields = Object.keys(this.refs)
             .map((keyOfRef) => this.refs[keyOfRef].refs.inputRef.getContent() as HTMLInputElement);
@@ -25,7 +28,8 @@ class RegistrationPage extends Block {
 
         if (isValid) {
             const body = allFields.reduce((acc, {value, id}) => ({...acc, [id]: value}), {});
-            console.log(body);
+            console.log('RegistrationPage', body)
+            await AuthController.signup(body as SignupData);
         }
     }
 
@@ -43,7 +47,7 @@ class RegistrationPage extends Block {
 
 
     protected handleGoToAuthClick() {
-        renderDom('auth');
+        Router.go(ROUTES.auth);
     }
 
     protected handleBlur(event: InputEvent) {

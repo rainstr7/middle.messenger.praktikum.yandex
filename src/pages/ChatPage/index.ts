@@ -1,7 +1,6 @@
 import Block from "../../utils/Block";
 import {nanoid} from 'nanoid';
 import template from "./chat.hbs";
-import renderDom from "../../utils/renderDom";
 import normalizedTime from "../../utils/normalizedTime";
 import MessagesBlock from "../../components/MessagesBlock";
 import ChangeUserListModal from "../../components/ChangeUserListModal";
@@ -9,6 +8,8 @@ import AddChatContentModal from "../../components/AddChatContentModal";
 import Input from "../../components/Input";
 import BackDropModal from "../../components/BackDropModal";
 import toCamelCase from "../../utils/toCamelCase";
+import Router from "../../utils/Router";
+import {ROUTES} from "../../utils/registerRouters";
 
 const modalsProps = {
     addUser: {
@@ -38,7 +39,7 @@ class ChatPage extends Block {
     backDropModalContainerRef = this.refs.backDropModalContainerRef as BackDropModal;
 
     handleGoToProfileClick() {
-        renderDom('profile');
+        Router.go(ROUTES.profile);
     }
 
     handleAddNewMessageClick() {

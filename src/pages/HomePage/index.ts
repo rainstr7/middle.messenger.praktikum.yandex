@@ -1,6 +1,7 @@
 import Block from "../../utils/Block";
 import template from "./home.hbs";
-import renderDom from "../../utils/renderDom";
+import Router from "../../utils/Router";
+import {ROUTES} from "../../utils/registerRouters";
 
 class HomePage extends Block {
 
@@ -9,31 +10,31 @@ class HomePage extends Block {
     }
 
     goToAuthPage() {
-        renderDom('auth');
+        Router.go(ROUTES.auth);
     }
 
     goToRegistrationPage() {
-        renderDom('registration');
+        Router.go(ROUTES.registration);
     }
 
     goTo500ErrorPage() {
-        renderDom('error500');
+        Router.go(ROUTES.error500);
     }
 
     goTo404ErrorPage() {
-        renderDom('error404');
+        Router.go(ROUTES.error404);
     }
 
     goToChatPage() {
-        renderDom('chat');
+        Router.go(ROUTES.chat);
     }
 
     goToProfilePage() {
-        renderDom('profile');
+        Router.go(ROUTES.profile);
     }
 
     goToChangeProfileDataPage() {
-        renderDom('changeProfileData');
+        Router.go(ROUTES.changeProfileData);
     }
 
     protected render(): DocumentFragment {
