@@ -21,7 +21,7 @@ export class Store extends EventBus {
         user: {
             data: {
                 id: 0,
-                first_name: '',
+                first_name: '1',
                 second_name: '',
                 login: '',
                 email: '',

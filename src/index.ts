@@ -33,7 +33,6 @@ window.addEventListener('DOMContentLoaded', async () => {
         }
     } catch (e) {
         Router.start();
-
         if (isProtectedRoute) {
             Router.go(ROUTES.auth);
         }

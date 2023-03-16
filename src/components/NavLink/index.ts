@@ -20,6 +20,11 @@ class NavLink extends Block {
         });
     }
 
+    componentDidMount() {
+        super.componentDidMount();
+        console.log('props NavLink', this.props);
+    }
+
     protected render(): DocumentFragment {
         return this.compile(template, this.props);
     }

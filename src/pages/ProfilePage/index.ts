@@ -3,6 +3,7 @@ import template from "./profile.hbs";
 import Router from "../../utils/Router";
 import {ROUTES} from "../../utils/registerRouters";
 import AuthController from "../../controllers/AuthController";
+import {withStore} from "../../utils/Store";
 
 class ProfilePageBase extends Block {
 
@@ -56,6 +57,11 @@ class ProfilePageBase extends Block {
         ]
     }
 
+    componentDidMount() {
+        super.componentDidMount();
+        console.log('this.props', this.props.first_name);
+    }
+
     protected render(): DocumentFragment {
         return this.compile(
             template, {
@@ -70,8 +76,6 @@ class ProfilePageBase extends Block {
     }
 }
 
-// const withUser = withStore((state) => ({ ...state.user }))
-//
-// export const ProfilePage = withUser(ProfilePageBase);
+const withUser = withStore((state) => ({...state.user}))
+export default withUser(ProfilePageBase);
 
-export default ProfilePageBase;
