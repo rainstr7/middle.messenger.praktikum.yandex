@@ -2,11 +2,12 @@ import Block from "../../utils/Block";
 import template from "./auth.hbs";
 import AuthController, {authErrors} from "../../controllers/AuthController";
 import toCapitalize from "../../utils/toCapitalize";
-import {SigninData} from "../../api/AuthAPI";
 import Router from "../../utils/Router";
 import {ROUTES} from "../../utils/registerRouters";
+import {SigninData} from "../../api/interfaces";
+import {withStore} from "../../utils/Store";
 
-class AuthPage extends Block {
+class AuthPageBase extends Block {
 
     constructor(props: {}) {
         super(props);
@@ -76,5 +77,6 @@ class AuthPage extends Block {
     }
 }
 
-export default AuthPage;
+const withUser = withStore((state) => ({...state.user}))
+export default withUser(AuthPageBase);
 

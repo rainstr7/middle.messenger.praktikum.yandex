@@ -1,20 +1,23 @@
 import Block from "../../utils/Block";
 import template from "./changeProfileData.hbs";
-import RegistrationController, {registrationErrors} from "../../controllers/RegistrationController";
 import toCapitalize from "../../utils/toCapitalize";
 import toCamelCase from "../../utils/toCamelCase";
 import Router from "../../utils/Router";
 import {ROUTES} from "../../utils/registerRouters";
+import {withStore} from "../../utils/Store";
+import UserController from "../../controllers/UserController";
+import {SignupData} from "../../api/interfaces";
+import ValidationController, {registrationErrors} from "../../controllers/ValidationController";
 
-class ChangeProfileDataPage extends Block {
+class ChangeProfileDataPageBase extends Block {
 
     constructor(props: {}) {
         super(props);
     }
 
-    controller = new RegistrationController;
+    controller = new ValidationController;
 
-    protected handleChangeProfileDataClick(event: PointerEvent) {
+    protected async handleChangeProfileDataClick(event: PointerEvent) {
         event.preventDefault();
         const allFields = Object.keys(this.refs)
             .map((keyOfRef) => this.refs[keyOfRef].refs.inputRef.getContent() as HTMLInputElement);
@@ -27,6 +30,7 @@ class ChangeProfileDataPage extends Block {
         if (isValid) {
             const body = allFields.reduce((acc, {value, id}) => ({...acc, [id]: value}), {});
             console.log(body);
+            await UserController.updateUserData(body as SignupData); //смена данных
         }
     }
 
@@ -57,6 +61,14 @@ class ChangeProfileDataPage extends Block {
         this.getValidateStatus(target.value, toCamelCase(target.id));
     }
 
+    componentDidMount() {
+        super.componentDidMount();
+        console.log(this.props)
+        const allFields = Object.keys(this.refs)
+            .map((keyOfRef) => this.refs[keyOfRef].refs.inputRef.getContent() as HTMLInputElement);
+        allFields.forEach(input => input.value = this.props.data[input.id])
+    }
+
     protected render(): DocumentFragment {
         return this.compile(
             template, {
@@ -70,4 +82,5 @@ class ChangeProfileDataPage extends Block {
     }
 }
 
-export default ChangeProfileDataPage;
+const withUser = withStore((state) => ({...state.user}))
+export default withUser(ChangeProfileDataPageBase);

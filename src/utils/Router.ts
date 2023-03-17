@@ -1,4 +1,5 @@
 import Block from './Block';
+import {ROUTES} from "./registerRouters";
 
 function isEqual(lhs: string, rhs: string): boolean {
     return lhs === rhs;
@@ -79,9 +80,8 @@ class Router {
 
     private _onRoute(pathname: string) {
         const route = this.getRoute(pathname);
-        console.log('route', route);
         if (!route) {
-            this.go('/404')
+            this.go(ROUTES.error404);
             return;
         }
 

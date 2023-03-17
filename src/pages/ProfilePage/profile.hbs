@@ -18,15 +18,16 @@
                 {{/Button}}
             </li>
             {{#NavLink classNames="profile-name" label=first_name}}
-                Иван
+                {{data.first_name}}
             {{/NavLink}}
-            {{#each profileInfo}}
-                {{#NavLink classNames=classNames}}
-                    {{{ProfileRow label=label information=information}}}
-                {{/NavLink}}
-            {{else}}
-                <li class="empty">Empty profile</li>
-            {{/each}}
+            {{#NavLink classNames=classNames}}
+                {{{ProfileRow label='Почта' information=data.email}}}
+                {{{ProfileRow label='Логин' information=data.login}}}
+                {{{ProfileRow label='Имя' information=data.first_name}}}
+                {{{ProfileRow label='Фамилия' information=data.second_name}}}
+                {{{ProfileRow label='Имя в чате' information=data.display_name}}}
+                {{{ProfileRow label='Телефон' information=data.phone}}}
+            {{/NavLink}}
             {{#NavLink classNames="row"}}
                 {{#Button classNames="button-passive" type="button" onClick=handleChangeProfileDataClick}}
                     Изменить данные
@@ -44,4 +45,9 @@
             {{/NavLink}}
         </ul>
     </main>
+    {{#if isLoading}}
+        {{{Loader}}}
+    {{/if}}
 </div>
+
+

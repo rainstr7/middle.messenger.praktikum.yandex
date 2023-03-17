@@ -1,12 +1,12 @@
 import Block from "../../utils/Block";
 import template from "./registration.hbs";
-import RegistrationController, {registrationErrors} from "../../controllers/RegistrationController";
+import ValidationController, {registrationErrors} from "../../controllers/ValidationController";
 import toCapitalize from "../../utils/toCapitalize";
 import toCamelCase from "../../utils/toCamelCase";
 import Router from "../../utils/Router";
 import {ROUTES} from "../../utils/registerRouters";
 import AuthController from "../../controllers/AuthController";
-import {SignupData} from "../../api/AuthAPI";
+import {SignupData} from "../../api/interfaces";
 
 class RegistrationPage extends Block {
 
@@ -14,7 +14,7 @@ class RegistrationPage extends Block {
         super(props);
     }
 
-    controller = new RegistrationController;
+    controller = new ValidationController;
 
     protected async handleRegistrationClick(event: PointerEvent) {
         event.preventDefault();

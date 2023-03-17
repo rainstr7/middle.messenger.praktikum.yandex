@@ -5,6 +5,7 @@ import Router from "./utils/Router";
 import AuthController from "./controllers/AuthController";
 import registerRouters, {ROUTES} from "./utils/registerRouters";
 
+// @ts-ignore
 Object.entries(components).forEach(([name, {index}]) => {
     registerComponent(name, index.default)
 

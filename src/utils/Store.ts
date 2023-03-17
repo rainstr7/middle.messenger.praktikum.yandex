@@ -1,8 +1,7 @@
 import {set} from './helpers';
 import Block from './Block';
 import EventBus from "./EventBus";
-import {User} from "../api/AuthAPI";
-import isEqual from "./isEqual";
+import {User} from "../api/interfaces";
 
 export enum StoreEvents {
     Updated = 'updated'
@@ -21,8 +20,9 @@ export class Store extends EventBus {
         user: {
             data: {
                 id: 0,
-                first_name: '1',
+                first_name: '',
                 second_name: '',
+                display_name: '',
                 login: '',
                 email: '',
                 password: '',
@@ -46,17 +46,17 @@ export class Store extends EventBus {
 const store = new Store();
 
 export const withStore = (mapStateToProps: (state: any) => any) => (Component: typeof Block) => {
-    let propsFromState: any;
+    // let propsFromState: any;
     return class WithStore extends Component {
         constructor(props: any) {
             const newPropsFromState = mapStateToProps(store.getState());
-            super({...props, ...propsFromState});
+            super({...props, ...newPropsFromState});
             store.on(StoreEvents.Updated, () => {
                 const stateProps = mapStateToProps(store.getState());
-                if (isEqual(propsFromState, newPropsFromState)) {
-                    return;
-                }
-                propsFromState = {...newPropsFromState};
+                // if (isEqual(propsFromState, newPropsFromState)) {
+                //     return;
+                // }
+                // propsFromState = {...newPropsFromState};
                 this.setProps({...stateProps});
             });
         }

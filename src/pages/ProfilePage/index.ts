@@ -11,8 +11,8 @@ class ProfilePageBase extends Block {
         super(props);
     }
 
-    handleChangePasswordClick(event: PointerEvent) {
-        event.preventDefault();
+    handleChangePasswordClick() {
+        Router.go(ROUTES.changePassword);
 
     }
 
@@ -28,38 +28,9 @@ class ProfilePageBase extends Block {
         Router.go(ROUTES.chat);
     }
 
-    init() {
-        return [
-            {
-                label: 'Почта',
-                information: 'pochta@yandex.ru'
-            },
-            {
-                label: 'Логин',
-                information: 'ivanivanov'
-            },
-            {
-                label: 'Имя',
-                information: 'Иван'
-            },
-            {
-                label: 'Фамилия',
-                information: 'Иванов'
-            },
-            {
-                label: 'Имя в чате',
-                information: 'Иван'
-            },
-            {
-                label: 'Телефон',
-                information: '+7 (909) 967 30 30'
-            },
-        ]
-    }
-
     componentDidMount() {
         super.componentDidMount();
-        console.log('this.props', this.props.first_name);
+        console.log(this.props)
     }
 
     protected render(): DocumentFragment {
@@ -70,7 +41,6 @@ class ProfilePageBase extends Block {
                 handleChangeProfileDataClick: this.handleChangeProfileDataClick.bind(this),
                 handleGoToChatsClick: this.handleGoToChatsClick.bind(this),
                 handleGoAwayClick: this.handleGoAwayClick.bind(this),
-                profileInfo: this.init.bind(this)(),
             }
         )
     }

@@ -1,6 +1,8 @@
-import API, {AuthAPI, SigninData, SignupData} from "../api/AuthAPI";
+import API, {AuthAPI} from "../api/AuthAPI";
 import router from "../utils/Router";
 import store from "../utils/Store";
+import {SigninData, SignupData} from "../api/interfaces";
+import {ROUTES} from "../utils/registerRouters";
 
 interface AuthControllerInterface {
     validate: (data: string, id: keyof typeof authErrors) => string | null;
@@ -20,26 +22,24 @@ class AuthController implements AuthControllerInterface {
 
     async signin(data: SigninData) {
         await this.call(() => this.api.signin(data));
-        console.log('TEST')
-        router.go('/profile');
+        router.go(ROUTES.profile);
     }
 
     async signup(data: SignupData) {
         await this.call(() => this.api.signup(data));
         await this.call(() => this.fetchUser());
-        router.go('/settings');
-
+        router.go(ROUTES.profile);
     }
 
     async fetchUser() {
-        const user = await this.call(() => this.api.read())
+        const user = await this.call(() => this.api.read());
         store.set('user.data', user);
     }
 
     async logout() {
         await this.call(() => this.api.logout());
-        store.set('user.data', undefined);
-        router.go('/');
+        // store.set('user.data', undefined);
+        router.go(ROUTES.auth);
     }
 
     private async call(cb: () => Promise<any>, errorCb = (error: Error) => {

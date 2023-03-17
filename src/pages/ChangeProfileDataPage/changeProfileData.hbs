@@ -8,6 +8,8 @@
                           onBlur=onHandleBlur onFocus=onHandleFocus ref='InputGroupEmailRef' }}}
             {{{InputGroup classNames='m-b-20' type='text' id='login' placeholder='Логин'
                           onBlur=onHandleBlur onFocus=onHandleFocus ref='InputGroupLoginRef'}}}
+            {{{InputGroup classNames='m-b-20' type='text' id='display_name' placeholder='Имя в чате'
+                          onBlur=onHandleBlur onFocus=onHandleFocus ref='InputGroupDisplayNameRef'}}}
             {{{InputGroup classNames='m-b-20' type='text' id='first_name' placeholder='Имя'
                           onBlur=onHandleBlur onFocus=onHandleFocus ref='InputGroupFirstNameRef'}}}
             {{{InputGroup classNames='m-b-20' type='text' id='second_name' placeholder='Фамилия'
@@ -24,5 +26,8 @@
             {{/Button}}
         </div>
     {{/Form}}
+    {{#if isLoading}}
+        {{{Loader}}}
+    {{/if}}
 </main>
 
