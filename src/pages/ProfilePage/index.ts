@@ -28,11 +28,6 @@ class ProfilePageBase extends Block {
         Router.go(ROUTES.chat);
     }
 
-    componentDidMount() {
-        super.componentDidMount();
-        console.log(this.props)
-    }
-
     protected render(): DocumentFragment {
         return this.compile(
             template, {
@@ -46,6 +41,6 @@ class ProfilePageBase extends Block {
     }
 }
 
-const withUser = withStore((state) => ({...state.user}))
+const withUser = withStore((state) => ({...state}))
 export default withUser(ProfilePageBase);
 

@@ -3,6 +3,7 @@ import template from './button.hbs';
 
 interface ButtonProps {
     onClick: (event: MouseEvent) => void;
+    onSubmit: (event: FormDataEvent) => void;
     classNames: string;
     events: {
         click: (event: MouseEvent) => void;
@@ -16,7 +17,8 @@ class Button extends Block {
         super({
             ...props,
             events: {
-                click: props.onClick
+                click: props.onClick,
+                onsubmit: props.onSubmit
             }
         });
     }

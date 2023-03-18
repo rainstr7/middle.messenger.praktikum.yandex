@@ -12,6 +12,9 @@ interface State {
         data?: User;
         error?: string;
         isLoading?: boolean;
+    },
+    modals: {
+        changeAvatar: boolean
     }
 }
 
@@ -28,7 +31,12 @@ export class Store extends EventBus {
                 password: '',
                 phone: '',
                 avatar: '',
-            }
+            },
+            error: undefined,
+            isLoading: false,
+        },
+        modals: {
+            changeAvatar: true
         }
     };
 
@@ -46,7 +54,7 @@ export class Store extends EventBus {
 const store = new Store();
 
 export const withStore = (mapStateToProps: (state: any) => any) => (Component: typeof Block) => {
-    // let propsFromState: any;
+    let propsFromState: any;
     return class WithStore extends Component {
         constructor(props: any) {
             const newPropsFromState = mapStateToProps(store.getState());
@@ -56,7 +64,7 @@ export const withStore = (mapStateToProps: (state: any) => any) => (Component: t
                 // if (isEqual(propsFromState, newPropsFromState)) {
                 //     return;
                 // }
-                // propsFromState = {...newPropsFromState};
+                propsFromState = {...newPropsFromState};
                 this.setProps({...stateProps});
             });
         }

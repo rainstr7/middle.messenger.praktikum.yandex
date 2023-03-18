@@ -22,12 +22,14 @@ class AuthController implements AuthControllerInterface {
 
     async signin(data: SigninData) {
         await this.call(() => this.api.signin(data));
+        setTimeout(() => location.reload(), 0);
         router.go(ROUTES.profile);
     }
 
     async signup(data: SignupData) {
         await this.call(() => this.api.signup(data));
         await this.call(() => this.fetchUser());
+        setTimeout(() => location.reload(), 0);
         router.go(ROUTES.profile);
     }
 
@@ -38,7 +40,7 @@ class AuthController implements AuthControllerInterface {
 
     async logout() {
         await this.call(() => this.api.logout());
-        // store.set('user.data', undefined);
+        store.set('user.data', undefined);
         router.go(ROUTES.auth);
     }
 
