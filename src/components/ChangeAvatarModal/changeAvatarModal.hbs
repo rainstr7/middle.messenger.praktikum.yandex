@@ -1,0 +1,23 @@
+<div class="backdrop {{classNames}}">
+    {{#Form enctype="multipart/form-data" classNames='form-container' ref="AvatarFormRef"}}
+        {{#Title class='title-large m-b-40'}}
+            Изменить аватар
+        {{/Title}}
+        <div class="container-center direction-column m-t-40">
+            <label class="input-file button-active m-b-20">
+                {{{Input type="file" id="avatar" required=true accept="image/*" ref="AvatarInputRef" autocomplete=false
+                         onchange=onChangeAvatar}}}
+                <span>Выберите файл</span>
+            </label>
+            {{#Button classNames='button-active m-b-20' type='submit' id='save_button' onClick=onSaveChangeClick}}
+                Сохранить
+            {{/Button}}
+            {{#Button classNames='button-passive' type='button' onClick=onCancelChangeClick id='cancel_button'}}
+                Отмена
+            {{/Button}}
+        </div>
+    {{/Form}}
+    {{#if user.isLoading}}
+        {{{Loader}}}
+    {{/if}}
+</div>
