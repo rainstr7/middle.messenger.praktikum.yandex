@@ -1,28 +1,26 @@
 <div class="container">
     {{#Button type="button" onClick=handleGoToChatsClick classNames="go-back-bar"}}
-
         <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="14" cy="14" r="14" transform="rotate(-180 14 14)" fill="#3369F3"/>
             <rect x="20" y="14.8" width="11" height="1.6" transform="rotate(-180 20 14.8)" fill="white"/>
             <path d="M13 19L9 14L13 9" stroke="white" stroke-width="1.6"/>
         </svg>
-
     {{/Button}}
     <main class="container-center">
         <ul class="profile direction-column">
             <li class="m-b-20">
-                {{{AvatarProfile}}}
+                {{{AvatarProfile path=path}}}
             </li>
             {{#NavLink classNames="profile-name" label=first_name}}
-                {{user.data.first_name}}
+                {{data.first_name}}
             {{/NavLink}}
             {{#NavLink classNames=classNames}}
-                {{{ProfileRow label='Почта' information=user.data.email}}}
-                {{{ProfileRow label='Логин' information=user.data.login}}}
-                {{{ProfileRow label='Имя' information=user.data.first_name}}}
-                {{{ProfileRow label='Фамилия' information=user.data.second_name}}}
-                {{{ProfileRow label='Имя в чате' information=user.data.display_name}}}
-                {{{ProfileRow label='Телефон' information=user.data.phone}}}
+                {{{ProfileRow label='Почта' information=data.email}}}
+                {{{ProfileRow label='Логин' information=data.login}}}
+                {{{ProfileRow label='Имя' information=data.first_name}}}
+                {{{ProfileRow label='Фамилия' information=data.second_name}}}
+                {{{ProfileRow label='Имя в чате' information=data.display_name}}}
+                {{{ProfileRow label='Телефон' information=data.phone}}}
             {{/NavLink}}
             {{#NavLink classNames="row"}}
                 {{#Button classNames="button-passive" type="button" onClick=handleChangeProfileDataClick}}
@@ -41,11 +39,8 @@
             {{/NavLink}}
         </ul>
     </main>
-    {{#if user.isLoading}}
+    {{#if isLoading}}
         {{{Loader}}}
-    {{/if}}
-    {{#if modals.changeAvatar}}
-        {{{ChangeAvatarModal}}}
     {{/if}}
 </div>
 

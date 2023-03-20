@@ -1,6 +1,6 @@
 import Block from "../../utils/Block";
 import template from './avatarProfile.hbs';
-import store, {withStore} from "../../utils/Store";
+import UserController from "../../controllers/UserController";
 
 interface AvatarProfileProps {
     classNames?: string;
@@ -12,14 +12,23 @@ class AvatarProfile extends Block {
         super(props);
     }
 
-    handleOpen() {
-        store.set('modals.changeAvatar', !this.props.changeAvatar);
+    async handleChangeAvatar(event: InputEvent & { target: HTMLInputElement }) {
+        event.preventDefault();
+        const {files} = event.target;
+        if (files === null) {
+            return;
+        }
+        const formData = new FormData();
+        formData.set("avatar", files[0]);
+        await UserController.updateAvatar(formData);
     }
 
     protected render(): DocumentFragment {
-        return this.compile(template, {...this.props, onChangeAvatar: this.handleOpen.bind(this)});
+        return this.compile(template, {
+            ...this.props,
+            onChangeAvatar: this.handleChangeAvatar.bind(this)
+        });
     }
 }
 
-const withUser = withStore((state) => ({...state.modals}))
-export default withUser(AvatarProfile);
+export default AvatarProfile;

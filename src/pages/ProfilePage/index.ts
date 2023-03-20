@@ -4,6 +4,7 @@ import Router from "../../utils/Router";
 import {ROUTES} from "../../utils/registerRouters";
 import AuthController from "../../controllers/AuthController";
 import {withStore} from "../../utils/Store";
+import HTTPTransport from "../../utils/HTTPTransport";
 
 class ProfilePageBase extends Block {
 
@@ -36,11 +37,12 @@ class ProfilePageBase extends Block {
                 handleChangeProfileDataClick: this.handleChangeProfileDataClick.bind(this),
                 handleGoToChatsClick: this.handleGoToChatsClick.bind(this),
                 handleGoAwayClick: this.handleGoAwayClick.bind(this),
+                path: this.props.data && this.props.data.avatar ? `${HTTPTransport.API_URL}/resources${this.props.data.avatar}` : null,
             }
         )
     }
 }
 
-const withUser = withStore((state) => ({...state}))
+const withUser = withStore((state) => ({...state.user}))
 export default withUser(ProfilePageBase);
 

@@ -2,6 +2,7 @@ import {set} from './helpers';
 import Block from './Block';
 import EventBus from "./EventBus";
 import {User} from "../api/interfaces";
+import isEqual from "./isEqual";
 
 export enum StoreEvents {
     Updated = 'updated'
@@ -13,9 +14,6 @@ interface State {
         error?: string;
         isLoading?: boolean;
     },
-    modals: {
-        changeAvatar: boolean
-    }
 }
 
 export class Store extends EventBus {
@@ -35,9 +33,6 @@ export class Store extends EventBus {
             error: undefined,
             isLoading: false,
         },
-        modals: {
-            changeAvatar: true
-        }
     };
 
     public set(keyPath: string, data: unknown) {
@@ -61,9 +56,9 @@ export const withStore = (mapStateToProps: (state: any) => any) => (Component: t
             super({...props, ...newPropsFromState});
             store.on(StoreEvents.Updated, () => {
                 const stateProps = mapStateToProps(store.getState());
-                // if (isEqual(propsFromState, newPropsFromState)) {
-                //     return;
-                // }
+                if (isEqual(propsFromState, newPropsFromState)) {
+                    return;
+                } //todo
                 propsFromState = {...newPropsFromState};
                 this.setProps({...stateProps});
             });

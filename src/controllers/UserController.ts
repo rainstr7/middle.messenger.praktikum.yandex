@@ -37,11 +37,11 @@ class UserController {
         }
     }
 
-    async updateAvatar(data: any) {
+    async updateAvatar(data: FormData) {
         try {
             store.set('user.isLoading', true);
             await this.api.update('/profile/avatar', data);
-            store.set('modals.changeAvatar', false);
+            setTimeout(() => location.reload(), 0);
         } catch (e: any) {
             console.error(e);
         } finally {

@@ -6,11 +6,7 @@ export class UserAPI extends BaseAPI {
         super('/user');
     }
 
-    update(path: string, data: SignupData | Password): Promise<User> {
-        return this.http.put(path, data);
-    };
-
-    updateAvatar(path: string, data: FormData): Promise<User> {
+    update(path: string, data: SignupData | Password | FormData): Promise<User> {
         return this.http.put(path, data);
     };
 

@@ -40,8 +40,8 @@ class AuthController implements AuthControllerInterface {
 
     async logout() {
         await this.call(() => this.api.logout());
-        store.set('user.data', undefined);
         router.go(ROUTES.auth);
+        store.set('user.data', undefined);
     }
 
     private async call(cb: () => Promise<any>, errorCb = (error: Error) => {
