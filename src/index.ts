@@ -20,6 +20,7 @@ window.addEventListener('DOMContentLoaded', async () => {
         case ROUTES.chat:
         case ROUTES.profile:
         case ROUTES.changeProfileData:
+        case ROUTES.changePassword:
             isProtectedRoute = true;
             break;
         default:
@@ -30,7 +31,7 @@ window.addEventListener('DOMContentLoaded', async () => {
         await AuthController.fetchUser();
         Router.start();
         if (!isProtectedRoute) {
-            Router.go(ROUTES.profile)
+            Router.go(ROUTES.chat)
         }
     } catch (e) {
         Router.start();

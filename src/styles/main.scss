@@ -285,6 +285,7 @@ body {
     .information-message {
       display: flex;
       justify-content: space-between;
+      min-width: 1.2rem;
 
       .time {
         @include small-text;

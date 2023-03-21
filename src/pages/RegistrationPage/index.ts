@@ -1,6 +1,6 @@
 import Block from "../../utils/Block";
 import template from "./registration.hbs";
-import ValidationController, {registrationErrors} from "../../controllers/ValidationController";
+import FormValidationController, {registrationErrors} from "../../controllers/FormValidationController";
 import toCapitalize from "../../utils/toCapitalize";
 import toCamelCase from "../../utils/toCamelCase";
 import Router from "../../utils/Router";
@@ -14,7 +14,7 @@ class RegistrationPage extends Block {
         super(props);
     }
 
-    controller = new ValidationController;
+    controller = new FormValidationController;
 
     protected async handleRegistrationClick(event: PointerEvent) {
         event.preventDefault();

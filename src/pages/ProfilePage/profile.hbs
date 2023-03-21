@@ -12,15 +12,15 @@
                 {{{AvatarProfile path=path}}}
             </li>
             {{#NavLink classNames="profile-name" label=first_name}}
-                {{data.first_name}}
+                {{user.first_name}}
             {{/NavLink}}
             {{#NavLink classNames=classNames}}
-                {{{ProfileRow label='Почта' information=data.email}}}
-                {{{ProfileRow label='Логин' information=data.login}}}
-                {{{ProfileRow label='Имя' information=data.first_name}}}
-                {{{ProfileRow label='Фамилия' information=data.second_name}}}
-                {{{ProfileRow label='Имя в чате' information=data.display_name}}}
-                {{{ProfileRow label='Телефон' information=data.phone}}}
+                {{{ProfileRow label='Почта' information=user.email}}}
+                {{{ProfileRow label='Логин' information=user.login}}}
+                {{{ProfileRow label='Имя' information=user.first_name}}}
+                {{{ProfileRow label='Фамилия' information=user.second_name}}}
+                {{{ProfileRow label='Имя в чате' information=user.display_name}}}
+                {{{ProfileRow label='Телефон' information=user.phone}}}
             {{/NavLink}}
             {{#NavLink classNames="row"}}
                 {{#Button classNames="button-passive" type="button" onClick=handleChangeProfileDataClick}}

@@ -1,6 +1,6 @@
 import Block from "../../utils/Block";
 import template from "./changePassword.hbs";
-import ValidationController, {registrationErrors} from "../../controllers/ValidationController";
+import FormValidationController, {registrationErrors} from "../../controllers/FormValidationController";
 import toCapitalize from "../../utils/toCapitalize";
 import toCamelCase from "../../utils/toCamelCase";
 import Router from "../../utils/Router";
@@ -21,7 +21,7 @@ class ChangePasswordPage extends Block {
         super(props);
     }
 
-    controller = new ValidationController;
+    controller = new FormValidationController;
 
     protected async onHandleChangePasswordClick(event: PointerEvent) {
         event.preventDefault();
@@ -81,5 +81,5 @@ class ChangePasswordPage extends Block {
     }
 }
 
-const withUser = withStore((state) => ({...state.user}))
+const withUser = withStore((state) => ({...state}))
 export default withUser(ChangePasswordPage);

@@ -23,38 +23,38 @@ class AuthController implements AuthControllerInterface {
     async signin(data: SigninData) {
         await this.call(() => this.api.signin(data));
         setTimeout(() => location.reload(), 0);
-        router.go(ROUTES.profile);
+        router.go(ROUTES.chat);
     }
 
     async signup(data: SignupData) {
         await this.call(() => this.api.signup(data));
         await this.call(() => this.fetchUser());
         setTimeout(() => location.reload(), 0);
-        router.go(ROUTES.profile);
+        router.go(ROUTES.chat);
     }
 
     async fetchUser() {
         const user = await this.call(() => this.api.read());
-        store.set('user.data', user);
+        store.set('user', user);
     }
 
     async logout() {
         await this.call(() => this.api.logout());
         router.go(ROUTES.auth);
-        store.set('user.data', undefined);
+        store.set('user', undefined);
     }
 
     private async call(cb: () => Promise<any>, errorCb = (error: Error) => {
-        store.set('user.error', error.message);
+        store.set('error', error.message);
     }) {
         try {
-            store.set('user.isLoading', true);
+            store.set('isLoading', true);
             return await cb();
         } catch (e) {
             errorCb(e);
             throw e;
         } finally {
-            store.set('user.isLoading', false);
+            store.set('isLoading', false);
         }
     }
 

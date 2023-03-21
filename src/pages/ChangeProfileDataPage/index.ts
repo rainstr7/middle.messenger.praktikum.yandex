@@ -7,7 +7,7 @@ import {ROUTES} from "../../utils/registerRouters";
 import {withStore} from "../../utils/Store";
 import UserController from "../../controllers/UserController";
 import {SignupData} from "../../api/interfaces";
-import ValidationController, {registrationErrors} from "../../controllers/ValidationController";
+import FormValidationController, {registrationErrors} from "../../controllers/FormValidationController";
 
 class ChangeProfileDataPageBase extends Block {
 
@@ -15,7 +15,7 @@ class ChangeProfileDataPageBase extends Block {
         super(props);
     }
 
-    controller = new ValidationController;
+    controller = new FormValidationController;
 
     protected async handleChangeProfileDataClick(event: PointerEvent) {
         event.preventDefault();
@@ -66,7 +66,7 @@ class ChangeProfileDataPageBase extends Block {
         console.log(this.props)
         const allFields = Object.keys(this.refs)
             .map((keyOfRef) => this.refs[keyOfRef].refs.inputRef.getContent() as HTMLInputElement);
-        allFields.forEach(input => input.value = this.props.data[input.id])
+        allFields.forEach(input => input.value = this.props[input.id])
     }
 
     protected render(): DocumentFragment {

@@ -38,7 +38,7 @@ const validationMethods: RegistrationValidateInterface = {
     passwordRepeat: ([firstPassword, secondPassword]: string[]) => firstPassword === secondPassword,
 };
 
-class ValidationController implements ProfileControllerInterface {
+class FormValidationController implements ProfileControllerInterface {
 
     protected password: string | null = null;
 
@@ -54,4 +54,4 @@ class ValidationController implements ProfileControllerInterface {
     }
 }
 
-export default ValidationController;
+export default FormValidationController;

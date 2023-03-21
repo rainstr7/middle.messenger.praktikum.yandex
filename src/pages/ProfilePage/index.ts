@@ -43,6 +43,6 @@ class ProfilePageBase extends Block {
     }
 }
 
-const withUser = withStore((state) => ({...state.user}))
+const withUser = withStore((state) => ({...state}))
 export default withUser(ProfilePageBase);
 

@@ -1,4 +1,4 @@
-<li class="{{classNames}} {{#if active}}active{{/if}}" id="{{id}}">
+{{#NavLink classNames=classNames  id=id onClick=onSetActive isActive=isActive}}
     <div>
         <div class="avatar-middle"></div>
     </div>
@@ -20,4 +20,4 @@
             </div>
         {{/if}}
     </div>
-</li>
+{{/NavLink}}

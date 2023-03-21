@@ -1,6 +1,6 @@
 import Block from "../../utils/Block";
 import {nanoid} from 'nanoid';
-import template from "./chat.hbs";
+import template from "./chatPage.hbs";
 import normalizedTime from "../../utils/normalizedTime";
 import MessagesBlock from "../../components/MessagesBlock";
 import ChangeUserListModal from "../../components/ChangeUserListModal";
@@ -30,6 +30,7 @@ class ChatPage extends Block {
     constructor(props: any) {
         super(props);
     }
+
 
     chatMenuModalContainerRef = this.refs.chatMenuModalContainerRef as ChangeUserListModal;
     chatAddContentModalContainerRef = this.refs.chatAddContentModalContainerRef as AddChatContentModal;
