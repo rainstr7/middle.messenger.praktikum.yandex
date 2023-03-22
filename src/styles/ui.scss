@@ -1,5 +1,21 @@
 @import '_default_variables.scss';
 
+@mixin middle-text {
+  font: {
+    family: inter, sans-serif;
+    size: $font-size-1;
+    weight: 500;
+  }
+
+  line-height: 0.8;
+}
+
+@mixin flex-start {
+  justify-content: start;
+  align-items: start;
+  align-self: start;
+}
+
 .button-passive {
   font-size: $font-size-1;
   color: $primary;
@@ -148,4 +164,39 @@
 /* Disabled */
 .input-file input[type="file"]:disabled + span {
   background-color: #eee;
+}
+
+.modal-menu {
+  display: flex;
+  color: $primary;
+
+  @include flex-start;
+
+  li {
+    cursor: pointer;
+    min-width: 100%;
+    align-items: center;
+    padding: 0.4rem;
+    display: flex;
+    transition: background-color .2s;
+  }
+
+  li:first-child {
+    border-radius: 0.4rem 0.4rem 0 0;
+  }
+
+  li:last-child {
+    border-radius: 0 0 0.4rem 0.4rem;
+  }
+
+  li:hover {
+    background-color: $active;
+  }
+
+  li > div {
+    @include middle-text;
+
+    white-space: nowrap;
+    padding-left: 0.3rem;
+  }
 }

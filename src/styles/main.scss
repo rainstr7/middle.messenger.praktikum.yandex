@@ -166,12 +166,6 @@ body {
     border-radius: 50%;
   }
 
-  &:hover {
-    .edit {
-      visibility: visible;
-    }
-  }
-
   .edit {
     position: absolute;
     background-color: $default-link-color;
@@ -187,6 +181,12 @@ body {
     opacity: 0.8;
     bottom: 0.5rem;
     right: 0.5rem;
+  }
+
+  &:hover {
+    .edit {
+      visibility: visible;
+    }
   }
 }
 
@@ -519,41 +519,6 @@ body {
   &.top {
     left: 0;
     top: -6rem;
-  }
-}
-
-.modal-menu {
-  display: flex;
-  color: $primary;
-
-  @include flex-start;
-
-  li {
-    cursor: pointer;
-    min-width: 100%;
-    align-items: center;
-    padding: 0.4rem;
-    display: flex;
-    transition: background-color .2s;
-  }
-
-  li:first-child {
-    border-radius: 0.4rem 0.4rem 0 0;
-  }
-
-  li:last-child {
-    border-radius: 0 0 0.4rem 0.4rem;
-  }
-
-  li:hover {
-    background-color: $active;
-  }
-
-  li > div {
-    @include middle-text;
-
-    white-space: nowrap;
-    padding-left: 0.3rem;
   }
 }
 
