@@ -7,7 +7,7 @@
     "build": "npx parcel build ./src/index.html --no-cache",
     "start": "npm run build && node ./server.js",
     "eslint": "node_modules/.bin/eslint . --fix",
-    "stylelint": "npx stylelint '**/*.scss'"
+    "stylelint": "npx stylelint '**/*.scss'  --fix"
   },
   "repository": {
     "type": "git",

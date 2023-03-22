@@ -11,12 +11,16 @@
                           onBlur=onHandleBlur onFocus=onHandleFocus ref='InputGroupPasswordRef'}}}
         </div>
         <div class="container-center direction-column m-t-40">
-            {{#Button classNames='button-active m-b-20' type='submit' onClick=onHandleAuthClick}}
+            {{#Button classNames='button-active m-b-20' type='submit' onClick=onHandleAuthClick id='auth_button'}}
                 Авторизоваться
             {{/Button}}
-            {{#Button classNames='button-passive' type='submit' onClick=onHandleGoToRegistrationClick}}
+            {{#Button classNames='button-passive' type='submit' onClick=onHandleGoToRegistrationClick
+                      id='registration_button'}}
                 Нет аккаунта?
             {{/Button}}
         </div>
     {{/Form}}
+    {{#if isLoading}}
+        {{{Loader}}}
+    {{/if}}
 </main>

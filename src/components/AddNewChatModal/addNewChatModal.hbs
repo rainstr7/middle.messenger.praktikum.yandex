@@ -1,0 +1,15 @@
+<div class="backdrop {{classNames}}" style="display: {{#if isOpen}}flex{{else}}none{{/if}}">
+    {{#Form enctype="multipart/form-data" classNames='form-container' ref="AvatarFormRef"}}
+        {{{InputGroup classNames='m-b-20'  type='text' placeholder="Введите название чата" id='new_chat_name'
+                      autocomplete=false required=true ref="InputGroupNewChat"}}}
+        {{#Button classNames='button-active m-b-20' type='submit' id='save_button' onClick=onSave}}
+            Добавить
+        {{/Button}}
+        {{#Button classNames='button-passive' type='button' onClick=onCloseModal id='cancel_button'}}
+            Отмена
+        {{/Button}}
+    {{/Form}}
+    {{#if isLoading}}
+        {{{Loader}}}
+    {{/if}}
+</div>

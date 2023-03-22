@@ -8,11 +8,13 @@ interface InputProps {
     id: string;
     onblur?: (event: InputEvent) => void;
     onfocus?: (event: InputEvent) => void;
+    onchange?: (event: InputEvent) => void;
     placeHolder?: string;
     required?: boolean;
     events: {
         blur: (event: InputEvent) => void;
         focus: (event: InputEvent) => void;
+        onchange: (events: InputEvent) => void
     };
 }
 
@@ -24,6 +26,7 @@ class Input extends Block {
             events: {
                 focus: props.onfocus,
                 blur: props.onblur,
+                change: props.onchange
             }
         });
     }

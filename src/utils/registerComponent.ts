@@ -4,7 +4,6 @@ import Block from "./Block";
 
 export interface BlockConstructable<Props = any> {
     cName: string;
-
     new(props: Props): Block;
 }
 
@@ -19,7 +18,6 @@ function registerComponent<Props extends any>(name: string, Component: BlockCons
         }
         const {children, refs} = data.root;
         const component = new Component(hash);
-
         children[component.id] = component;
         if (ref) {
             refs[ref] = component;

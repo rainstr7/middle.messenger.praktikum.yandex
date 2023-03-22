@@ -1,16 +1,17 @@
 import Block from "../../utils/Block";
 import template from "./auth.hbs";
-import renderDom from "../../utils/renderDom";
 import AuthController, {authErrors} from "../../controllers/AuthController";
 import toCapitalize from "../../utils/toCapitalize";
+import Router from "../../utils/Router";
+import {ROUTES} from "../../utils/registerRouters";
+import {SigninData} from "../../api/interfaces";
+import {withStore} from "../../utils/Store";
 
-class AuthPage extends Block {
+class AuthPageBase extends Block {
 
     constructor(props: {}) {
         super(props);
     }
-
-    protected controller = new AuthController;
 
     protected changeStatusError(error: string | null, id: keyof typeof authErrors) {
         const errorComponent = this.refs[`InputGroup${toCapitalize(id)}Ref`].refs.inputErrorRef
@@ -20,12 +21,12 @@ class AuthPage extends Block {
     }
 
     protected getValidateStatus(data: string, id: keyof typeof authErrors) {
-        const textError = this.controller.validate(data, id);
+        const textError = AuthController.validate(data, id);
         this.changeStatusError(textError, id);
         return !textError;
     }
 
-    protected handleAuthClick(event: PointerEvent) {
+    protected async handleAuthClick(event: PointerEvent) {
         event.preventDefault();
 
         const allFields = Object.keys(this.refs)
@@ -37,12 +38,14 @@ class AuthPage extends Block {
 
         if (isValid) {
             const body = allFields.reduce((acc, {value, id}) => ({...acc, [id]: value}), {});
+            console.log(body)
+            await AuthController.signin(body as SigninData); //авторизация
             console.log(body);
         }
     }
 
     protected handleGoToRegistrationClick() {
-        renderDom('registration');
+        Router.go(ROUTES.registration);
     }
 
     protected handleBlur(event: InputEvent) {
@@ -69,4 +72,6 @@ class AuthPage extends Block {
     }
 }
 
-export default AuthPage;
+const withUser = withStore((state) => ({...state.user}))
+export default withUser(AuthPageBase);
+

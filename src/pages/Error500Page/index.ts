@@ -1,6 +1,7 @@
 import Block from "../../utils/Block";
 import template from "./error500page.hbs";
-import renderDom from "../../utils/renderDom";
+import Router from "../../utils/Router";
+import {ROUTES} from "../../utils/registerRouters";
 
 class Error500Page extends Block {
 
@@ -9,7 +10,7 @@ class Error500Page extends Block {
     }
 
     handleGoToChatClick() {
-        renderDom('chat');
+        Router.go(ROUTES.chat);
     }
 
     protected render(): DocumentFragment {

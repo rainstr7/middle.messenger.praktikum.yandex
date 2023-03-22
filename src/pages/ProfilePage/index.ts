@@ -1,57 +1,34 @@
 import Block from "../../utils/Block";
 import template from "./profile.hbs";
-import renderDom from "../../utils/renderDom";
+import Router from "../../utils/Router";
+import {ROUTES} from "../../utils/registerRouters";
+import AuthController from "../../controllers/AuthController";
+import {withStore} from "../../utils/Store";
+import HTTPTransport from "../../utils/HTTPTransport";
+import MessagesController from "../../controllers/MessagesController";
 
-class ProfilePage extends Block {
+class ProfilePageBase extends Block {
 
     constructor(props: {}) {
         super(props);
     }
 
-    handleChangePasswordClick(event: PointerEvent) {
-        event.preventDefault();
+    handleChangePasswordClick() {
+        Router.go(ROUTES.changePassword);
 
     }
 
-    handleChangeProfileDataClick(event: PointerEvent) {
-        event.preventDefault();
+    handleChangeProfileDataClick() {
+        Router.go(ROUTES.changeProfileData);
     }
 
-    handleGoAwayClick() {
-        renderDom('home');
+    async handleGoAwayClick() {
+        MessagesController.closeAll();
+        await AuthController.logout();
     }
 
     handleGoToChatsClick() {
-        renderDom('chat');
-    }
-
-    profileInfo() {
-        return [
-            {
-                label: 'Почта',
-                information: 'pochta@yandex.ru'
-            },
-            {
-                label: 'Логин',
-                information: 'ivanivanov'
-            },
-            {
-                label: 'Имя',
-                information: 'Иван'
-            },
-            {
-                label: 'Фамилия',
-                information: 'Иванов'
-            },
-            {
-                label: 'Имя в чате',
-                information: 'Иван'
-            },
-            {
-                label: 'Телефон',
-                information: '+7 (909) 967 30 30'
-            },
-        ]
+        Router.go(ROUTES.chat);
     }
 
     protected render(): DocumentFragment {
@@ -62,10 +39,12 @@ class ProfilePage extends Block {
                 handleChangeProfileDataClick: this.handleChangeProfileDataClick.bind(this),
                 handleGoToChatsClick: this.handleGoToChatsClick.bind(this),
                 handleGoAwayClick: this.handleGoAwayClick.bind(this),
-                profileInfo: this.profileInfo.bind(this)(),
+                path: this.props.avatar ? `${HTTPTransport.API_URL}/resources${this.props.avatar}` : null,
             }
         )
     }
 }
 
-export default ProfilePage;
+const withUser = withStore((state) => ({...state.user, isLoading: state.isLoading}))
+export default withUser(ProfilePageBase);
+

@@ -1,0 +1,17 @@
+{{#BackDrop onClick=onBackDropClick}}
+    {{#Modal classNames="modal-container" ref="chatGlobalModalRef"}}
+        {{#Title}}
+            {{title}}
+        {{/Title}}
+        {{{InputGroup classNames='m-b-20' type='text' id='login' placeholder=placeholder
+                      onBlur=onHandleBlur onFocus=onHandleFocus ref='inputBackDropModalLoginRef' autocomplete='off'}}}
+        <div class="container-center direction-column m-t-40">
+            {{#Button classNames='button-active m-b-10' onClick=onHandleClick type="submit" id=id}}
+                {{buttonLabel}}
+            {{/Button}}
+            {{#Button classNames='button-passive' onClick=onCancelClick  type="submit"}}
+                Отмена
+            {{/Button}}
+        </div>
+    {{/Modal}}
+{{/BackDrop}}

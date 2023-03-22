@@ -7,6 +7,7 @@ interface NavLinkProps {
         click: () => void;
     }
     onClick: () => void;
+    isActive?: boolean;
 }
 
 class NavLink extends Block {

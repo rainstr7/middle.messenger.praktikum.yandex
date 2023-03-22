@@ -1,5 +1,5 @@
-@import '_default_variables.scss';
-@import 'ui.scss';
+@import 'default_variables';
+@import 'ui';
 
 html {
   font-size: 20px;
@@ -84,9 +84,6 @@ body {
   background: $secondary;
   cursor: pointer;
 
-  &:hover {
-    opacity: 0.8;
-  }
 }
 
 @mixin avatar-small {
@@ -130,8 +127,10 @@ body {
 
 .title-large {
   text-align: center;
+  position: relative;
 
   @include large-text;
+
 }
 
 .title-middle {
@@ -158,6 +157,37 @@ body {
   @include avatar-large;
 
   color: $default-icon-color;
+
+  .avatar {
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    border-radius: 50%;
+  }
+
+  .edit {
+    position: absolute;
+    background-color: $default-link-color;
+    color: $active;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+
+    @include flex-center;
+
+    border-radius: 50%;
+    visibility: hidden;
+    opacity: 0.8;
+    bottom: 0.5rem;
+    right: 0.5rem;
+  }
+
+  &:hover {
+    .edit {
+      visibility: visible;
+    }
+  }
 }
 
 .container {
@@ -188,6 +218,7 @@ body {
   border-radius: $default-border-radius;
   padding: 2.5rem 1.5rem;
   box-shadow: $default-box-shadow;
+  background-color: $default-background;
 }
 
 .chat-list-container {
@@ -214,6 +245,14 @@ body {
     justify-content: space-between;
     padding: 1rem 0;
     border-top: $default-border;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $active;
+      margin-left: -1rem;
+      margin-right: -1rem;
+      padding: 1rem;
+    }
 
     &:last-child {
       border-bottom: $default-border;
@@ -221,6 +260,7 @@ body {
 
     &.active {
       background: $active;
+      cursor: default;
       margin-left: -1rem;
       margin-right: -1rem;
       padding: 1rem;
@@ -230,6 +270,7 @@ body {
       display: flex;
       flex-direction: column;
       padding: 0 0.5rem;
+      flex-grow: 1;
     }
 
     .user-name {
@@ -245,11 +286,13 @@ body {
       overflow: hidden;
       font-size: $font-size-1;
       color: $default-link-color;
+      justify-content: flex-end;
     }
 
     .information-message {
       display: flex;
       justify-content: space-between;
+      min-width: 1.2rem;
 
       .time {
         @include small-text;
@@ -290,23 +333,6 @@ body {
       font-weight: 600;
       font-size: $font-size-2;
     }
-
-    .chat-menu {
-      display: flex;
-
-      @include flex-center;
-
-      cursor: pointer;
-      width: 1.7rem;
-      height: 1.7rem;
-      border-radius: 50%;
-      transition: background-color .5s;
-      color: $primary;
-
-      &:hover {
-        background-color: $dark-background;
-      }
-    }
   }
 
   .messages-container {
@@ -341,6 +367,7 @@ body {
 
       @include middle-text;
 
+      line-height: 1.2;
       color: #1E1E1E;
       max-width: 50%;
       height: fit-content;
@@ -354,6 +381,7 @@ body {
         @include flex-center;
         @include small-text;
 
+        align-self: end;
         text-align: right;
         color: $primary;
 
@@ -379,7 +407,6 @@ body {
       &::placeholder {
         text-align: start;
         margin-left: 0.25rem;
-        padding: 0.5rem;
       }
     }
   }
@@ -436,9 +463,92 @@ body {
   @include extra-large-text;
 
   text-align: center;
-  color: #1E1E1E;
+  color: $default-font-color;
 }
 
+.chat-menu {
+  display: flex;
 
+  @include flex-center;
 
+  cursor: pointer;
+  width: 1.7rem;
+  height: 1.7rem;
+  border-radius: 50%;
+  transition: background-color .5s;
+  color: $primary;
+
+  &:hover {
+    background-color: $active;
+  }
+}
+
+.add {
+  position: fixed;
+  bottom: 1rem;
+  width: 2rem;
+  height: 2rem;
+}
+
+.modal {
+  position: absolute;
+  background: $default-background;
+  box-shadow: 0 0 6px rgb(0 0 0 / 14%);
+  border-radius: 12px;
+
+  &.left-top {
+    left: -5rem;
+    top: -5rem;
+  }
+
+  &.left-bottom {
+    left: -5rem;
+    bottom: -5rem;
+  }
+
+  &.left {
+    left: -5rem;
+    bottom: 0;
+  }
+
+  &.bottom-left {
+    right: 0;
+    bottom: -6rem;
+  }
+
+  &.top {
+    left: 0;
+    top: -6rem;
+  }
+}
+
+.back-drop-modal-container {
+  position: absolute;
+  display: flex;
+  z-index: 2;
+
+  @include flex-center;
+
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgb(0 0 0 / 50%);
+
+  .modal-container {
+    @include large-text;
+
+    padding: 2rem;
+  }
+}
+
+.empty {
+  color: $default-link-color;
+  align-self: center;
+  display: flex;
+  flex: 1;
+  align-items: center;
+
+  @include middle-text;
+}
 
