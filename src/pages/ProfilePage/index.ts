@@ -5,6 +5,7 @@ import {ROUTES} from "../../utils/registerRouters";
 import AuthController from "../../controllers/AuthController";
 import {withStore} from "../../utils/Store";
 import HTTPTransport from "../../utils/HTTPTransport";
+import MessagesController from "../../controllers/MessagesController";
 
 class ProfilePageBase extends Block {
 
@@ -22,6 +23,7 @@ class ProfilePageBase extends Block {
     }
 
     async handleGoAwayClick() {
+        MessagesController.closeAll();
         await AuthController.logout();
     }
 
@@ -37,12 +39,12 @@ class ProfilePageBase extends Block {
                 handleChangeProfileDataClick: this.handleChangeProfileDataClick.bind(this),
                 handleGoToChatsClick: this.handleGoToChatsClick.bind(this),
                 handleGoAwayClick: this.handleGoAwayClick.bind(this),
-                path: this.props.data && this.props.data.avatar ? `${HTTPTransport.API_URL}/resources${this.props.data.avatar}` : null,
+                path: this.props.avatar ? `${HTTPTransport.API_URL}/resources${this.props.avatar}` : null,
             }
         )
     }
 }
 
-const withUser = withStore((state) => ({...state}))
+const withUser = withStore((state) => ({...state.user, isLoading: state.isLoading}))
 export default withUser(ProfilePageBase);
 

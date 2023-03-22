@@ -1,22 +1,19 @@
 import Block from "../../utils/Block";
 import template from "./message.hbs";
-
-export interface MessageProps {
-    id: string;
-    classNames: string;
-    isOwnMessage: boolean;
-    message: string;
-    time: string;
-}
+import normalizedTime from "../../utils/normalizedTime";
+import {MessageInterface} from "../../api/interfaces";
 
 class Message extends Block {
 
-    constructor(props: MessageProps) {
+    constructor(props: MessageInterface) {
         super(props);
     }
 
     protected render(): DocumentFragment {
-        return this.compile(template, this.props);
+        return this.compile(template, {
+            ...this.props,
+            time: normalizedTime(new Date(this.props.time)),
+        });
     }
 }
 

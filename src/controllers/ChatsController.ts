@@ -21,10 +21,17 @@ class ChatsController {
             await MessagesController.connect(chat.id, token);
         });
         store.set('chats', chats);
+        if (chats.length > 0) {
+            store.set('selectedChat', chats[0].id);
+        }
     }
 
     addUserToChat(id: number, userId: number) {
         this.api.addUsers(id, [userId]);
+    }
+
+    delUserFromChat(id: number, userId: number) {
+        this.api.delUsers(id, [userId]);
     }
 
     async delete(id: number) {
@@ -42,9 +49,4 @@ class ChatsController {
     }
 }
 
-const controller = new ChatsController();
-
-// @ts-ignore
-window.chatsController = controller;
-
-export default controller;
+export default new ChatsController();

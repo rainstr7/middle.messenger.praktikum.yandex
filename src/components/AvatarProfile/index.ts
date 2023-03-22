@@ -4,6 +4,7 @@ import UserController from "../../controllers/UserController";
 
 interface AvatarProfileProps {
     classNames?: string;
+    onChangeAvatar: () => void;
 }
 
 class AvatarProfile extends Block {
@@ -15,7 +16,7 @@ class AvatarProfile extends Block {
     async handleChangeAvatar(event: InputEvent & { target: HTMLInputElement }) {
         event.preventDefault();
         const {files} = event.target;
-        if (files === null) {
+        if (!files) {
             return;
         }
         const formData = new FormData();

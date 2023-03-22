@@ -2,24 +2,16 @@ import Block from "../../utils/Block";
 import template from './changeUserListModal.hbs';
 
 interface ChangeUserListModalProps {
-    onHandleOpenMenuClick: () => void;
-    status: boolean;
+    onHandleOpenChatMenuClick: () => void;
+    onHandleChatMenuChoice: () => void;
+    isOpen: boolean;
+    id: string;
 }
 
 class ChangeUserListModal extends Block {
 
     constructor(props: ChangeUserListModalProps) {
         super(props);
-    }
-
-    componentDidMount() {
-        super.componentDidMount();
-        this.setProps({status: false})
-        this.refs.chatMenuModalRef.hide();
-    }
-
-    getStatus(): boolean | undefined {
-        return this.props.status;
     }
 
     protected render(): DocumentFragment {

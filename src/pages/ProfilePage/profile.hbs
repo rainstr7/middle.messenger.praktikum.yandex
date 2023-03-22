@@ -11,16 +11,16 @@
             <li class="m-b-20">
                 {{{AvatarProfile path=path}}}
             </li>
-            {{#NavLink classNames="profile-name" label=first_name}}
-                {{user.first_name}}
+            {{#NavLink classNames="profile-name"}}
+                {{first_name}}
             {{/NavLink}}
             {{#NavLink classNames=classNames}}
-                {{{ProfileRow label='Почта' information=user.email}}}
-                {{{ProfileRow label='Логин' information=user.login}}}
-                {{{ProfileRow label='Имя' information=user.first_name}}}
-                {{{ProfileRow label='Фамилия' information=user.second_name}}}
-                {{{ProfileRow label='Имя в чате' information=user.display_name}}}
-                {{{ProfileRow label='Телефон' information=user.phone}}}
+                {{{ProfileRow label='Почта' information=email}}}
+                {{{ProfileRow label='Логин' information=login}}}
+                {{{ProfileRow label='Имя' information=first_name}}}
+                {{{ProfileRow label='Фамилия' information=second_name}}}
+                {{{ProfileRow label='Имя в чате' information=display_name}}}
+                {{{ProfileRow label='Телефон' information=phone}}}
             {{/NavLink}}
             {{#NavLink classNames="row"}}
                 {{#Button classNames="button-passive" type="button" onClick=handleChangeProfileDataClick}}

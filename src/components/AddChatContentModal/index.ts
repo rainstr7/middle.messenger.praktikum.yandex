@@ -12,16 +12,6 @@ class AddChatContentModal extends Block {
         super(props);
     }
 
-    componentDidMount() {
-        super.componentDidMount();
-        this.setProps({status: false})
-        this.refs.chatContentModalRef.hide();
-    }
-
-    getStatus(): boolean | undefined {
-        return this.props.status;
-    }
-
     protected render(): DocumentFragment {
         return this.compile(template, this.props);
     }

@@ -1,34 +1,13 @@
 import Block from "../../utils/Block";
 import template from "./messagesBlock.hbs";
-import {MessageProps} from "../Message";
 import {withStore} from "../../utils/Store";
+import {MessageInterface} from "../../api/interfaces";
 
 interface MessageBlockProps {
-    messages: MessageProps[]
+    messages: MessageInterface[],
+    selectedChat: number,
+    userId: number;
 }
-
-
-// const templateMessages = [
-//     {
-//         id: '1',
-//         classNames: 'message direction-column m-b-40',
-//         message: `Привет! Смотри, тут всплыл интересный кусок лунной космической истории — НАСА в какой-то момент
-//             попросила Хассельблад адаптировать модель SWC для полетов на Луну. Сейчас мы все знаем что астронавты
-//             летали с моделью 500 EL — и к слову говоря, все тушки этих камер все еще находятся на поверхности Луны,
-//             так как астронавты с собой забрали только кассеты с пленкой.
-//             Хассельблад в итоге адаптировал SWC для космоса, но что-то пошло не так и на ракету они так никогда и не
-//             попали. Всего их было произведено 25 штук, одну из них недавно продали на аукционе за 45000 евро.`,
-//         time: '11:56',
-//         isOwnMessage: false
-//     },
-//     {
-//         id: '2',
-//         classNames: 'my-message m-b-40',
-//         message: `Круто!`,
-//         time: '11:56',
-//         isOwnMessage: true
-//     },
-// ];
 
 class MessengerBase extends Block {
 
@@ -36,21 +15,14 @@ class MessengerBase extends Block {
         super(props);
     }
 
-    addNewMessage(message: MessageProps) {
-        this.setProps({...this.props, messages: [...this.props.messages, message]})
-    }
-
-    componentDidMount() {
-        super.componentDidMount();
-        console.log('MessengerBase', this.props);
-    }
-
     protected render(): DocumentFragment {
-        return this.compile(template, this.props);
+        return this.compile(template, {
+            ...this.props,
+        });
     }
 }
 
-const withSelectedChatMessages = withStore(state => {
+const withSelectedChatMessages = withStore((state) => {
     const selectedChatId = state.selectedChat;
 
     if (!selectedChatId) {
@@ -60,12 +32,13 @@ const withSelectedChatMessages = withStore(state => {
             userId: state.user.id
         };
     }
-
+    const selectOwnMessages = ((state.messages || {})[selectedChatId] || [])
+        .map((data) => ({...data, isOwnMessage: state.user && state.user.id === data.user_id}))
     return {
-        messages: (state.messages || {})[selectedChatId] || [],
+        messages: selectOwnMessages || [],
         selectedChat: state.selectedChat,
-        userId: state.user.id
+        userId: state.user && state.user.id
     };
 });
 
-export default withSelectedChatMessages(MessengerBase);
+export default withSelectedChatMessages(MessengerBase as typeof Block);

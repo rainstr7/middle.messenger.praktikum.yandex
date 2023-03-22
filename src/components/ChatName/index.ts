@@ -4,18 +4,13 @@ import {withStore} from "../../utils/Store";
 import {ChatInfo} from "../../api/ChatsAPI";
 
 interface ChatNameProps {
-    classNames?: string;
+    title: string;
 }
 
 class ChatNameBase extends Block {
 
     constructor(props: ChatNameProps) {
         super(props);
-    }
-
-    componentDidMount() {
-        super.componentDidMount();
-        console.log('this.props', this.props)
     }
 
     protected render(): DocumentFragment {
@@ -26,4 +21,5 @@ class ChatNameBase extends Block {
 const withChatName = withStore((state) => (
     {title: (state.chats || []).find(({id}: ChatInfo) => id === state.selectedChat)?.title || ''}
 ));
-export default withChatName(ChatNameBase);
+
+export default withChatName(ChatNameBase as typeof Block);

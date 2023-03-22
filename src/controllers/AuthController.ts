@@ -22,14 +22,14 @@ class AuthController implements AuthControllerInterface {
 
     async signin(data: SigninData) {
         await this.call(() => this.api.signin(data));
-        setTimeout(() => location.reload(), 0);
+        setTimeout(() => location.reload(), 500);
         router.go(ROUTES.chat);
     }
 
     async signup(data: SignupData) {
         await this.call(() => this.api.signup(data));
         await this.call(() => this.fetchUser());
-        setTimeout(() => location.reload(), 0);
+        setTimeout(() => location.reload(), 500);
         router.go(ROUTES.chat);
     }
 

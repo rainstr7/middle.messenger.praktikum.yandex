@@ -5,28 +5,20 @@ import {withStore} from "../../utils/Store";
 import ChatsController from "../../controllers/ChatsController";
 
 export interface ChatProps {
-    id: string;
-    active: boolean;
-    classNames: string;
-    name: string;
-    newMessage: number;
-    text: string;
-    time: string;
-    events: {
-        click: (event: MouseEvent) => void;
-    };
-    onClick: (event: MouseEvent) => void;
+    id: string
+    title: string
+    avatar: string
+    classNames: string
+    unreadMessagesCount: number
+    isActive: boolean
+    time: string
+    onSetActive: (event: MouseEvent) => void;
 }
 
 class ChatBase extends Block {
 
     constructor(props: ChatProps) {
-        super({
-            ...props,
-            events: {
-                click: props.onClick
-            },
-        });
+        super(props);
     }
 
     handleSetActive(event: Event & { currentTarget: { id: string } }) {
@@ -39,13 +31,15 @@ class ChatBase extends Block {
         return this.compile(template, {
             ...this.props,
             time: this.props.text ? normalizedTime(new Date(this.props.time)) : '',
-            text: this.props.text || 'empty chat',
+            text: this.props.text || 'Чат пока пуст',
             isActive: this.props.id === this.props.selectedChat?.id,
             onSetActive: this.handleSetActive.bind(this),
         });
     }
 }
 
-export const withSelectedChat = withStore(state => ({selectedChat: (state.chats || []).find(({id}) => id === state.selectedChat)}));
+export const withSelectedChat = withStore((state) => (
+    {selectedChat: (state.chats || []).find(({id}) => id === state.selectedChat)}
+));
 
-export default withSelectedChat(ChatBase);
+export default withSelectedChat(ChatBase as typeof Block);

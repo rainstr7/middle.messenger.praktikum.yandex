@@ -7,8 +7,10 @@ interface ButtonProps {
     classNames: string;
     events: {
         click: (event: MouseEvent) => void;
+        onsubmit: (event: MouseEvent) => void;
     };
-    type?: "submit" | "button"
+    type?: "submit" | "button";
+    id: string;
 }
 
 class Button extends Block {

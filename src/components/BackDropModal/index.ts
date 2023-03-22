@@ -1,29 +1,35 @@
 import Block from "../../utils/Block";
 import template from "./backDropModal.hbs";
+import store, {withStore} from "../../utils/Store";
+import ChatsController from "../../controllers/ChatsController";
 
 interface BackDropModalProps {
     classNames: string;
     status: boolean;
 }
 
-class BackDropModal extends Block {
+const modalsProps = {
+    addUser: {
+        title: 'Добавить пользователя',
+        buttonLabel: 'Добавить',
+        placeholder: 'Логин'
+    },
+    delUser: {
+        title: 'Удалить пользователя',
+        buttonLabel: 'Удалить',
+        placeholder: 'Логин'
+
+    }
+}
+
+class BackDropModalBase extends Block {
 
     constructor(props: BackDropModalProps) {
         super(props);
     }
 
-    componentDidMount() {
-        super.componentDidMount();
-        this.hide();
-    }
-
-    protected compile(template: (context: unknown) => string, context: Record<string, unknown>): DocumentFragment {
-
-        return super.compile(template, context);
-    }
-
-    changeModalProps(props: any) {
-        this.setProps({...this.props, ...props});
+    close() {
+        store.set('activeModal', '');
     }
 
     handleBackDropClick(event: Event & { target: Element }) {
@@ -33,14 +39,32 @@ class BackDropModal extends Block {
         }
     }
 
+    handleChangeUserList(event: Event & { currentTarget: { id: string } }) {
+        const {id} = event.currentTarget;
+        const userId = (this.refs.inputBackDropModalLoginRef.refs.inputRef.getContent() as HTMLInputElement).value;
+        const activeChat = this.props.selectedChat;
+        if (id && userId && activeChat) {
+            switch (id) {
+                case 'addUser':
+                    ChatsController.addUserToChat(activeChat, +userId);
+                    this.close();
+                    break;
+                case 'delUser':
+                    ChatsController.delUserFromChat(activeChat, +userId);
+                    this.close();
+                    break;
+                default:
+                    this.close();
+            }
+        } else {
+            this.close();
+        }
+
+    }
+
     handleClickCancel(event: Event) {
         event.preventDefault();
         this.close();
-    }
-
-
-    close() {
-        this.hide();
     }
 
     protected render(): DocumentFragment {
@@ -48,8 +72,17 @@ class BackDropModal extends Block {
             ...this.props,
             onBackDropClick: this.handleBackDropClick.bind(this),
             onCancelClick: this.handleClickCancel.bind(this),
+            title: modalsProps.hasOwnProperty(this.props.activeModal as keyof typeof modalsProps) ?
+                modalsProps[this.props.activeModal as keyof typeof modalsProps].title : '',
+            placeholder: modalsProps.hasOwnProperty(this.props.activeModal as keyof typeof modalsProps) ?
+                modalsProps[this.props.activeModal as keyof typeof modalsProps].placeholder : '',
+            buttonLabel: modalsProps.hasOwnProperty(this.props.activeModal as keyof typeof modalsProps) ?
+                modalsProps[this.props.activeModal as keyof typeof modalsProps].buttonLabel : '',
+            onHandleClick: this.handleChangeUserList.bind(this),
+            id: this.props.activeModal
         });
     }
 }
 
-export default BackDropModal;
+const withModal = withStore((state) => (state));
+export default withModal(BackDropModalBase as typeof Block);

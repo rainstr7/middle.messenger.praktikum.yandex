@@ -78,6 +78,7 @@ class Block<P extends Record<string, any> = any> {
 
     public dispatchComponentDidMount() {
         this.eventBus().emit(Block.EVENTS.FLOW_CDM);
+        // @ts-ignore
         Object.values(this.children).forEach(child => child.dispatchComponentDidMount());
     }
 
@@ -87,6 +88,7 @@ class Block<P extends Record<string, any> = any> {
         }
     }
 
+    // @ts-ignore
     protected componentDidUpdate(oldProps: P, newProps: P) {
         return true;
     }

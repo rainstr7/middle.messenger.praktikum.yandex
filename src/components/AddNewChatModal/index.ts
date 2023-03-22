@@ -7,6 +7,8 @@ interface TitleProps {
     isOpen: boolean;
     onCloseModal: () => void;
     onSave: () => void;
+    activeModal: string;
+    isLoading: boolean;
 }
 
 class AddNewChatModalBase extends Block {
@@ -15,8 +17,8 @@ class AddNewChatModalBase extends Block {
         super(props);
     }
 
-    handleClose(event: Event) {
-        event.preventDefault();
+    handleClose(event?: Event) {
+        event?.preventDefault();
         store.set('activeModal', '');
     }
 
@@ -26,7 +28,7 @@ class AddNewChatModalBase extends Block {
         if (name.trim()) {
             await ChatsController.create(name);
         }
-        store.set('activeModal', '');
+        this.handleClose();
     }
 
     protected render(): DocumentFragment {
@@ -39,5 +41,7 @@ class AddNewChatModalBase extends Block {
     }
 }
 
-const withModal = withStore((state) => (state))
-export default withModal(AddNewChatModalBase);
+const withModal = withStore((state) => (
+    {activeModal: state.activeModal, isLoading: state.isLoading}
+))
+export default withModal(AddNewChatModalBase as typeof Block);

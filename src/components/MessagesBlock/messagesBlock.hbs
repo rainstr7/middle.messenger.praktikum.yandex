@@ -1,7 +1,17 @@
 <section class="messages-container direction-column">
     {{#each messages}}
-        {{{Message classNames=classNames message=message time=time isOwnMessage=isOwnMessage id=id}}}
+        {{{Message
+                chat_id=chat_id
+                content=content
+                file=file
+                id=id
+                is_read=id
+                time=time
+                type=type
+                user_id=user_id
+                isOwnMessage=isOwnMessage
+        }}}
     {{else}}
-        <p class="empty">Empty chat</p>
+        <p class="empty">Здесь пока никто ничего не написал</p>
     {{/each}}
 </section>

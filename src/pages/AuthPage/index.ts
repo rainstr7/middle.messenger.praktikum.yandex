@@ -13,11 +13,6 @@ class AuthPageBase extends Block {
         super(props);
     }
 
-    componentDidMount() {
-        super.componentDidMount();
-        console.log(this.props)
-    }
-
     protected changeStatusError(error: string | null, id: keyof typeof authErrors) {
         const errorComponent = this.refs[`InputGroup${toCapitalize(id)}Ref`].refs.inputErrorRef
         if (errorComponent) {

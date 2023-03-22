@@ -8,10 +8,8 @@ import ChatsController from "../../controllers/ChatsController";
 interface ChatsBlockProps {
     chats: ChatProps[];
     onClick: (event: MouseEvent) => void;
-    events: {
-        click: (event: MouseEvent) => void;
-    };
     selectedChat: ChatInfo;
+    onCreateChat: () => void;
 }
 
 class ChatsBlockBase extends Block {
@@ -20,13 +18,13 @@ class ChatsBlockBase extends Block {
         super(props)
     }
 
-    async addNewChat() {
+    addNewChat() {
         store.set('activeModal', 'add_new_chat');
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         super.componentDidMount();
-        ChatsController.fetchChats().then();
+        await ChatsController.fetchChats();
     }
 
 
@@ -41,4 +39,5 @@ class ChatsBlockBase extends Block {
 }
 
 const withChats = withStore((state) => ({chats: [...(state.chats || [])]}));
-export default withChats(ChatsBlockBase);
+
+export default withChats(ChatsBlockBase as typeof Block);
