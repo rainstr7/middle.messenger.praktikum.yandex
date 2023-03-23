@@ -2,12 +2,13 @@ import {HelperOptions} from 'handlebars';
 import Handlebars from 'handlebars/dist/handlebars.runtime';
 import Block from "./Block";
 
-export interface BlockConstructable<Props = any> {
+export interface BlockConstructable<Props = unknown> {
     cName: string;
+
     new(props: Props): Block;
 }
 
-function registerComponent<Props extends any>(name: string, Component: BlockConstructable<Props>) {
+function registerComponent<Props extends unknown>(name: string, Component: BlockConstructable<Props>) {
     Handlebars.registerHelper(name, function (this: Props, {hash: {ref, ...hash}, data, fn}: HelperOptions) {
         const {root} = data;
         if (!root.children) {

@@ -22,14 +22,13 @@ class AuthController implements AuthControllerInterface {
 
     async signin(data: SigninData) {
         await this.call(() => this.api.signin(data));
-        setTimeout(() => location.reload(), 500);
+        setTimeout(() => location.reload(), 0);
         router.go(ROUTES.chat);
     }
 
     async signup(data: SignupData) {
         await this.call(() => this.api.signup(data));
         await this.call(() => this.fetchUser());
-        setTimeout(() => location.reload(), 500);
         router.go(ROUTES.chat);
     }
 
@@ -40,11 +39,11 @@ class AuthController implements AuthControllerInterface {
 
     async logout() {
         await this.call(() => this.api.logout());
-        router.go(ROUTES.auth);
         store.set('user', undefined);
+        router.go(ROUTES.auth);
     }
 
-    private async call(cb: () => Promise<any>, errorCb = (error: Error) => {
+    private async call(cb: () => Promise<unknown>, errorCb = (error: Error) => {
         store.set('error', error.message);
     }) {
         try {

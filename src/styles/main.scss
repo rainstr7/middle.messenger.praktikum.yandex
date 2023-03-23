@@ -78,6 +78,7 @@ body {
 .avatar {
   display: flex;
   border-radius: 50%;
+
   @include flex-center;
 
   background-color: $secondary;
@@ -218,7 +219,6 @@ body {
 }
 
 .chat-list-container {
-  padding: 1rem;
   background-color: $dark-background;
   color: $default-link-color;
   height: 100vh;
@@ -227,6 +227,7 @@ body {
   .chat-list-header {
     @include middle-text;
 
+    padding: 1rem 1rem 0;
     text-align: right;
   }
 
@@ -241,6 +242,7 @@ body {
   .chat-block {
     overflow-y: auto;
     overflow-x: hidden;
+    padding: 0 1rem;
   }
 
   .message-container {

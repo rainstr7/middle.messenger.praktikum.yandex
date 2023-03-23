@@ -5,7 +5,6 @@ import {ROUTES} from "../../utils/registerRouters";
 import AuthController from "../../controllers/AuthController";
 import {withStore} from "../../utils/Store";
 import HTTPTransport from "../../utils/HTTPTransport";
-import MessagesController from "../../controllers/MessagesController";
 
 class ProfilePageBase extends Block {
 
@@ -23,7 +22,6 @@ class ProfilePageBase extends Block {
     }
 
     async handleGoAwayClick() {
-        MessagesController.closeAll();
         await AuthController.logout();
     }
 

@@ -21,9 +21,6 @@ class ChatsController {
             await MessagesController.connect(chat.id, token);
         });
         store.set('chats', chats);
-        if (chats.length > 0) {
-            store.set('selectedChat', chats[0].id);
-        }
     }
 
     addUserToChat(id: number, userId: number) {
@@ -36,12 +33,12 @@ class ChatsController {
 
     async delete(id: number) {
         await this.api.delete(id);
-
         this.fetchChats();
     }
 
     async updateAvatar(data: FormData) {
         await this.api.updateAvatar(data)
+        setTimeout(() => location.reload(), 0);
     }
 
     getToken(id: number) {

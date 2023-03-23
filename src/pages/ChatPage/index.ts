@@ -4,10 +4,14 @@ import Router from "../../utils/Router";
 import {ROUTES} from "../../utils/registerRouters";
 import {withStore} from "../../utils/Store";
 
+interface ChatPageInterface {
+    selectedChat: number;
+    onHandleGoToProfileClick: () => void;
+}
 
 class ChatPage extends Block {
 
-    constructor(props: any) {
+    constructor(props: ChatPageInterface) {
         super(props);
     }
 
@@ -26,4 +30,4 @@ class ChatPage extends Block {
 }
 
 const withState = withStore((state) => ({selectedChat: state.selectedChat}));
-export default withState(ChatPage);
+export default withState(ChatPage as typeof Block);
