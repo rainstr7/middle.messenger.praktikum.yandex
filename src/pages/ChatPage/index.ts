@@ -19,6 +19,11 @@ class ChatPage extends Block {
         Router.go(ROUTES.profile);
     }
 
+    componentDidMount() {
+        super.componentDidMount();
+        console.log(this.props)
+    }
+
     protected render(): DocumentFragment {
         return this.compile(
             template, {

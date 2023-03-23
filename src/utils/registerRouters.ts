@@ -7,6 +7,8 @@ import ChatPage from "../pages/ChatPage";
 import Error500Page from "../pages/Error500Page";
 import Error404Page from "../pages/Error404Page";
 import ChangePasswordPage from "../pages/ChangePasswordPage";
+import {withRouter} from "../hocs/withRouter";
+import Block from "./Block";
 
 export const ROUTES = {
     auth: '/',
@@ -20,19 +22,19 @@ export const ROUTES = {
 }
 
 export const COMPONENTS = {
-    auth: AuthPage,
-    registration: RegistrationPage,
-    changeProfileData: ChangeProfileDataPage,
-    changePassword: ChangePasswordPage,
-    chat: ChatPage,
-    profile: ProfilePage,
-    error500: Error500Page,
-    error404: Error404Page,
+    auth: withRouter(AuthPage),
+    registration: withRouter(RegistrationPage),
+    changeProfileData: withRouter(ChangeProfileDataPage),
+    changePassword: withRouter(ChangePasswordPage),
+    chat: withRouter(ChatPage),
+    profile: withRouter(ProfilePage),
+    error500: withRouter(Error500Page),
+    error404: withRouter(Error404Page),
 }
 
 const registerRouters = () => {
     Object.keys(COMPONENTS).forEach((key: keyof typeof COMPONENTS) => {
-            Router.use(ROUTES[key], COMPONENTS[key]);
+        Router.use(ROUTES[key], COMPONENTS[key] as typeof Block);
         }
     );
 }
