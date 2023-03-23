@@ -22,19 +22,19 @@ export const ROUTES = {
 }
 
 export const COMPONENTS = {
-    auth: withRouter(AuthPage) as typeof Block,
-    registration: withRouter(RegistrationPage) as typeof Block,
-    changeProfileData: withRouter(ChangeProfileDataPage) as typeof Block,
+    auth: withRouter(AuthPage),
+    registration: withRouter(RegistrationPage),
+    changeProfileData: withRouter(ChangeProfileDataPage),
     changePassword: withRouter(ChangePasswordPage),
-    chat: withRouter(ChatPage) as typeof Block,
-    profile: withRouter(ProfilePage) as typeof Block,
-    error500: withRouter(Error500Page) as typeof Block,
-    error404: withRouter(Error404Page) as typeof Block,
+    chat: withRouter(ChatPage),
+    profile: withRouter(ProfilePage),
+    error500: withRouter(Error500Page),
+    error404: withRouter(Error404Page),
 }
 
 const registerRouters = () => {
     Object.keys(COMPONENTS).forEach((key: keyof typeof COMPONENTS) => {
-            Router.use(ROUTES[key], COMPONENTS[key]);
+        Router.use(ROUTES[key], COMPONENTS[key] as typeof Block);
         }
     );
 }
