@@ -78,10 +78,11 @@ body {
 .avatar {
   display: flex;
   border-radius: 50%;
-
   @include flex-center;
 
-  background: $secondary;
+  background-color: $secondary;
+  background-size: contain;
+  background-repeat: no-repeat;
   cursor: pointer;
 
 }
@@ -155,23 +156,18 @@ body {
 
 .avatar-large {
   @include avatar-large;
+}
 
+.avatar-middle, .avatar-large {
   color: $default-icon-color;
 
-  .avatar {
-    width: 100%;
-    height: 100%;
-    background-repeat: no-repeat;
-    background-size: contain;
-    border-radius: 50%;
-  }
 
   .edit {
     position: absolute;
     background-color: $default-link-color;
     color: $active;
-    width: 2rem;
-    height: 2rem;
+    width: 30%;
+    height: 30%;
     display: flex;
 
     @include flex-center;
@@ -179,8 +175,8 @@ body {
     border-radius: 50%;
     visibility: hidden;
     opacity: 0.8;
-    bottom: 0.5rem;
-    right: 0.5rem;
+    bottom: 10%;
+    right: 0;
   }
 
   &:hover {
@@ -225,6 +221,8 @@ body {
   padding: 1rem;
   background-color: $dark-background;
   color: $default-link-color;
+  height: 100vh;
+  overflow: hidden;
 
   .chat-list-header {
     @include middle-text;
@@ -238,6 +236,11 @@ body {
     input {
       @include styled-input;
     }
+  }
+
+  .chat-block {
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 
   .message-container {
@@ -321,6 +324,7 @@ body {
   background-color: $default-background;
   flex: 2.5;
   justify-content: space-between;
+  height: 100vh;
 
   .user-header-container {
     justify-content: space-between;
@@ -339,6 +343,7 @@ body {
     @extend .container;
 
     padding: 1rem;
+    overflow: auto;
 
     .message {
       display: flex;

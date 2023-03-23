@@ -40,11 +40,16 @@ class ChatsController {
         this.fetchChats();
     }
 
+    async updateAvatar(data: FormData) {
+        await this.api.updateAvatar(data)
+    }
+
     getToken(id: number) {
         return this.api.getToken(id);
     }
 
     selectChat(id: number) {
+        store.set('activeModal', '');
         store.set('selectedChat', id);
     }
 }

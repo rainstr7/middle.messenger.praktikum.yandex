@@ -3,6 +3,7 @@ import template from './chat.hbs';
 import normalizedTime from "../../utils/normalizedTime";
 import {withStore} from "../../utils/Store";
 import ChatsController from "../../controllers/ChatsController";
+import HTTPTransport from "../../utils/HTTPTransport";
 
 export interface ChatProps {
     id: string
@@ -34,6 +35,7 @@ class ChatBase extends Block {
             text: this.props.text || 'Чат пока пуст',
             isActive: this.props.id === this.props.selectedChat?.id,
             onSetActive: this.handleSetActive.bind(this),
+            path: this.props.avatar ? `${HTTPTransport.API_URL}/resources${this.props.avatar}` : null,
         });
     }
 }

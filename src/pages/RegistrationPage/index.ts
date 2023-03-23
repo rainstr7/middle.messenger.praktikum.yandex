@@ -28,7 +28,6 @@ class RegistrationPage extends Block {
 
         if (isValid) {
             const body = allFields.reduce((acc, {value, id}) => ({...acc, [id]: value}), {});
-            console.log('RegistrationPage', body)
             await AuthController.signup(body as SignupData);
         }
     }

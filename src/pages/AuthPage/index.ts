@@ -38,9 +38,7 @@ class AuthPageBase extends Block {
 
         if (isValid) {
             const body = allFields.reduce((acc, {value, id}) => ({...acc, [id]: value}), {});
-            console.log(body)
-            await AuthController.signin(body as SigninData); //авторизация
-            console.log(body);
+            await AuthController.signin(body as SigninData);
         }
     }
 
