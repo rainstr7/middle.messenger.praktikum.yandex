@@ -11,7 +11,7 @@ interface RegistrationValidateInterface {
     phone: RegExp;
     password: RegExp;
     oldPassword: RegExp;
-    passwordRepeat: any;
+    passwordRepeat: (arg: string[]) => boolean;
 }
 
 export const registrationErrors = {
@@ -48,9 +48,9 @@ class FormValidationController implements ProfileControllerInterface {
         }
         const method = validationMethods[id];
         if (id === 'passwordRepeat') {
-            return this.password && method([this.password, data]) ? null : registrationErrors[id];
+            return this.password && (method as (passwords: string[]) => boolean)([this.password, data]) ? null : registrationErrors[id];
         }
-        return method.test(data) ? null : registrationErrors[id];
+        return (method as RegExp).test(data) ? null : registrationErrors[id];
     }
 }
 

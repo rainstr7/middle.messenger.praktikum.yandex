@@ -50,6 +50,10 @@ export class ChatsAPI extends BaseAPI {
         return response.token;
     }
 
+    updateAvatar(data: FormData): Promise<unknown> {
+        return this.http.put('/avatar', data);
+    };
+
     update = undefined;
 }
 

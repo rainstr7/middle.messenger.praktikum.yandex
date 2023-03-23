@@ -32,8 +32,8 @@ export class Store extends EventBus {
             phone: '',
             avatar: '',
         },
-        chats: [], //todo описать начальное состояние
-        messages: {}, //todo описать начальное состояние
+        chats: [],
+        messages: {},
         selectedChat: undefined,
         error: undefined,
         isLoading: false,

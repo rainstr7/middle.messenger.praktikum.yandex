@@ -20,10 +20,10 @@
                           onBlur=onHandleBlur onFocus=onHandleFocus ref='InputGroupPasswordRepeatRef'}}}
         </div>
         <div class="container-center direction-column m-t-40">
-            {{#Button classNames='button-active m-b-20' type='submit' onClick=onHandleRegistrationClick}}
+            {{#Button classNames='button-active m-b-20' type='submit' onClick=onHandleRegistrationClick id='sign_up'}}
                 Зарегистрироваться
             {{/Button}}
-            {{#Button classNames='button-passive' type='button' onClick=onHandleGoToAuthClick}}
+            {{#Button classNames='button-passive' type='button' onClick=onHandleGoToAuthClick id='go_to_sign_in'}}
                 Войти
             {{/Button}}
         </div>

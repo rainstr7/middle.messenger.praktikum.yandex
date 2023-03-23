@@ -3,6 +3,7 @@ import template from './chatHeaderMenuBlock.hbs';
 import store, {Store, withStore} from "../../utils/Store";
 import MessagesController from "../../controllers/MessagesController";
 import ChatsController from "../../controllers/ChatsController";
+import HTTPTransport from "../../utils/HTTPTransport";
 
 class ChatHeaderMenuBlockBase extends Block {
 
@@ -52,10 +53,15 @@ class ChatHeaderMenuBlockBase extends Block {
             onHandleOpenMenuClick: this.handleOpenMenu.bind(this),
             onHandleAddNewMessageClick: this.handleAddNewMessageClick.bind(this),
             onHandleClose: this.handleClose.bind(this),
+            path: this.props.avatar ? `${HTTPTransport.API_URL}/resources${this.props.avatar}` : null,
         });
     }
 }
 
-const withState = withStore((state) => ({...state}))
+const withState = withStore((state) => ({
+    activeModal: state.activeModal,
+    selectedChat: state.selectedChat,
+    avatar: state.chats.find(({id}) => id === state.selectedChat)?.avatar
+}))
 export default withState(ChatHeaderMenuBlockBase as typeof Block);
 

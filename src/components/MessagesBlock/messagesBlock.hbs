@@ -12,6 +12,13 @@
                 isOwnMessage=isOwnMessage
         }}}
     {{else}}
-        <p class="empty">Здесь пока никто ничего не написал</p>
+        <p class="empty">
+            {{#if selectedChat}}
+                Здесь пока никто ничего не написал
+            {{else}}
+                Выберете чат
+            {{/if}}
+
+        </p>
     {{/each}}
 </section>

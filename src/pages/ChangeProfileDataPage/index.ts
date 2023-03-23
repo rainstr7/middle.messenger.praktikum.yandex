@@ -29,8 +29,7 @@ class ChangeProfileDataPageBase extends Block {
 
         if (isValid) {
             const body = allFields.reduce((acc, {value, id}) => ({...acc, [id]: value}), {});
-            console.log(body);
-            await UserController.updateUserData(body as SignupData); //смена данных
+            await UserController.updateUserData(body as SignupData);
         }
     }
 
@@ -63,7 +62,6 @@ class ChangeProfileDataPageBase extends Block {
 
     componentDidMount() {
         super.componentDidMount();
-        console.log(this.props)
         const allFields = Object.keys(this.refs)
             .map((keyOfRef) => this.refs[keyOfRef].refs.inputRef.getContent() as HTMLInputElement);
         allFields.forEach(input => input.value = this.props[input.id])

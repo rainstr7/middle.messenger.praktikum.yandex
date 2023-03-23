@@ -17,7 +17,7 @@ class UserController {
             const user = await this.api.update('/profile', data);
             store.set('user', user);
             router.go(ROUTES.profile);
-        } catch (error: any) {
+        } catch (error) {
             store.set('error', error.message);
             throw error;
         } finally {
@@ -30,7 +30,7 @@ class UserController {
             store.set('isLoading', true);
             await this.api.update('/password', data);
             router.go(ROUTES.profile);
-        } catch (error: any) {
+        } catch (error) {
             store.set('error', error.message);
         } finally {
             store.set('isLoading', false);
@@ -42,7 +42,7 @@ class UserController {
             store.set('isLoading', true);
             await this.api.update('/profile/avatar', data);
             setTimeout(() => location.reload(), 0);
-        } catch (e: any) {
+        } catch (e) {
             console.error(e);
         } finally {
             store.set('isLoading', false);
