@@ -2,7 +2,7 @@ import Block from "../../utils/Block";
 import template from './form.hbs';
 
 interface FormProps {
-    classNames: string;
+    onSubmit: () => void;
 }
 
 class Form extends Block {

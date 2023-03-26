@@ -1,0 +1,12 @@
+<section class="user-header-container">
+    {{{AvatarChatHeader selectedChat=selectedChat path=path}}}
+    {{{ChatName}}}
+    {{{ChangeUserListModal onHandleOpenChatMenuClick=onHandleOpenMenuClick
+                           onHandleChatMenuChoice=onHandleChatMenuChoice
+                           id="menu_user"
+                           ref="chatMenuModalContainerRef"
+                           isOpen=isOpen}}}
+    {{#if isOpenUserMenu}}
+        {{{BackDropModal onBackDropClick=onHandleClose ref="adbackDropModalContainerRef"}}}
+    {{/if}}
+</section>

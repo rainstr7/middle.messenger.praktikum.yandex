@@ -7,9 +7,11 @@ interface RegistrationValidateInterface {
     login: RegExp;
     firstName: RegExp;
     secondName: RegExp;
+    displayName: RegExp;
     phone: RegExp;
     password: RegExp;
-    passwordRepeat: any;
+    oldPassword: RegExp;
+    passwordRepeat: (arg: string[]) => boolean;
 }
 
 export const registrationErrors = {
@@ -17,8 +19,10 @@ export const registrationErrors = {
     login: 'Введите корректный логин',
     firstName: 'Введите корректное имя',
     secondName: 'Введите корректную фамилию',
+    displayName: 'Введите корректное отображаемое имя',
     phone: 'Введите корректный номер телефона',
     password: 'Введите корректный пароль',
+    oldPassword: 'Введите старый пароль',
     passwordRepeat: "Пароли не совпадают",
 }
 
@@ -27,12 +31,14 @@ const validationMethods: RegistrationValidateInterface = {
     login: /^[a-zA-Z](.[a-zA-Z0-9_-]*){2,19}$/,
     firstName: /^([А-Я][а-яё-]{1,23}|[A-Z][a-z-])$/,
     secondName: /^([А-Я][а-яё-]{1,23}|[A-Z][a-z-])$/,
+    displayName: /^[a-zA-Zа-яёА-Я](.[a-zA-Z0-9_-а-яё]*){2,19}$/,
     phone: /^[0-9+][0-9]{9,14}$/,
     password: /^(?=^.{8,40}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/,
+    oldPassword: /^(?=^.{8,40}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/,
     passwordRepeat: ([firstPassword, secondPassword]: string[]) => firstPassword === secondPassword,
 };
 
-class RegistrationController implements ProfileControllerInterface {
+class FormValidationController implements ProfileControllerInterface {
 
     protected password: string | null = null;
 
@@ -42,10 +48,10 @@ class RegistrationController implements ProfileControllerInterface {
         }
         const method = validationMethods[id];
         if (id === 'passwordRepeat') {
-            return this.password && method([this.password, data]) ? null : registrationErrors[id];
+            return this.password && (method as (passwords: string[]) => boolean)([this.password, data]) ? null : registrationErrors[id];
         }
-        return method.test(data) ? null : registrationErrors[id];
+        return (method as RegExp).test(data) ? null : registrationErrors[id];
     }
 }
 
-export default RegistrationController;
+export default FormValidationController;

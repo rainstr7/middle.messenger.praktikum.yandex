@@ -1,0 +1,24 @@
+<section class="messages-container direction-column">
+    {{#each messages}}
+        {{{Message
+                chat_id=chat_id
+                content=content
+                file=file
+                id=id
+                is_read=id
+                time=time
+                type=type
+                user_id=user_id
+                isOwnMessage=isOwnMessage
+        }}}
+    {{else}}
+        <p class="empty">
+            {{#if selectedChat}}
+                Здесь пока никто ничего не написал
+            {{else}}
+                Выберете чат
+            {{/if}}
+
+        </p>
+    {{/each}}
+</section>

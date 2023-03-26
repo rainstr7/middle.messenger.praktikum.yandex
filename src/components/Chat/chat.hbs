@@ -1,10 +1,10 @@
-<li class="{{classNames}} {{#if active}}active{{/if}}">
+{{#NavLink classNames=classNames  id=id onClick=onSetActive isActive=isActive}}
     <div>
-        <div class="avatar-middle"></div>
+        <div class="avatar-middle" style="background-image: url({{path}})"></div>
     </div>
     <div class="user-container">
                     <span class="user-name">
-                        {{name}}
+                        {{title}}
                     </span>
         <span class="last-message">
             {{text}}
@@ -14,11 +14,10 @@
                     <span class="time">
                         {{time}}
                     </span>
-        {{#if newMessage includeZero=false}}
+        {{#if unreadMessagesCount includeZero=false}}
             <div class="widget">
-                {{newMessage}}
+                {{unreadMessagesCount}}
             </div>
         {{/if}}
-
     </div>
-</li>
+{{/NavLink}}
