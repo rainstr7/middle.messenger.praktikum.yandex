@@ -1,5 +1,6 @@
 import Handlebars, {HelperOptions} from 'handlebars';
 // const Handlebars = require('handlebars-template-loader/runtime');
+// import Handlebars from 'handlebars/dist/handlebars.runtime.js';
 import Block from "./Block";
 
 export interface BlockConstructable<Props = unknown> {
@@ -26,11 +27,11 @@ function registerComponent<Props extends unknown>(name: string, Component: Block
             refs[ref] = component;
         }
         if (fn) {
-            return new Handlebars.SafeString(`<div data-id="${component.id}">${fn(this)}</div>`);
+            return `<div data-id="${component.id}">${fn(this)}</div>`;
         } else {
-            return new Handlebars.SafeString(`<div data-id="${component.id}"></div>`);
+            return `<div data-id="${component.id}"></div>`;
         }
-    })
+    });
 }
 
 export default registerComponent;

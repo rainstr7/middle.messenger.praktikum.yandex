@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "messenger",
   "scripts": {
-    "serve": "node server.js",
-    "start": "webpack && webpack serve --stats-error-details",
+    "serve": "webpack-dev-server --mode development --open",
+    "start": "webpack && node ./server.js",
     "build": "webpack",
     "build:prod": "webpack --config webpack.config.prod.ts",
     "eslint": "eslint src/**/*.ts",
