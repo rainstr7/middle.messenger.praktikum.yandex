@@ -1,14 +1,20 @@
 import registerComponent from "./utils/registerComponent";
-// @ts-ignore
-import components from './components/**/*.ts';
 import Router from "./utils/Router";
 import AuthController from "./controllers/AuthController";
 import registerRouters, {ROUTES} from "./utils/registerRouters";
+import '../src/styles/app.scss'
 
-// @ts-ignore
-Object.entries(components).forEach(([name, {index}]) => {
-    registerComponent(name, index.default)
+const components: any = {};
 
+function importAll(r: any) {
+    r.keys().forEach((key: string) => (components[key] = r(key)));
+}
+
+importAll(require.context('./components/', true, /\.ts$/));
+
+Object.entries(components).forEach(([path, component]: any[]) => {
+    const name = path.split('/')[1];
+    registerComponent(name, component.default)
 })
 
 

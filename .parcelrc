@@ -1,5 +1,5 @@
 {
-  "extends": "@parcel/config-default",
+  "extends": "@parcel/config-default/index.json",
   "transformers": {
     "*.hbs": [
       "@anikin/parcel-transformer-handlebars-precompile"
@@ -8,5 +8,8 @@
   "resolvers": [
     "...",
     "@parcel/resolver-glob"
-  ]
+  ],
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true
+  }
 }
