@@ -11,14 +11,10 @@
     "build:prod": "webpack --mode=production --node-env=production",
     "watch": "webpack --watch",
     "serve": "webpack serve",
-    "eslint": "eslint src/**/*.ts",
-    "stylelint": "stylelint src/**/*.scss",
+    "eslint": "node_modules/.bin/eslint . --fix",
+    "stylelint": "npx stylelint '**/*.scss'  --fix",
     "test": "mocha --require ts-node/register --require ./mochaSetup.js './src/**/*.test.ts'",
     "prepare": "husky install"
-  },
-  "lint-staged": {
-    "*.ts": "eslint",
-    "*.sсss": "stylelint"
   },
   "repository": {
     "type": "git",
@@ -37,6 +33,7 @@
     "express": "4.18.2",
     "handlebars": "4.7.7",
     "handlebars-loader": "1.7.3",
+    "jsdom": "^21.1.1",
     "mini-css-extract-plugin": "^2.7.5",
     "nanoid": "3",
     "style-loader": "^3.3.2",
@@ -71,7 +68,6 @@
     "eslint-config-airbnb": "19.0.4",
     "html-webpack-plugin": "^5.5.0",
     "husky": "^7.0.4",
-    "jsdom": "^16.6.0",
     "mocha": "^9.0.2",
     "node-sass": "^8.0.0",
     "parcel": "2.8.3",

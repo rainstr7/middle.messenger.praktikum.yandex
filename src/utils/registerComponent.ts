@@ -1,6 +1,6 @@
-import Handlebars, {HelperOptions} from 'handlebars';
+import {HelperOptions} from 'handlebars';
 // const Handlebars = require('handlebars-loader/runtime');
-// import Handlebars from 'handlebars-template-loader/runtime';
+import Handlebars from 'handlebars/dist/handlebars.runtime';
 // import Handlebars from 'handlebars/dist/handlebars.runtime';
 // const Handlebars = require('handlebars');
 import Block from "./Block";

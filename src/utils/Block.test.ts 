@@ -1,16 +1,17 @@
-import proxyquire from 'proxyquire';
 import {expect} from 'chai';
-import sinon from 'sinon';
-import type BlockType from './Block'
+import type BlockType from './Block';
+import proxyquire = require('proxyquire');
+
+const sinon = require('sinon');
 
 const eventBusMock = {
-    on: sinon.fake(),
-    emit: sinon.fake(),
+    on: sinon.stub(),
+    emit: sinon.stub(),
 }
 
 const {default: Block} = proxyquire('./Block', {
     './EventBus': {
-        EventBus: class {
+        default: class {
             emit = eventBusMock.emit;
             on = eventBusMock.on;
         }
@@ -18,6 +19,11 @@ const {default: Block} = proxyquire('./Block', {
 }) as { default: typeof BlockType };
 
 describe('Block', () => {
+    beforeEach(() => {
+        eventBusMock.on.reset();
+        eventBusMock.emit.reset();
+    })
+
     class ComponentMock extends Block {
     }
 
@@ -26,4 +32,19 @@ describe('Block', () => {
 
         expect(eventBusMock.emit.calledWith('init')).to.eq(true);
     });
+
+    it('should fire protected componentDidMount on component-did-mount dispatch', () => {
+        let isCalled = false;
+
+        class ComponentMock extends Block {
+            componentDidMount() {
+                isCalled = true;
+            }
+        }
+
+        const component = new ComponentMock({});
+        component.dispatchComponentDidMount();
+
+        expect(isCalled).to.eq(true);
+    })
 });

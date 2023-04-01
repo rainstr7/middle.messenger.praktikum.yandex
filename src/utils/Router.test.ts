@@ -1,19 +1,29 @@
 import Router, {BlockConstructable} from './Router'
 import {expect} from 'chai';
 
-const sinon = require("sinon");
+const sinon = require('sinon');
 
 describe('Router', () => {
-    global.window.history.back = () => {
-        if (typeof window.onpopstate === 'function') {
-            window.onpopstate({currentTarget: window} as unknown as PopStateEvent);
+    let originalBack = global.window.history.back;
+    let originalForward = global.window.history.forward;
+
+    before(() => {
+        global.window.history.back = () => {
+            if (typeof window.onpopstate === 'function') {
+                window.onpopstate({currentTarget: window} as unknown as PopStateEvent);
+            }
+        };
+        global.window.history.forward = () => {
+            if (typeof window.onpopstate === 'function') {
+                window.onpopstate({currentTarget: window} as unknown as PopStateEvent);
+            }
         }
-    };
-    global.window.history.forward = () => {
-        if (typeof window.onpopstate === 'function') {
-            window.onpopstate({currentTarget: window} as unknown as PopStateEvent);
-        }
-    }
+    });
+
+    after(() => {
+        global.window.history.back = originalBack;
+        global.window.history.forward = originalForward;
+    });
 
     const getContentFake = sinon.fake.returns(document.createElement('div'));
 
