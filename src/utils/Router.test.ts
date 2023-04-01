@@ -1,6 +1,7 @@
 import Router, {BlockConstructable} from './Router'
 import {expect} from 'chai';
-import sinon from "sinon";
+
+const sinon = require("sinon");
 
 describe('Router', () => {
     global.window.history.back = () => {
