@@ -10,7 +10,7 @@ function importAll(r: any) {
     r.keys().forEach((key: string) => (components[key] = r(key)));
 }
 
-importAll(require.context('./components/', true, /\.ts$/));
+importAll(require.context('./components/', true, /(?<!.test).(?<ext>[cm]?ts|tsx)$/));
 
 Object.entries(components).forEach(([path, component]: any[]) => {
     const name = path.split('/')[1];

@@ -32,7 +32,7 @@
     "dotenv": "^9.0.2",
     "express": "4.18.2",
     "handlebars": "4.7.7",
-    "handlebars-loader": "1.7.3",
+    "handlebars-template-loader": "0.8.0",
     "jsdom": "^21.1.1",
     "mini-css-extract-plugin": "^2.7.5",
     "nanoid": "3",

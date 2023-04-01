@@ -1,9 +1,7 @@
 import {HelperOptions} from 'handlebars';
-// const Handlebars = require('handlebars-loader/runtime');
-import Handlebars from 'handlebars/dist/handlebars.runtime';
-// import Handlebars from 'handlebars/dist/handlebars.runtime';
-// const Handlebars = require('handlebars');
 import Block from "./Block";
+
+const Handlebars = require('handlebars-template-loader/runtime');
 
 export interface BlockConstructable<Props = unknown> {
     cName: string;
@@ -12,9 +10,6 @@ export interface BlockConstructable<Props = unknown> {
 }
 
 function registerComponent<Props extends unknown>(name: string, Component: BlockConstructable<Props>) {
-    console.log('name', name)
-    console.log('Component', Component)
-    console.log('Handlebars', Handlebars.registerHelper)
     Handlebars.registerHelper(name, function (this: Props, {hash: {ref, ...hash}, data, fn}: HelperOptions) {
         console.log('data', data)
         const {root} = data;
