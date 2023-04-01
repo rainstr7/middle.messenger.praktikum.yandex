@@ -4,7 +4,7 @@ import {Configuration} from 'webpack';
 import {CleanWebpackPlugin} from "clean-webpack-plugin";
 
 const path = require('path');
-
+const isProductionBuild = process.env.NODE_ENV == 'production';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const config: Configuration & Record<string, any> = {
     mode: 'development',
@@ -17,10 +17,10 @@ const config: Configuration & Record<string, any> = {
     target: ['web', 'es2017'],
     resolve: {
         fallback: {crypto: false},
-        extensions: ['.tsx', '.ts', '.jsx', '.js', '...'],
+        extensions: ['.tsx', '.ts', '.jsx', '.js', 'json', '...'],
         alias: {
             // handlebars: 'handlebars/dist/handlebars.runtime.js',
-            handlebars: 'handlebars/dist/handlebars.js',
+            handlebars: 'handlebars/dist/handlebars.min.js',
             utils: path.resolve(__dirname, './src/utils'),
             components: path.resolve(__dirname, './src/components'),
             pages: path.resolve(__dirname, './src/pages'),
@@ -34,7 +34,7 @@ const config: Configuration & Record<string, any> = {
         },
         liveReload: true,
         compress: true,
-        port: 3000,
+        port: 3002,
         hot: false,
     },
     module: {
@@ -67,7 +67,9 @@ const config: Configuration & Record<string, any> = {
             {
                 test: /\.hbs$/i,
                 loader: "handlebars-loader",
-                exclude: ['/node_modules/'],
+                options: {
+                    runtime: "handlebars/dist/handlebars.min.js",
+                }
             },
         ],
     },
@@ -82,4 +84,15 @@ const config: Configuration & Record<string, any> = {
     ],
 };
 
-export default config;
+module.exports = () => {
+    if (isProductionBuild) {
+        config.mode = 'production';
+
+
+    } else {
+        config.mode = 'development';
+    }
+    return config;
+};
+
+// export default config;
