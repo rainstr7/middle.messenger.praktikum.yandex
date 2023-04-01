@@ -13,7 +13,8 @@
     "serve": "webpack serve",
     "eslint": "eslint src/**/*.ts",
     "stylelint": "stylelint src/**/*.scss",
-    "test": "mocha --require ts-node/register --require ./mochaSetup.js './src/**/*.test.ts'"
+    "test": "mocha --require ts-node/register --require ./mochaSetup.js './src/**/*.test.ts'",
+    "prepare": "husky install"
   },
   "lint-staged": {
     "*.ts": "eslint",
