@@ -27,24 +27,29 @@ describe('Block', () => {
     class ComponentMock extends Block {
     }
 
+    const block = new ComponentMock({})
+
     it('should fire init event on initialization', () => {
         new ComponentMock({});
 
         expect(eventBusMock.emit.calledWith('init')).to.eq(true);
     });
 
+    it("getContent() return HTMLElement", () => {
+        expect(block.getContent()).to.eq(block.element);
+    });
+
     it('should fire protected componentDidMount on component-did-mount dispatch', () => {
-        let isCalled = false;
+        let isCalled = true
 
         class ComponentMock extends Block {
-            componentDidMount() {
-                isCalled = true;
+            componentDidMount(): void {
+                isCalled = true
             }
         }
 
-        const component = new ComponentMock({});
-        component.dispatchComponentDidMount();
-
-        expect(isCalled).to.eq(true);
+        const component = new ComponentMock({})
+        component.dispatchComponentDidMount()
+        expect(isCalled).to.eq(true)
     })
 });

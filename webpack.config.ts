@@ -12,6 +12,7 @@ const config: Configuration & Record<string, any> = {
         path: path.resolve(__dirname, 'src', 'index.ts')
     },
     output: {
+        filename: '[name].bundle.js',
         path: path.resolve(__dirname, 'dist'),
     },
     target: ['web', 'es2017'],
