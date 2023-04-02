@@ -19,22 +19,18 @@ const config: Configuration & Record<string, any> = {
     resolve: {
         fallback: {crypto: false},
         extensions: ['.tsx', '.ts', '.jsx', '.js', 'json', '...'],
-        alias: {
-            utils: path.resolve(__dirname, './src/utils'),
-            components: path.resolve(__dirname, './src/components'),
-            pages: path.resolve(__dirname, './src/pages'),
-            styles: path.resolve(__dirname, './src/styles'),
-            api: path.resolve(__dirname, './src/api'),
-        },
+    },
+    performance: {
+        hints: false
     },
     devServer: {
         static: {
             directory: path.join(__dirname, 'public'),
         },
-        liveReload: true,
-        compress: true,
-        port: 3002,
-        hot: false,
+        open: true,
+        host: 'localhost',
+        historyApiFallback: true,
+        port: 3000,
     },
     module: {
         rules: [

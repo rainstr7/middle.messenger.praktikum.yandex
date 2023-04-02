@@ -18,7 +18,10 @@ function render(query: string, block: Block) {
     root.innerHTML = '';
 
     root.append(block.getContent()!);
-    // block.dispatchComponentDidMount();
+    if (block.dispatchComponentDidMount) {
+        block.dispatchComponentDidMount();
+    }
+
     return root;
 }
 
