@@ -27,7 +27,6 @@ const config: Configuration & Record<string, any> = {
         static: {
             directory: path.join(__dirname, 'public'),
         },
-        open: true,
         host: 'localhost',
         historyApiFallback: true,
         port: 3000,
