@@ -17,6 +17,7 @@ function render(query: string, block: Block) {
 
     root.innerHTML = '';
 
+
     root.append(block.getContent()!);
     if (block.dispatchComponentDidMount) {
         block.dispatchComponentDidMount();

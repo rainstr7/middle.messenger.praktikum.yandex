@@ -31,6 +31,7 @@ window.addEventListener('DOMContentLoaded', async () => {
             break;
         default:
             isProtectedRoute = false;
+            break;
     }
 
     try {

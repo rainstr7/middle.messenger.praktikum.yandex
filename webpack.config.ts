@@ -1,4 +1,5 @@
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import {Configuration} from 'webpack';
 import {CleanWebpackPlugin} from "clean-webpack-plugin";
@@ -66,6 +67,15 @@ const config: Configuration & Record<string, any> = {
     },
     plugins: [
         new CleanWebpackPlugin(),
+        new CopyWebpackPlugin({
+            patterns: [
+                {
+                    from: '**/*',
+                    context: path.resolve(__dirname, 'src', 'assets'),
+                    to: './assets',
+                },
+            ],
+        }),
         new HtmlWebpackPlugin({
             template: 'src/index.html',
         }),

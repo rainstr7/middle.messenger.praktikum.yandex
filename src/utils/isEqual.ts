@@ -1,4 +1,4 @@
-type PlainObject<T = any> = {
+export type PlainObject<T = any> = {
     [k in string]: T;
 };
 
@@ -18,7 +18,7 @@ function isArrayOrObject(value: unknown): value is [] | PlainObject {
 }
 
 function isEqual(lhs: PlainObject, rhs: PlainObject) {
-    if (!(lhs instanceof Object && rhs instanceof Object)) {
+    if (typeof lhs !== 'object' || typeof rhs !== 'object') {
         return false;
     }
     if (Object.keys(lhs).length !== Object.keys(rhs).length) {
