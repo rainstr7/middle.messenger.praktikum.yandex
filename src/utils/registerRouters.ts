@@ -21,7 +21,7 @@ export const ROUTES = {
     error404: '/404'
 }
 
-export const COMPONENTS = {
+const COMPONENTS = {
     auth: withRouter(AuthPage),
     registration: withRouter(RegistrationPage),
     changeProfileData: withRouter(ChangeProfileDataPage),
@@ -33,8 +33,8 @@ export const COMPONENTS = {
 }
 
 const registerRouters = () => {
-    Object.keys(COMPONENTS).forEach((key: keyof typeof COMPONENTS) => {
-        Router.use(ROUTES[key], COMPONENTS[key] as typeof Block);
+    Object.keys(COMPONENTS).forEach((key: string) => {
+            Router.use(ROUTES[(key as keyof typeof ROUTES)], COMPONENTS[(key as keyof typeof ROUTES)] as typeof Block);
         }
     );
 }

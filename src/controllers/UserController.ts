@@ -18,7 +18,7 @@ class UserController {
             store.set('user', user);
             router.go(ROUTES.profile);
         } catch (error) {
-            store.set('error', error.message);
+            store.set('error', (error as Error).message);
             throw error;
         } finally {
             store.set('isLoading', false);
@@ -31,7 +31,7 @@ class UserController {
             await this.api.update('/password', data);
             router.go(ROUTES.profile);
         } catch (error) {
-            store.set('error', error.message);
+            store.set('error', (error as Error).message);
         } finally {
             store.set('isLoading', false);
         }

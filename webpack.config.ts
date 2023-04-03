@@ -86,14 +86,7 @@ const config: Configuration & Record<string, any> = {
 };
 
 module.exports = () => {
-    if (isProductionBuild) {
-        config.mode = 'production';
-
-
-    } else {
-        config.mode = 'development';
-    }
+    config.mode = isProductionBuild ? 'production' : 'development';
     return config;
 };
 
-// export default config;
