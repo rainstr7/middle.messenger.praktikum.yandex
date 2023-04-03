@@ -13,6 +13,14 @@
     "docker:build": "docker build -t chat-app:dev -f Dockerfile .",
     "docker:run": "docker run -p 3000:3000 -it chat-app:dev"
   },
+  "lint-staged": {
+    "*.ts": "eslint .",
+    ".css": "stylelint '**/*.css'",
+    "*.(js|ts)": [
+      "npm run lint:write",
+      "git add"
+    ]
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rainstr7/middle.messenger.praktikum.yandex.git"
