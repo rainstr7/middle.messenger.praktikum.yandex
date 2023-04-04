@@ -10,6 +10,9 @@ type Options = {
     method: Method;
     data?: Object;
 };
+type HTTPMainMethod<Response = void> = (url: string, options?: Options) => Promise<Response>
+type HTTPMethod<Response = any> = (url: string, data?: Object) => Promise<Response>
+
 
 export default class HTTPTransport {
     static API_URL = 'https://ya-praktikum.tech/api/v2';
@@ -19,39 +22,29 @@ export default class HTTPTransport {
         this.endpoint = `${HTTPTransport.API_URL}${endpoint}`;
     }
 
-    public get<Response>(path = '/'): Promise<Response> {
-        return this.request<Response>(this.endpoint + path);
-    }
+    public get: HTTPMethod = (path = '/') => this.request(this.endpoint + path);
 
-    public post<Response = void>(path: string, data = {}): Promise<Response> {
-        return this.request<Response>(this.endpoint + path, {
-            method: Method.Post,
-            data,
-        });
-    }
+    public post: HTTPMethod = (path: string, data = {}) => this.request(this.endpoint + path, {
+        method: Method.Post,
+        data,
+    });
 
-    public put<Response = void>(path: string, data = {}): Promise<Response> {
-        return this.request<Response>(this.endpoint + path, {
-            method: Method.Put,
-            data,
-        });
-    }
+    public put: HTTPMethod = (path: string, data = {}) => this.request(this.endpoint + path, {
+        method: Method.Put,
+        data,
+    });
 
-    public patch<Response = void>(path: string, data = {}): Promise<Response> {
-        return this.request<Response>(this.endpoint + path, {
-            method: Method.Patch,
-            data,
-        });
-    }
+    public patch: HTTPMethod = (path: string, data = {}) => this.request(this.endpoint + path, {
+        method: Method.Patch,
+        data,
+    });
 
-    public delete<Response>(path: string, data = {}): Promise<Response> {
-        return this.request<Response>(this.endpoint + path, {
-            method: Method.Delete,
-            data
-        });
-    }
+    public delete: HTTPMethod = (path: string, data = {}) => this.request(this.endpoint + path, {
+        method: Method.Delete,
+        data
+    });
 
-    private request<Response>(url: string, options: Options = {method: Method.Get}): Promise<Response> {
+    private request: HTTPMainMethod = (url: string, options: Options = {method: Method.Get}) => {
         const {method, data} = options;
 
         return new Promise((resolve, reject) => {

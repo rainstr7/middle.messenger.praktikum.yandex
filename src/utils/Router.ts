@@ -1,6 +1,10 @@
 import Block from './Block';
 import {ROUTES} from "./registerRouters";
 
+export interface BlockConstructable<P extends Record<string, any> = any> {
+    new(props: P): Block<P>;
+}
+
 function isEqual(lhs: string, rhs: string): boolean {
     return lhs === rhs;
 }
@@ -13,8 +17,12 @@ function render(query: string, block: Block) {
 
     root.innerHTML = '';
 
+
     root.append(block.getContent()!);
-    block.dispatchComponentDidMount();
+    if (block.dispatchComponentDidMount) {
+        block.dispatchComponentDidMount();
+    }
+
     return root;
 }
 
@@ -23,7 +31,7 @@ class Route {
 
     constructor(
         private pathname: string,
-        private readonly blockClass: typeof Block,
+        private readonly blockClass: BlockConstructable,
         private readonly query: string) {
     }
 
@@ -61,7 +69,7 @@ class Router {
         Router.__instance = this;
     }
 
-    public use(pathname: string, block: typeof Block) {
+    public use(pathname: string, block: BlockConstructable) {
         const route = new Route(pathname, block, this.rootQuery);
         this.routes.push(route);
 

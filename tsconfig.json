@@ -5,6 +5,7 @@
   "compilerOptions": {
     "outDir": "dist",
     "target": "es2017",
+    "allowSyntheticDefaultImports": true,
     "declaration": false,
     "module": "commonjs",
     "strictNullChecks": true,
@@ -12,6 +13,7 @@
     "noImplicitAny": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
+    "esModuleInterop": true,
     "lib": [
       "es2017",
       "dom"

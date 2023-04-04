@@ -64,11 +64,8 @@ export function withStore<SP>(mapStateToProps: (state: State) => SP) {
                     previousState = stateProps;
                     this.setProps({...stateProps});
                 });
-
             }
-
         }
-
     }
 }
 export default store;

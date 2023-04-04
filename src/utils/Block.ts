@@ -122,8 +122,7 @@ class Block<P extends Record<string, any> = any> {
 
     protected compile(template: (context: unknown) => string, context: Record<string, unknown>) {
         const contextAndStubs = {...context, children: this.children, refs: this.refs};
-
-        const html = template(contextAndStubs);
+        const html = template && template(contextAndStubs);
 
         const temp = document.createElement('template');
 

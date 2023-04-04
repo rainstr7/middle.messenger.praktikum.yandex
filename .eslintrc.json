@@ -9,6 +9,12 @@
       2,
       3
     ],
-    "no-console": "off"
+    "no-console": "off",
+    "no-param-reassign": [
+      2,
+      {
+        "props": false
+      }
+    ]
   }
 }
